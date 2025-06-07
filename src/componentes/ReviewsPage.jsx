@@ -53,10 +53,10 @@ const ReviewsPage = () => {
 
         if (summary.total_reviews > 0) {
           setPercentPositive(
-            ((summary.total_positive / summary.total_reviews) * 100).toFixed(2)
+            Math.round((summary.total_positive / summary.total_reviews) * 100)
           );
           setPercentNegative(
-            ((summary.total_negative / summary.total_reviews) * 100).toFixed(2)
+            Math.round((summary.total_negative / summary.total_reviews) * 100)
           );
         } else {
           setPercentPositive(0);
