@@ -44,16 +44,19 @@ const ReviewsPage = () => {
 
         setReviews(reviewsData.reviews || []);
         setReviewTexts(onlyTexts);
-        setReviewSummary(reviewsData.review_summary || {});
-        setTotalPositive(reviewSummary.total_positive);
-        setTotalNegative(reviewSummary.total_negative);
 
-        if (reviewSummary.total_reviews > 0) {
+        // Usar variável local para evitar o problema de timing do setState
+        const summary = reviewsData.review_summary || {};
+        setReviewSummary(summary);
+        setTotalPositive(summary.total_positive || 0);
+        setTotalNegative(summary.total_negative || 0);
+
+        if (summary.total_reviews > 0) {
           setPercentPositive(
-            ((totalPositive / reviewSummary.total_reviews) * 100).toFixed(2)
+            ((summary.total_positive / summary.total_reviews) * 100).toFixed(2)
           );
           setPercentNegative(
-            ((totalNegative / reviewSummary.total_reviews) * 100).toFixed(2)
+            ((summary.total_negative / summary.total_reviews) * 100).toFixed(2)
           );
         } else {
           setPercentPositive(0);
