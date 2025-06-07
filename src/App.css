@@ -1,0 +1,148 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow-x: hidden;
+  width: 100vw;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.barra_pesquisa {
+  width: 30vw;
+  margin-top: 5vh;
+  margin-bottom: 3vh;
+}
+.card-filters {
+  width: 80vw;
+  height: 55vh;
+  border-radius: 2rem;
+  border: 2.5px solid rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.204);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.filters-content {
+  margin: 2rem 3rem;
+}
+.button {
+  background: linear-gradient(135deg, #b84aff, #d370ff, #8c4dff);
+  border: none;
+  border-radius: 50px;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 1vh 2.5vw;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  backdrop-filter: blur(20px); /* backdrop-blur-xl */
+  transition: all 0.5s;
+}
+
+.button:hover {
+  box-shadow: 0 0 40px rgba(184, 74, 255, 0.8),
+    0 0 60px rgba(211, 112, 255, 0.8), 0 0 80px rgba(140, 77, 255, 0.8);
+}
+.margin-filters {
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+}
+.game-details {
+  margin: 4rem 3rem;
+}
+.descricao-jogo {
+  width: 50vw;
+}
+.select1 {
+  width: 20vw;
+  background-color: transparent;
+  color: white;
+  padding: 1.5vh 2vw;
+}
+.barra-progresso {
+  width: 55vw;
+  height: 4vh;
+  border: 2px solid rgba(255, 255, 255, 0.407);
+  background-color: rgba(255, 255, 255, 0.129);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.progresso {
+  background-color: linear-gradient(135deg, #b84aff, #d370ff, #8c4dff);
+}
+.button2 {
+  background: linear-gradient(135deg, #b84aff, #d370ff, #8c4dff);
+  border: none;
+  transition: all 0.5s ease;
+}
+.button2:hover {
+  box-shadow: 0 0 30px rgba(184, 74, 255, 0.8),
+    0 0 60px rgba(211, 112, 255, 0.8), 0 0 80px rgba(140, 77, 255, 0.8);
+}
+.logo_loading {
+  width: 50vw;
+  height: auto;
+}
+.button-filters {
+  background-color: rgba(255, 255, 255, 0.129);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: white;
+  border: 1px solid white;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.button-filters:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.button-filters.active {
+  background: linear-gradient(135deg, #b84aff, #d370ff, #8c4dff);
+  border: none;
+  color: white;
+}
+.expandable-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center; /* centraliza o conteúdo quando fechado */
+  overflow: hidden;
+  width: 6vw;
+  transition: width 0.3s ease;
+  white-space: nowrap;
+  background-color: rgba(255, 255, 255, 0.253);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: white;
+  border: 1px solid white;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.expandable-button img {
+  width: 31px;
+  height: 31px;
+  flex-shrink: 0;
+}
+
+.expandable-button .text {
+  width: 0;
+  opacity: 0;
+  overflow: hidden;
+  margin-left: 0;
+  transition: all 0.3s ease;
+}
+
+.expandable-button:hover {
+  width: 200px;
+}
+
+.expandable-button:hover .text {
+  width: auto;
+  opacity: 1;
+}
