@@ -24,6 +24,7 @@ const ReviewsPage = () => {
   const [totalNegative, setTotalNegative] = useState(0);
   const [percentPositive, setPercentPositive] = useState(0);
   const [percentNegative, setPercentNegative] = useState(0);
+  const [averagePlaytime, setAveragePlaytime] = useState(0);
 
   const numPerPage = searchParams.get("num_per_page") || 20;
   const reviewType = searchParams.get("review_type") || "all";
@@ -46,6 +47,17 @@ const ReviewsPage = () => {
 
         setReviews(reviewsData.reviews || []);
         setReviewTexts(onlyTexts);
+        // Cálculo da média de horas jogadas
+        const totalPlaytime = reviewsData.reviews.reduce((acc, review) => {
+          return acc + (review.author?.playtime_at_review || 0);
+        }, 0);
+
+        const avgPlaytime =
+          reviewsData.reviews.length > 0
+            ? Math.round(totalPlaytime / reviewsData.reviews.length / 60)
+            : 0;
+
+        setAveragePlaytime(avgPlaytime);
 
         // Usar variável local para evitar o problema de timing do setState
         const summary = reviewsData.review_summary || {};
@@ -130,7 +142,7 @@ const ReviewsPage = () => {
       >
         {/* Overlay opcional (background1 por cima se você quiser) */}
         <div
-          className="absolute inset-0 z-10"
+          className="absolute inset-0 z-0"
           style={{
             backgroundImage: `url(${background1})`,
             backgroundSize: "cover",
@@ -138,9 +150,52 @@ const ReviewsPage = () => {
             backgroundRepeat: "no-repeat",
           }}
         ></div>
-        <div className="flex-1 pl-20 min-h-screen flex">
-          <div className="text-4xl font-bold mb-2 font-sf game-details">
-            {gameDetails.name}
+        <div className="flex-1 flex flex-col justify-end pl-20 min-h-screen flex z-20">
+          <div className="font-sf text-white game-details">
+            <div className="flex">
+              <div className="text-6xl font-bold mb-2 z-30">
+                {gameDetails.name}
+              </div>
+              <div className="items-center space-x-4 flex">
+                <button className="expandable-button rounded-full mx-6">
+                  <img src={add_library} alt="Add to library" />
+                  <span className="text font-sf font-bold">Add to library</span>
+                </button>
+              </div>
+            </div>
+            <div className="backdrop-blur-lg rounded-2xl text-4xl mt-6 font-medium">
+              Overall analysis
+            </div>
+            <div
+              className="flex flex-wrap mt-7 mb-5 w-full gap-6 justify-center"
+              id="overall info"
+            >
+              <div className="flex-1 min-w-[250px] max-w-[350px] flex flex-col items-center justify-center text-center bg-white/20 backdrop-blur-lg rounded-2xl shadow-lg border border-white/30 p-6">
+                <p className="text-4xl font-medium">{dayRange} days</p>
+                <p className="text-xl mt-1">Selected timeframe</p>
+              </div>
+              <div className="flex-1 min-w-[300px] max-w-[400px] flex flex-col items-center justify-center text-center bg-white/20 backdrop-blur-lg rounded-2xl shadow-lg border border-white/30 p-6">
+                <p className="text-4xl font-medium">
+                  {reviewSummary.review_score_desc}
+                </p>
+                <p className="text-xl mt-1">Overall score</p>
+              </div>
+              <div className="flex-1 min-w-[200px] max-w-[300px] flex flex-col items-center justify-center text-center bg-white/20 backdrop-blur-lg rounded-2xl shadow-lg border border-white/30 p-6">
+                <p className="text-4xl font-medium">{percentPositive}%</p>
+                <p className="text-xl mt-1">Total positive</p>
+              </div>
+              <div className="flex-1 min-w-[200px] max-w-[300px] flex flex-col items-center justify-center text-center bg-white/20 backdrop-blur-lg rounded-2xl shadow-lg border border-white/30 p-6">
+                <p className="text-4xl font-medium">{percentNegative}%</p>
+                <p className="text-xl mt-1">Total negative</p>
+              </div>
+              <div className="flex-1 min-w-[300px] max-w-[400px] flex flex-col items-center justify-center text-center bg-white/20 backdrop-blur-lg rounded-2xl shadow-lg border border-white/30 p-6">
+                <p className="text-4xl font-medium">{averagePlaytime} hours</p>
+                <p className="text-xl mt-1">Average playtime</p>
+              </div>
+            </div>
+            <div className="backdrop-blur-lg rounded-2xl text-3xl mt-14 text-center font-medium">
+              Scroll to see reviews
+            </div>
           </div>
         </div>
       </div>
@@ -149,34 +204,6 @@ const ReviewsPage = () => {
         <div className="z-30">
           <AppLayout>
             <div className="m-10 p-6 z-40">
-              {/* Game Details */}
-              {gameDetails && (
-                <div className="mb-8 p-6 text-white flex inline">
-                  <h1 className="text-4xl font-bold mb-2 font-sf">
-                    {gameDetails.name}
-                  </h1>
-                  <div className="items-center space-x-4 mt-10">
-                    <button className="expandable-button rounded-full mx-6">
-                      <img src={add_library} alt="Add to library" />
-                      <span className="text font-sf font-bold">
-                        Add to library
-                      </span>
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {/* Review Summary */}
-              {reviewSummary && (
-                <div className="mb-8 p-6 bg-white bg-opacity-20 backdrop-blur-lg rounded-lg text-white">
-                  <h2 className="text-2xl font-bold mb-2">Review Summary</h2>
-                  <p>Selected timeframe: {dayRange} days</p>
-                  <p>Total Positive: {percentPositive}%</p>
-                  <p>Total Negative: {percentNegative}%</p>
-                  <p>Overall Score: {reviewSummary.review_score_desc}</p>
-                </div>
-              )}
-
               {/* AI Analysis */}
               <h1 className="text-3xl font-bold mb-4 font-sf text-white">
                 AI Analysis
