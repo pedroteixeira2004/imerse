@@ -138,6 +138,11 @@ const ReviewsPage = () => {
             backgroundRepeat: "no-repeat",
           }}
         ></div>
+        <div className="flex-1 pl-20 min-h-screen flex">
+          <div className="text-4xl font-bold mb-2 font-sf game-details">
+            {gameDetails.name}
+          </div>
+        </div>
       </div>
       <div className="relative w-full h-screen bg-gradient-to-br from-purple-800 via-blue-900 to-indigo-900">
         <div className="absolute inset-0 backdrop-blur-sm bg-opacity-60"></div>
