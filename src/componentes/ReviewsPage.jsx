@@ -4,7 +4,9 @@ import TimestampConverter from "./timestampConverter";
 import AppLayout from "./Layout";
 import { useNavigate } from "react-router-dom";
 import LoadingReviews from "./LoadingReviews";
-
+import add_library from "../assets/icones/add_library.png";
+import background1 from "../assets/imagens/gradiente_game_details.svg";
+import background2 from "../assets/imagens/gradiente_fundo.svg";
 const ReviewsPage = () => {
   const { appId } = useParams();
   const [searchParams] = useSearchParams();
@@ -116,91 +118,126 @@ const ReviewsPage = () => {
   if (!reviews.length)
     return <p className="text-black">Nenhuma avaliação encontrada.</p>;
   return (
-    <div className="bg-gradient-to-r from-blue-500 to-purple-600 min-h-screen">
-      <AppLayout>
-        <div className="m-10 p-6">
-          {/* Game Details */}
-          {gameDetails && (
-            <div className="mb-8 p-6 bg-white bg-opacity-20 backdrop-blur-lg rounded-lg text-white">
-              <h1 className="text-4xl font-bold mb-2">{gameDetails.name}</h1>
-              <p className="mb-2">
-                📅 Release Date: {gameDetails.release_date?.date}
-              </p>
-            </div>
-          )}
+    <div>
+      <div
+        className="relative h-[100vh] w-full"
+        style={{
+          backgroundImage: `url(${gameDetails.background_raw})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        {/* Overlay opcional (background1 por cima se você quiser) */}
+        <div
+          className="absolute inset-0 z-10"
+          style={{
+            backgroundImage: `url(${background1})`,
+            backgroundSize: "cover",
+            backgroundPosition: "bottom",
+            backgroundRepeat: "no-repeat",
+          }}
+        ></div>
+      </div>
+      <div className="relative w-full h-screen bg-gradient-to-br from-purple-800 via-blue-900 to-indigo-900">
+        <div className="absolute inset-0 backdrop-blur-sm bg-opacity-60"></div>
+        <div className="z-30">
+          <AppLayout>
+            <div className="m-10 p-6 z-40">
+              {/* Game Details */}
+              {gameDetails && (
+                <div className="mb-8 p-6 text-white flex inline">
+                  <h1 className="text-4xl font-bold mb-2 font-sf">
+                    {gameDetails.name}
+                  </h1>
+                  <div className="items-center space-x-4 mt-10">
+                    <button className="expandable-button rounded-full mx-6">
+                      <img src={add_library} alt="Add to library" />
+                      <span className="text font-sf font-bold">
+                        Add to library
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              )}
 
-          {/* Review Summary */}
-          {reviewSummary && (
-            <div className="mb-8 p-6 bg-white bg-opacity-20 backdrop-blur-lg rounded-lg text-white">
-              <h2 className="text-2xl font-bold mb-2">Review Summary</h2>
-              <p>Selected timeframe: </p>
-              <p>Total Positive: {percentPositive}</p>
-              <p>Total Negative: {percentNegative}</p>
-              <p>Overall Score: {reviewSummary.review_score_desc}</p>
-            </div>
-          )}
+              {/* Review Summary */}
+              {reviewSummary && (
+                <div className="mb-8 p-6 bg-white bg-opacity-20 backdrop-blur-lg rounded-lg text-white">
+                  <h2 className="text-2xl font-bold mb-2">Review Summary</h2>
+                  <p>Selected timeframe: {dayRange} days</p>
+                  <p>Total Positive: {percentPositive}%</p>
+                  <p>Total Negative: {percentNegative}%</p>
+                  <p>Overall Score: {reviewSummary.review_score_desc}</p>
+                </div>
+              )}
 
-          {/* AI Analysis */}
-          <h1 className="text-3xl font-bold mb-4 font-sf text-white">
-            AI Analysis
-          </h1>
-          <div className="mb-4 flex gap-4 flex-wrap">
-            <button
-              onClick={() => handleAnalyze("general")}
-              className={`px-4 py-2 rounded-full text-white font-bold transition-all duration-300 button2
+              {/* AI Analysis */}
+              <h1 className="text-3xl font-bold mb-4 font-sf text-white">
+                AI Analysis
+              </h1>
+              <div className="mb-4 flex gap-4 flex-wrap">
+                <button
+                  onClick={() => handleAnalyze("general")}
+                  className={`px-4 py-2 rounded-full text-white font-bold transition-all duration-300 button2
       ${analysisType === "general"}`}
-            >
-              General Insight
-            </button>
+                >
+                  General Insight
+                </button>
 
-            <button
-              onClick={() => handleAnalyze("sentiment")}
-              className={`px-4 py-2 rounded-full text-white font-bold transition-all duration-300 button2
+                <button
+                  onClick={() => handleAnalyze("sentiment")}
+                  className={`px-4 py-2 rounded-full text-white font-bold transition-all duration-300 button2
       ${analysisType === "sentiment"}`}
-            >
-              Sentiment Analysis
-            </button>
+                >
+                  Sentiment Analysis
+                </button>
 
-            <button
-              onClick={() => handleAnalyze("keywords")}
-              className={`px-4 py-2 rounded-full text-white font-bold transition-all duration-300 
+                <button
+                  onClick={() => handleAnalyze("keywords")}
+                  className={`px-4 py-2 rounded-full text-white font-bold transition-all duration-300 
       ${
         analysisType === "keywords"
           ? "bg-gradient-to-r from-blue-400 to-teal-400"
           : "bg-gradient-to-r from-blue-400 to-teal-400 backdrop-blur-xl transition-all duration-500 hover:shadow-[0_0_40px_rgba(0,255,255,0.9)]"
       }`}
-            >
-              Keyword Extraction
-            </button>
-          </div>
+                >
+                  Keyword Extraction
+                </button>
+              </div>
 
-          {analysisStatus && (
-            <p className="text-white font-semibold mb-4">{analysisStatus}</p>
-          )}
+              {analysisStatus && (
+                <p className="text-white font-semibold mb-4">
+                  {analysisStatus}
+                </p>
+              )}
 
-          {/* Reviews */}
-          <h1 className="text-3xl font-bold mb-4 font-sf text-white">
-            Reviews
-          </h1>
-          <ul>
-            {reviews.map((review, index) => (
-              <li
-                key={index}
-                className="mb-4 p-4 rounded-lg bg-white bg-opacity-30 backdrop-blur-lg"
-              >
-                <p className="text-white font-sf">{review.review}</p>
-                <TimestampConverter timestamp={review.timestamp_created} />
-                <p className="text-white text-sm">
-                  👍 {review.votes_up} 👎 {review.votes_down}
-                </p>
-                <p>
-                  Hours played at the review: {review.author.playtime_at_review}
-                </p>
-              </li>
-            ))}
-          </ul>
+              {/* Reviews */}
+              <h1 className="text-3xl font-bold mb-4 font-sf text-white">
+                Reviews
+              </h1>
+              <ul>
+                {reviews.map((review, index) => (
+                  <li
+                    key={index}
+                    className="mb-4 p-4 rounded-lg bg-white bg-opacity-30 backdrop-blur-lg"
+                  >
+                    <p className="text-white font-sf">{review.review}</p>
+                    <TimestampConverter timestamp={review.timestamp_created} />
+                    <p className="text-white text-sm">
+                      👍 {review.votes_up} 👎 {review.votes_down}
+                    </p>
+                    <p>
+                      Hours played at the review:{" "}
+                      {review.author.playtime_at_review}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </AppLayout>
         </div>
-      </AppLayout>
+      </div>
     </div>
   );
 };
