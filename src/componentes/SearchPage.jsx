@@ -39,8 +39,8 @@ const SearchPage = () => {
               <div className="mt-10">
                 <button
                   onClick={handleSearch}
-                  className="px-10 py-2 text-white text-lg font-bold rounded-full 
-        button2 text-xl"
+                  className="px-10 py-2 text-white font-bold rounded-full 
+        button2 text-xl font-sf"
                 >
                   Discover
                 </button>

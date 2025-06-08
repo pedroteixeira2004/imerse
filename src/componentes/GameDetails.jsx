@@ -111,7 +111,7 @@ const GameDetails = () => {
             <div className="flex items-center space-x-4 mt-10">
               <button
                 onClick={() => navigate(`/filters/${appId}`)}
-                className="px-5 py-2 text-white text-lg font-bold rounded-full button2"
+                className="px-5 py-2 text-white text-lg font-bold rounded-full button2 font-sf"
               >
                 Analyse game
               </button>

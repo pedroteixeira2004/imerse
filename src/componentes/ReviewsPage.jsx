@@ -211,7 +211,7 @@ const ReviewsPage = () => {
               <div className="mb-4 flex gap-4 flex-wrap">
                 <button
                   onClick={() => handleAnalyze("general")}
-                  className={`px-4 py-2 rounded-full text-white font-bold transition-all duration-300 button2
+                  className={`px-4 py-2 rounded-full text-white font-bold transition-all duration-300 button2 font-sf
       ${analysisType === "general"}`}
                 >
                   General Insight
@@ -219,7 +219,7 @@ const ReviewsPage = () => {
 
                 <button
                   onClick={() => handleAnalyze("sentiment")}
-                  className={`px-4 py-2 rounded-full text-white font-bold transition-all duration-300 button2
+                  className={`px-4 py-2 rounded-full text-white font-bold transition-all duration-300 button2 font-sf
       ${analysisType === "sentiment"}`}
                 >
                   Sentiment Analysis
@@ -227,12 +227,8 @@ const ReviewsPage = () => {
 
                 <button
                   onClick={() => handleAnalyze("keywords")}
-                  className={`px-4 py-2 rounded-full text-white font-bold transition-all duration-300 
-      ${
-        analysisType === "keywords"
-          ? "bg-gradient-to-r from-blue-400 to-teal-400"
-          : "bg-gradient-to-r from-blue-400 to-teal-400 backdrop-blur-xl transition-all duration-500 hover:shadow-[0_0_40px_rgba(0,255,255,0.9)]"
-      }`}
+                  className={`px-4 py-2 rounded-full text-white font-bold transition-all duration-300 button2 font-sf
+      ${analysisType === "keywords"}`}
                 >
                   Keyword Extraction
                 </button>

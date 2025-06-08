@@ -1,16 +1,16 @@
-<svg width="883" height="998" viewBox="0 0 883 998" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g filter="url(#filter0_f_152_412)">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M450.084 216.403C515.285 220.653 590.997 126.068 637.046 172.461C688.502 224.302 614.135 313.553 618.891 386.472C621.415 425.175 644.257 457.277 657.987 493.547C687.125 570.516 774.73 642.599 744.888 719.297C718.838 786.251 612.217 761.58 544.462 785.327C471.955 810.739 407.958 879.181 332.694 863.764C257.23 848.306 203.923 776.446 168.05 708.223C136.067 647.398 118.076 570.559 145.354 507.48C171.401 447.247 285.135 459.536 302.913 396.361C326.466 312.66 191.756 214.313 246.786 147.022C293.073 90.424 377.161 211.649 450.084 216.403Z" fill="url(#paint0_linear_152_412)"/>
+<svg width="1018" height="1026" viewBox="0 0 1018 1026" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_f_1000_3290)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M446.095 208.559C529.479 215.952 558.985 318.92 619.818 376.426C684.21 437.295 794.661 462.468 807.451 550.148C820.757 641.371 754.766 730.468 679.154 783.207C612.695 829.561 524.547 822.458 446.095 802.191C386.059 786.682 350.247 733.57 308.731 687.513C270.651 645.268 230.238 605.881 218.9 550.148C204.501 479.364 198.569 402.771 238.572 342.626C285.985 271.341 360.817 200.999 446.095 208.559Z" fill="url(#paint0_linear_1000_3290)"/>
 </g>
 <defs>
-<filter id="filter0_f_152_412" x="0" y="0" width="883" height="998" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<filter id="filter0_f_1000_3290" x="0" y="0" width="1017.17" height="1025.88" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>
 <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-<feGaussianBlur stdDeviation="66" result="effect1_foregroundBlur_152_412"/>
+<feGaussianBlur stdDeviation="104" result="effect1_foregroundBlur_1000_3290"/>
 </filter>
-<linearGradient id="paint0_linear_152_412" x1="132" y1="132" x2="855.471" y2="742.12" gradientUnits="userSpaceOnUse">
-<stop stop-color="#6358E0"/>
-<stop offset="1" stop-color="#0A89B0"/>
+<linearGradient id="paint0_linear_1000_3290" x1="92.8411" y1="208" x2="866.673" y2="913.517" gradientUnits="userSpaceOnUse">
+<stop stop-color="#2338C4"/>
+<stop offset="1" stop-color="#0B1973"/>
 </linearGradient>
 </defs>
 </svg>
