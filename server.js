@@ -129,30 +129,130 @@ app.post("/api/analyze-reviews", async (req, res) => {
     switch (type) {
       case "sentiment":
         prompt = `
-Analyze the emotional sentiment expressed in the reviews below.
-Identify the overall tone (positive, negative, or mixed), highlight specific emotional expressions (e.g., frustration, joy, excitement), and describe any recurring emotional trends.
+You are an expert AI analyst for game reviews.
+
+Analyze the emotional sentiment and patterns expressed in the reviews below.
+
+Return only a valid JSON object, strictly in this format:
+{
+  "summary": "Brief summary of the overall information focusing on the emotions.",
+  "overallTone": "Very Positive" | "Positive" |"Mixed"| "Negative" | "Very Negative",
+  "positiveAspects": ["aspect1", "aspect2", "aspect3", ...],
+  "negativeAspects": ["aspect1", "aspect2", "aspect3", ...],
+  "emotionalExpressions": ["emotion1", "emotion2", "emotion3", ...],
+  "recurringTrends": ["trend1", "trend2", "trend3", ...]
+  "suggestions":["suggestion1", "suggestion2", "suggestion3", ...]
+}
+
+Guidelines:
+- "summary" must summarize all the content, focusing on the emotions and where they are expressed.
+- "overallTone" must summarize the dominant emotional tone.
+- "positiveAspects" should include all the positive aspects mentioned related to the positive emotions.
+- "negativeAspects" should include all the negative aspects mentioned related to the negative emotions.
+- "emotionalExpressions" should include both explicit emotions (joy, frustration) and subtle feelings.
+- "recurringTrends" should describe behaviors, complaints, praises, or patterns of player experience.
+- "suggestions" should be inferred suggestions or requests from the players.
+
+Important rules:
+- Return all aspect names, overall tone, keywords, themes, emotional expressions, and suggestions with the first letter capitalized.
+- Ensure that all multi-word terms or phrases have spaces between words (e.g., "fast loading" instead of "fastLoading").
+- Do not include any explanations.
+- Do not include any text outside the JSON.
+- Do not use markdown syntax.
+
 Reviews:
 ${limitedComments}
-    `;
+`;
         break;
+
       case "keywords":
         prompt = `
-Extract the main keywords and recurring terms from the reviews below.
-Focus on words and phrases that reflect the players' experience or concerns. Avoid generic terms. Organize the keywords by frequency or importance.
+You are an expert AI analyst for game reviews.
+
+Extract detailed keywords and recurring terms from the reviews below.
+
+Return only a valid JSON object, strictly in this format:
+{
+  "summary": "Brief summary of the most current themes and words used in the reviews.",
+  "keywords": [
+    { "term": "keyword1", "frequency": number },
+    { "term": "keyword2", "frequency": number }
+  ]
+  "themes": ["theme1", "theme2", "theme3", ...]
+  "suggestions": ["suggestion1", "suggestion2", "suggestion3", ...]
+}
+
+Guidelines:
+- "summary" must summarize the most words and themes used in the reviews.
+- "keywords" should include important nouns, verbs, or phrases (avoid generic terms).
+- Estimate "frequency" by how often the keyword appears in the reviews.
+- "themes" should capture broad areas of discussion.
+- "suggestions" should be actionable insights inferred from the reviews.
+
+Important rules:
+- Return all aspect names, overall tone, keywords, themes, emotional expressions, and suggestions with the first letter capitalized.
+- Ensure that all multi-word terms or phrases have spaces between words (e.g., "fast loading" instead of "fastLoading").
+- Do not include any explanations.
+- Do not include any text outside the JSON.
+- Do not use markdown syntax.
+
 Reviews:
 ${limitedComments}
-    `;
+`;
+
         break;
+
       case "general":
         prompt = `
-Based on the reviews below, write a general insight about how players are feeling about the game.
-Highlight recurring themes, positive or negative sentiments, and any implicit suggestions.
+You are an expert AI analyst for game reviews.
+
+Based on the reviews below, generate a complete insight about how players are feeling about the game.
+
+Return only a valid JSON object, strictly in this format:
+{
+"summary": "Brief summary and balance of how players are feeling, suggestions, positive and negative aspects, keywords.",
+"overallTone": "Very Positive"| "Positive"|"Mixed"|"Negative"| "Very Negative",
+"emotionExpressions": ["emotion1", "emotion2", "emotion3", ...],
+  "themes": ["theme1", "theme2", "theme3", ...],
+  "positiveAspects": ["aspect1", "aspect2", "aspect3", ...],
+  "negativeAspects": ["aspect1", "aspect2", "aspect3", ...],
+  "suggestions": ["suggestion1", "suggestion2", ...]
+  "recurringTrends": ["trend1", "trend2", "trend3", ...],
+  "keywords": [
+    { "term": "keyword1", "frequency": number },
+    { "term": "keyword2", "frequency": number }
+  ]
+}
+
+Guidelines:
+- Be concise and clear in "summary".
+- "overallTone" summarizes the dominant tone and balance of the reviews.
+- "emotionalExpressions" should highlight both strong and subtle emotions.
+- "themes" capture broad topics of player discussion.
+- "positiveAspects" should highlight specific positive areas of the game.
+- "negativeAspects" should highlight specific areas of criticism.
+- "suggestions" are actionable insights or requests.
+- "recurringTrends" are repeated patterns or comments from players.
+- "keywords" include key words and phrases players use, with estimated frequency.
+
+Important rules:
+- Return all aspect names, overall tone, keywords, themes, emotional expressions, and suggestions with the first letter capitalized
+- Ensure that all multi-word terms or phrases have spaces between words (e.g., "fast loading" instead of "fastLoading").
+- Do not include any explanations.
+- Do not include any text outside the JSON.
+- Do not use markdown syntax.
+
 Reviews:
 ${limitedComments}
-    `;
+`;
+
         break;
+
+      default:
+        return res.status(400).json({ error: "Invalid analysis type." });
     }
 
+    // Call Gemini API
     const response = await axios.post(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
       {
@@ -165,13 +265,41 @@ ${limitedComments}
       }
     );
 
-    const aiText = response.data.candidates[0].content.parts[0].text;
-    res.json({ insight: aiText });
+    // Get AI response text
+    let aiText =
+      response.data.candidates[0]?.content?.parts[0]?.text?.trim() || "";
+
+    console.log("Raw AI response:", aiText);
+
+    // Try to extract only the JSON part (handle if Gemini adds extra text)
+    // Regex to extract JSON block if needed
+    const jsonMatch = aiText.match(/\{[\s\S]*\}/);
+
+    if (!jsonMatch) {
+      throw new Error("Could not extract JSON from AI response.");
+    }
+
+    const jsonText = jsonMatch[0];
+
+    // Parse JSON
+    let parsedInsight;
+    try {
+      parsedInsight = JSON.parse(jsonText);
+    } catch (parseError) {
+      console.error("Failed to parse JSON:", parseError);
+      console.error("JSON text:", jsonText);
+      return res.status(500).json({ error: "Invalid JSON format from AI." });
+    }
+
+    // Send to React app
+    res.json({ insight: parsedInsight });
   } catch (error) {
     console.error("Error analyzing reviews with Gemini:");
     if (error.response) {
       console.error("Status:", error.response.status);
       console.error("Details:", error.response.data);
+    } else {
+      console.error(error);
     }
     res.status(500).json({ error: "Error analyzing reviews with Gemini." });
   }
