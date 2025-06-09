@@ -7,6 +7,7 @@ import LoadingReviews from "./LoadingReviews";
 import add_library from "../assets/icones/add_library.png";
 import background1 from "../assets/imagens/gradiente_game_details.svg";
 import background2 from "../assets/imagens/gradiente_fundo.svg";
+import Background from "./background";
 const ReviewsPage = () => {
   const { appId } = useParams();
   const [searchParams] = useSearchParams();
@@ -25,7 +26,6 @@ const ReviewsPage = () => {
   const [percentPositive, setPercentPositive] = useState(0);
   const [percentNegative, setPercentNegative] = useState(0);
   const [averagePlaytime, setAveragePlaytime] = useState(0);
-
   const numPerPage = searchParams.get("num_per_page") || 20;
   const reviewType = searchParams.get("review_type") || "all";
   const dayRange = searchParams.get("day_range") || "365";
@@ -124,13 +124,13 @@ const ReviewsPage = () => {
       setLoading(false);
     }
   };
-
   if (error) return <p className="text-red-500">{error}</p>;
   if (loading) return <LoadingReviews />;
   if (!reviews.length)
     return <p className="text-black">Nenhuma avaliação encontrada.</p>;
   return (
     <div>
+      <Background />
       <div
         className="relative h-[100vh] w-full"
         style={{
@@ -163,7 +163,7 @@ const ReviewsPage = () => {
                 </button>
               </div>
             </div>
-            <div className="backdrop-blur-lg rounded-2xl text-4xl mt-6 font-medium">
+            <div className="backdrop-blur w-64 text-4xl mt-6 font-medium">
               Overall analysis
             </div>
             <div
@@ -199,71 +199,76 @@ const ReviewsPage = () => {
           </div>
         </div>
       </div>
-      <div className="relative w-full h-screen bg-gradient-to-br from-purple-800 via-blue-900 to-indigo-900">
-        <div className="absolute inset-0 backdrop-blur-sm bg-opacity-60"></div>
-        <div className="z-30">
-          <AppLayout>
-            <div className="m-10 p-6 z-40">
-              {/* AI Analysis */}
-              <h1 className="text-3xl font-bold mb-4 font-sf text-white">
-                AI Analysis
-              </h1>
-              <div className="mb-4 flex gap-4 flex-wrap">
-                <button
-                  onClick={() => handleAnalyze("general")}
-                  className={`px-4 py-2 rounded-full text-white font-bold transition-all duration-300 button2 font-sf
+      <div>
+        <div className=" relative z-30">
+          <div className="relative">
+            <div className="relative z-10">
+              <AppLayout>
+                <div className="m-10 p-6 z-40">
+                  {/* AI Analysis */}
+                  <h1 className="text-3xl font-bold mb-4 font-sf text-white">
+                    AI Analysis
+                  </h1>
+                  <div className="mb-4 flex gap-4 flex-wrap">
+                    <button
+                      onClick={() => handleAnalyze("general")}
+                      className={`px-4 py-2 rounded-full text-white font-bold transition-all duration-300 button2 font-sf
       ${analysisType === "general"}`}
-                >
-                  General Insight
-                </button>
+                    >
+                      General Insight
+                    </button>
 
-                <button
-                  onClick={() => handleAnalyze("sentiment")}
-                  className={`px-4 py-2 rounded-full text-white font-bold transition-all duration-300 button2 font-sf
+                    <button
+                      onClick={() => handleAnalyze("sentiment")}
+                      className={`px-4 py-2 rounded-full text-white font-bold transition-all duration-300 button2 font-sf
       ${analysisType === "sentiment"}`}
-                >
-                  Sentiment Analysis
-                </button>
+                    >
+                      Sentiment Analysis
+                    </button>
 
-                <button
-                  onClick={() => handleAnalyze("keywords")}
-                  className={`px-4 py-2 rounded-full text-white font-bold transition-all duration-300 button2 font-sf
+                    <button
+                      onClick={() => handleAnalyze("keywords")}
+                      className={`px-4 py-2 rounded-full text-white font-bold transition-all duration-300 button2 font-sf
       ${analysisType === "keywords"}`}
-                >
-                  Keyword Extraction
-                </button>
-              </div>
+                    >
+                      Keyword Extraction
+                    </button>
+                  </div>
 
-              {analysisStatus && (
-                <p className="text-white font-semibold mb-4">
-                  {analysisStatus}
-                </p>
-              )}
+                  {analysisStatus && (
+                    <p className="text-white font-semibold mb-4">
+                      {analysisStatus}
+                    </p>
+                  )}
 
-              {/* Reviews */}
-              <h1 className="text-3xl font-bold mb-4 font-sf text-white">
-                Reviews
-              </h1>
-              <ul>
-                {reviews.map((review, index) => (
-                  <li
-                    key={index}
-                    className="mb-4 p-4 rounded-lg bg-white bg-opacity-30 backdrop-blur-lg"
-                  >
-                    <p className="text-white font-sf">{review.review}</p>
-                    <TimestampConverter timestamp={review.timestamp_created} />
-                    <p className="text-white text-sm">
-                      👍 {review.votes_up} 👎 {review.votes_down}
-                    </p>
-                    <p>
-                      Hours played at the review:{" "}
-                      {review.author.playtime_at_review}
-                    </p>
-                  </li>
-                ))}
-              </ul>
+                  {/* Reviews */}
+                  <h1 className="text-3xl font-bold mb-4 font-sf text-white">
+                    Reviews
+                  </h1>
+                  <ul>
+                    {reviews.map((review, index) => (
+                      <li
+                        key={index}
+                        className="mb-4 p-4 rounded-lg bg-white bg-opacity-30 backdrop-blur-lg"
+                      >
+                        <p className="text-white font-sf">{review.review}</p>
+                        <TimestampConverter
+                          timestamp={review.timestamp_created}
+                        />
+                        <p className="text-white text-sm">
+                          👍 {review.votes_up} 👎 {review.votes_down}
+                        </p>
+                        <p>
+                          Hours played at the review:{" "}
+                          {Math.round(review.author.playtime_at_review / 60)}
+                        </p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </AppLayout>
             </div>
-          </AppLayout>
+          </div>
         </div>
       </div>
     </div>

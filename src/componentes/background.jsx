@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import "../background.css";
 
-const Background = () => {
+const Background = ({ visible = false }) => {
   const containerRef = useRef(null);
 
   // Feito com ajuda do ChatGPT
@@ -103,7 +103,14 @@ const Background = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="main-container">
+    <div
+      ref={containerRef}
+      className={`main-container fixed transition-opacity duration-500 ${
+        visible
+          ? "opacity-100 pointer-events-auto"
+          : "opacity-0 pointer-events-none"
+      }`}
+    >
       <img
         src="/imagens/vetores_background/Vector-3.svg"
         className="moving-svg"
