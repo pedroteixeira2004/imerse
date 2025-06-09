@@ -11,7 +11,7 @@ const LoadingDetails = () => {
         <div className="mt-6">
           <img src={Logo} alt="Logo" className="mb-6 logo_loading" />
         </div>
-        <BeatLoader color="#ffffff" size={50} className="mb-6 mt-6" />
+        <BeatLoader color="#ffffff" size={30} className="mb-6 mt-6" />
         <div className="text-white font-sf text-center text-3xl">
           Diving into the game. Wait a moment.
         </div>

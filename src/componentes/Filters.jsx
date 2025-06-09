@@ -3,11 +3,11 @@ import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AppLayout from "./Layout";
 import Background from "./background";
-import LanguageDropdown from "./languageDropdown";
 import positive from "../assets/icones/positive.png";
 import negative from "../assets/icones/negative.png";
 import all from "../assets/icones/all.png";
 import Select from "react-select";
+import supportedLocales from "./SteamLocales";
 const FiltersPage = () => {
   const { appId } = useParams();
   const navigate = useNavigate();
@@ -29,14 +29,12 @@ const FiltersPage = () => {
     { value: "80", label: "80" },
     { value: "100", label: "100" },
   ];
-  const languageOptions = [
-    { value: "all", label: "All" },
-    { value: "english", label: "English" },
-    { value: "french", label: "French" },
-    { value: "spanish", label: "Spanish" },
-    { value: "german", label: "German" },
-    { value: "portuguese", label: "Portuguese" },
-  ];
+  const languageOptions = Object.entries(supportedLocales).map(
+    ([key, value]) => ({
+      value: key,
+      label: value.englishName,
+    })
+  );
   const dayOptions = [
     { value: 7, label: "7 days" },
     { value: 15, label: "15 days" },
@@ -183,7 +181,6 @@ const FiltersPage = () => {
                           setLanguage(selectedOption.value)
                         }
                         placeholder="Select the language"
-                        isSearchable={false}
                         menuPortalTarget={document.body} // força o menu para o body
                         styles={{
                           control: (base, state) => ({
