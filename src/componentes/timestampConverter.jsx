@@ -10,7 +10,7 @@ const TimestampConverter = ({ timestamp }) => {
 
   return (
     <div className="text-white">
-      <p>Review date: {formattedDate}</p>
+      <p>{formattedDate}</p>
     </div>
   );
 };

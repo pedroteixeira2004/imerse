@@ -6,8 +6,10 @@ import { useNavigate } from "react-router-dom";
 import LoadingReviews from "./LoadingReviews";
 import add_library from "../assets/icones/add_library.png";
 import background1 from "../assets/imagens/gradiente_game_details.svg";
-import background2 from "../assets/imagens/gradiente_fundo.svg";
+import like from "../assets/icones/like.png";
 import Background from "./background";
+import mouse from "../assets/icones/mouse.png";
+import smile from "../assets/icones/smile.png";
 const ReviewsPage = () => {
   const { appId } = useParams();
   const [searchParams] = useSearchParams();
@@ -193,8 +195,9 @@ const ReviewsPage = () => {
                 <p className="text-xl mt-1">Average playtime</p>
               </div>
             </div>
-            <div className="backdrop-blur-lg rounded-2xl text-3xl mt-14 text-center font-medium">
-              Scroll to see reviews
+            <div className="backdrop-blur-lg rounded-2xl text-3xl mt-14 justify-center font-medium flex">
+              <div>Scroll to see reviews</div>
+              <img src={mouse} alt="mouse" className="ml-4 w-10 h-10" />
             </div>
           </div>
         </div>
@@ -249,19 +252,51 @@ const ReviewsPage = () => {
                     {reviews.map((review, index) => (
                       <li
                         key={index}
-                        className="mb-4 p-4 rounded-lg bg-white bg-opacity-30 backdrop-blur-lg"
+                        className="mb-4 p-4 bg-white/20 backdrop-blur-lg rounded-2xl shadow-lg border border-white/30 mt-10"
                       >
-                        <p className="text-white font-sf">{review.review}</p>
-                        <TimestampConverter
-                          timestamp={review.timestamp_created}
-                        />
-                        <p className="text-white text-sm">
-                          👍 {review.votes_up} 👎 {review.votes_down}
-                        </p>
-                        <p>
-                          Hours played at the review:{" "}
-                          {Math.round(review.author.playtime_at_review / 60)}
-                        </p>
+                        <div className="m-5">
+                          <p className="text-white font-sf text-lg font-regular">
+                            {review.review}
+                          </p>
+                          <div className="mt-6 text-lg flex justify-between items-center font-medium">
+                            <div className="flex flex-col justify-center text-right">
+                              <div className="flex align-center mb-1">
+                                <div className="flex">
+                                  <img
+                                    src={like}
+                                    alt="like"
+                                    className="w-6 h-6 mr-2"
+                                  />
+                                  <p className="text-white font-sf">
+                                    {review.votes_up}
+                                  </p>
+                                </div>
+                                <div className="flex ml-6 align-center">
+                                  <img
+                                    src={smile}
+                                    alt="smile"
+                                    className="w-6 h-6 mr-2"
+                                  />
+                                  <p className="text-white font-sf">
+                                    {review.votes_funny}
+                                  </p>
+                                </div>
+                              </div>
+                              <p className="text-white font-sf">
+                                Playtime at the review:{" "}
+                                {Math.round(
+                                  review.author.playtime_at_review / 60
+                                )}
+                                h
+                              </p>
+                            </div>
+                            <div className="font-sf text-white">
+                              <TimestampConverter
+                                timestamp={review.timestamp_created}
+                              />
+                            </div>
+                          </div>
+                        </div>
                       </li>
                     ))}
                   </ul>

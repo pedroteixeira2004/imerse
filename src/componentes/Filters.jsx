@@ -177,11 +177,15 @@ const FiltersPage = () => {
                       </p>
                       <Select
                         options={languageOptions}
+                        value={languageOptions.find(
+                          (option) => option.value === language
+                        )}
                         onChange={(selectedOption) =>
                           setLanguage(selectedOption.value)
                         }
                         placeholder="Select the language"
-                        menuPortalTarget={document.body} // força o menu para o body
+                        menuPortalTarget={document.body}
+                        className="font-sf" // força o menu para o body
                         styles={{
                           control: (base, state) => ({
                             ...base,

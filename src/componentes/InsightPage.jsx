@@ -2,6 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import AppLayout from "./Layout";
 import ReactMarkdown from "react-markdown";
+import Background from "./background";
 
 const InsightPage = () => {
   const location = useLocation();
@@ -9,17 +10,21 @@ const InsightPage = () => {
 
   if (!insight) {
     return (
-      <AppLayout>
-        <div className="p-6 text-white">
-          <h1 className="text-2xl font-bold mb-4">AI Analysis</h1>
-          <p>No insight provided.</p>
-        </div>
-      </AppLayout>
+      <div>
+        <Background />
+        <AppLayout>
+          <div className="p-6 text-white">
+            <h1 className="text-2xl font-bold mb-4">AI Analysis</h1>
+            <p>No insight provided.</p>
+          </div>
+        </AppLayout>
+      </div>
     );
   }
 
   return (
     <div className="bg-gradient-to-r from-blue-500 to-purple-600 min-h-screen">
+      <Background />
       <AppLayout>
         <div className="p-6 text-white">
           <h1 className="text-3xl font-bold mb-4 font-sf">AI Analysis</h1>
