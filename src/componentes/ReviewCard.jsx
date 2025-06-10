@@ -12,44 +12,78 @@ export default function ReviewCard({ review }) {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [showReadMore, setShowReadMore] = useState(false);
   const contentRef = useRef(null);
+  const containerRef = useRef(null);
+
+  const maxCollapsedHeight = 140;
 
   useEffect(() => {
     if (contentRef.current) {
-      // Checar altura real do conteúdo para ativar o Read More
       const contentHeight = contentRef.current.scrollHeight;
-      const maxCollapsedHeight = 200; // altura em px do colapso
       setShowReadMore(contentHeight > maxCollapsedHeight);
     }
   }, [review.review]);
 
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const fullHeight = contentRef.current.scrollHeight;
+
+    el.style.transition = "height 0.5s ease";
+    el.style.overflow = "hidden";
+
+    if (!isCollapsed) {
+      // expandir
+      el.style.height = `${fullHeight}px`;
+    } else {
+      // recolher → fixamos a altura atual antes de recolher
+      const currentHeight = el.getBoundingClientRect().height;
+      el.style.height = `${currentHeight}px`;
+
+      // forçamos o reflow para garantir que o browser vê a altura atual
+      // e consegue animar para 200px
+      void el.offsetHeight;
+
+      el.style.height = `${maxCollapsedHeight}px`;
+    }
+
+    const handleTransitionEnd = () => {
+      if (!isCollapsed) {
+        el.style.height = "auto";
+      }
+    };
+
+    el.addEventListener("transitionend", handleTransitionEnd);
+
+    return () => {
+      el.removeEventListener("transitionend", handleTransitionEnd);
+    };
+  }, [isCollapsed]);
+
   return (
     <li
       className="
-    mb-4 p-4
-    bg-white/10
-    backdrop-blur-[15px]
-    rounded-2xl
-    border
-    border-white/30
-    shadow-[0_4px_30px_rgba(0,0,0,0.1)]
-    mt-10
-    text-white
-  "
+        mb-4 p-4
+        bg-white/10
+        backdrop-blur-[15px]
+        rounded-2xl
+        border
+        border-white/30
+        shadow-[0_4px_30px_rgba(0,0,0,0.1)]
+        mt-10
+        text-white
+      "
     >
       <div className="m-5 relative">
-        <div
-          ref={contentRef}
-          style={{
-            maxHeight: isCollapsed && showReadMore ? 200 : "none",
-            overflow: "hidden",
-            transition: "max-height 0.5s ease",
-            whiteSpace: "pre-line",
-          }}
-          className="text-white font-sf text-lg font-regular"
-        >
-          <BBCode plugins={plugins}>
-            {review.review.replace(/\[table\][\s\S]*?\[\/table\]/gi, "")}
-          </BBCode>
+        <div ref={containerRef}>
+          <div
+            ref={contentRef}
+            className="text-white font-sf text-lg font-regular whitespace-pre-line"
+          >
+            <BBCode plugins={plugins}>
+              {review.review.replace(/\[table\][\s\S]*?\[\/table\]/gi, "")}
+            </BBCode>
+          </div>
         </div>
 
         {showReadMore && (
@@ -57,37 +91,27 @@ export default function ReviewCard({ review }) {
             <button
               onClick={() => setIsCollapsed(!isCollapsed)}
               className="
-            px-6 py-2
-            rounded-full
-            bg-white/20
-            backdrop-blur-lg
-            border border-white/30
-            text-white
-            font-sf
-            font-semibold
-            transition
-            hover:bg-white/30
-            shadow-lg
-          "
+                px-6 py-2
+                rounded-full
+                bg-white/20
+                backdrop-blur-lg
+                border border-white/30
+                text-white
+                font-sf
+                font-semibold
+                transition
+                hover:bg-white/30
+                shadow-lg
+              "
             >
               {isCollapsed ? (
                 <div className="flex items-center">
-                  <div
-                    className="
-                  mr-2"
-                  >
-                    Read more
-                  </div>
+                  <div className="mr-2">Read more</div>
                   <FaChevronDown />
                 </div>
               ) : (
                 <div className="flex items-center">
-                  <div
-                    className="
-                  mr-2"
-                  >
-                    Read less
-                  </div>
+                  <div className="mr-2">Read less</div>
                   <FaChevronUp />
                 </div>
               )}

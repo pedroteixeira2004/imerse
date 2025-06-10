@@ -12,6 +12,7 @@ module.exports = {
     "./src/componentes/Reports.jsx",
     "./src/componentes/Filters.jsx",
     "./src/componentes/ReviewCard.jsx",
+    "./src/componentes/InsightPage.jsx",
   ],
   theme: {
     extend: {

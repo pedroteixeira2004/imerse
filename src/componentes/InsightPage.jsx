@@ -58,66 +58,162 @@ const InsightPage = () => {
       <Background />
       <AppLayout>
         <div className="p-6 text-white m-10">
-          <h1 className="text-3xl font-bold mb-4 font-sf">AI Analysis</h1>
+          <h1 className="text-3xl font-bold mb-10 font-sf">AI Analysis</h1>
+
           <div
-            className="
-    mb-4 p-6
-    bg-gradient-to-br from-white/15 to-white/5
-    backdrop-blur-[15px]
-    rounded-2xl
-    border border-white/30
-    shadow-[0_4px_30px_rgba(0,0,0,0.1)]
-    w-full
-    transition-all duration-300
-    hover:shadow-[0_6px_40px_rgba(255,255,255,0.2)]
-  "
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 xl:grid-cols-6 auto-rows-min
+            gap-10 font-sf"
           >
-            <div className="m-5">
-              {insight.summary && (
-                <div>
-                  <h2 className="text-xl font-semibold mb-2">Summary</h2>
-                  <p>{insight.summary}</p>
-                </div>
-              )}
+            {insight.summary && (
+              <div
+                className="
+                col-span-full
+              p-6
+              bg-gradient-to-br from-white/15 to-white/5
+              backdrop-blur-[15px]
+              rounded-2xl
+              border border-white/30
+              shadow-[0_4px_30px_rgba(0,0,0,0.1)]
+            "
+              >
+                <h2 className="text-xl font-semibold mb-2">Summary</h2>
+                <p>{insight.summary}</p>
+              </div>
+            )}
 
-              {insight.overallTone && (
-                <div>
-                  <h2 className="text-xl font-semibold mb-2">Overall Tone</h2>
-                  <p className="capitalize">
-                    {safeString(insight.overallTone)}
-                  </p>
-                </div>
-              )}
+            {insight.overallTone && (
+              <div
+                className="
+                col-span-2
+                row-span-1
+              p-6
+              bg-gradient-to-br from-white/15 to-white/5
+              backdrop-blur-[15px]
+              rounded-2xl
+              border border-white/30
+              shadow-[0_4px_30px_rgba(0,0,0,0.1)]
+            "
+              >
+                <h2 className="text-xl font-semibold mb-2">Overall Tone</h2>
+                <p className="capitalize">{safeString(insight.overallTone)}</p>
+              </div>
+            )}
 
-              {/* Emotional Expressions */}
-              {(insight.emotionalExpressions || insight.emotionExpressions) &&
-                renderStringList(
+            {insight.emotionalExpressions && (
+              <div
+                className="
+                col-span-2
+              p-6
+              bg-gradient-to-br from-white/15 to-white/5
+              backdrop-blur-[15px]
+              rounded-2xl
+              border border-white/30
+              shadow-[0_4px_30px_rgba(0,0,0,0.1)]
+              font-sf
+            "
+              >
+                {renderStringList(
                   "Emotional Expressions",
-                  insight.emotionalExpressions || insight.emotionExpressions
+                  insight.emotionalExpressions
                 )}
+              </div>
+            )}
 
-              {/* Positive Aspects */}
-              {insight.positiveAspects &&
-                renderStringList("Positive Aspects", insight.positiveAspects)}
+            {insight.positiveAspects && (
+              <div
+                className="
+                col-span-2
+              p-6
+              bg-gradient-to-br from-white/15 to-white/5
+              backdrop-blur-[15px]
+              rounded-2xl
+              border border-white/30
+              shadow-[0_4px_30px_rgba(0,0,0,0.1)]
+            "
+              >
+                {renderStringList("Positive Aspects", insight.positiveAspects)}
+              </div>
+            )}
 
-              {/* Negative Aspects */}
-              {insight.negativeAspects &&
-                renderStringList("Negative Aspects", insight.negativeAspects)}
+            {insight.negativeAspects && (
+              <div
+                className="
+              col-span-2
+              p-6
+              bg-gradient-to-br from-white/15 to-white/5
+              backdrop-blur-[15px]
+              rounded-2xl
+              border border-white/30
+              shadow-[0_4px_30px_rgba(0,0,0,0.1)]
+            "
+              >
+                {renderStringList("Negative Aspects", insight.negativeAspects)}
+              </div>
+            )}
 
-              {/* Recurring Trends */}
-              {insight.recurringTrends &&
-                renderStringList("Recurring Trends", insight.recurringTrends)}
+            {insight.recurringTrends && (
+              <div
+                className="
+              col-span-2
+              p-6
+              bg-gradient-to-br from-white/15 to-white/5
+              backdrop-blur-[15px]
+              rounded-2xl
+              border border-white/30
+              shadow-[0_4px_30px_rgba(0,0,0,0.1)]
+            "
+              >
+                {renderStringList("Recurring Trends", insight.recurringTrends)}
+              </div>
+            )}
 
-              {/* Themes */}
-              {insight.themes && renderStringList("Themes", insight.themes)}
+            {insight.themes && (
+              <div
+                className="
+              col-span-2
+              p-6
+              bg-gradient-to-br from-white/15 to-white/5
+              backdrop-blur-[15px]
+              rounded-2xl
+              border border-white/30
+              shadow-[0_4px_30px_rgba(0,0,0,0.1)]
+            "
+              >
+                {renderStringList("Themes", insight.themes)}
+              </div>
+            )}
 
-              {/* Suggestions */}
-              {insight.suggestions &&
-                renderStringList("Suggestions", insight.suggestions)}
+            {insight.suggestions && (
+              <div
+                className="
+              col-span-2
+              p-6
+              bg-gradient-to-br from-white/15 to-white/5
+              backdrop-blur-[15px]
+              rounded-2xl
+              border border-white/30
+              shadow-[0_4px_30px_rgba(0,0,0,0.1)]
+            "
+              >
+                {renderStringList("Suggestions", insight.suggestions)}
+              </div>
+            )}
 
-              {/* Keywords */}
-              {insight.keywords && renderKeywordsList(insight.keywords)}
-            </div>
+            {insight.keywords && (
+              <div
+                className="
+              col-span-2
+              p-6
+              bg-gradient-to-br from-white/15 to-white/5
+              backdrop-blur-[15px]
+              rounded-2xl
+              border border-white/30
+              shadow-[0_4px_30px_rgba(0,0,0,0.1)]
+            "
+              >
+                {renderKeywordsList(insight.keywords)}
+              </div>
+            )}
           </div>
         </div>
       </AppLayout>

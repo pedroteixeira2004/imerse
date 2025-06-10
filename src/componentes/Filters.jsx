@@ -278,7 +278,7 @@ const FiltersPage = () => {
                         <button
                           key={option.value}
                           onClick={() => setDayRange(option.value)}
-                          className={`button-filters px-6 py-1 rounded-3xl border ${
+                          className={`button-filters px-6 py-1 rounded-3xl border  font-medium${
                             dayRange === option.value ? "active" : ""
                           }`}
                         >
@@ -302,7 +302,7 @@ const FiltersPage = () => {
                         <button
                           key={type.value}
                           onClick={() => setReviewType(type.value)}
-                          className={`button-filters px-6 py-1 rounded-3xl border ${
+                          className={`button-filters px-6 py-1 rounded-3xl border font-medium ${
                             reviewType === type.value ? "active" : ""
                           }`}
                         >
@@ -327,7 +327,7 @@ const FiltersPage = () => {
                         <button
                           key={option.value}
                           onClick={() => setFilter(option.value)}
-                          className={`button-filters px-6 py-1 rounded-3xl border ${
+                          className={`button-filters px-6 py-1 rounded-3xl border font-medium${
                             filter === option.value ? "active" : ""
                           }`}
                         >

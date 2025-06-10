@@ -218,10 +218,6 @@ Return only a valid JSON object, strictly in this format:
   "negativeAspects": ["aspect1", "aspect2", "aspect3", ...],
   "suggestions": ["suggestion1", "suggestion2", ...]
   "recurringTrends": ["trend1", "trend2", "trend3", ...],
-  "keywords": [
-    { "term": "keyword1", "frequency": number },
-    { "term": "keyword2", "frequency": number }
-  ]
 }
 
 Guidelines:
@@ -233,7 +229,6 @@ Guidelines:
 - "negativeAspects" should highlight specific areas of criticism.
 - "suggestions" are actionable insights or requests.
 - "recurringTrends" are repeated patterns or comments from players.
-- "keywords" include key words and phrases players use, with estimated frequency.
 
 Important rules:
 - Return all aspect names, overall tone, keywords, themes, emotional expressions, and suggestions with the first letter capitalized
