@@ -7,11 +7,6 @@ const InsightPage = () => {
   const location = useLocation();
   const insight = location.state?.insight;
 
-  const capitalizeFirstLetter = (string) => {
-    if (typeof string !== "string") return "";
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
-
   const safeString = (value) => {
     if (typeof value === "string") return value;
     if (typeof value === "number") return value.toString();
@@ -25,7 +20,7 @@ const InsightPage = () => {
       <h2 className="text-xl font-semibold mb-2">{title}</h2>
       <ul className="list-disc list-inside space-y-1">
         {items.map((item, index) => (
-          <li key={index}>{capitalizeFirstLetter(safeString(item))}</li>
+          <li key={index}>{safeString(item)}</li>
         ))}
       </ul>
     </div>
@@ -37,8 +32,7 @@ const InsightPage = () => {
       <ul className="list-disc list-inside space-y-1">
         {keywords.map((item, index) => (
           <li key={index}>
-            {safeString(item.term)} (frequency:{" "}
-            {capitalizeFirstLetter(safeString(item.frequency))})
+            {safeString(item.term)} (frequency: {safeString(item.frequency)})
           </li>
         ))}
       </ul>
@@ -65,12 +59,24 @@ const InsightPage = () => {
       <AppLayout>
         <div className="p-6 text-white m-10">
           <h1 className="text-3xl font-bold mb-4 font-sf">AI Analysis</h1>
-          <div className="mb-4 p-4 bg-white/20 backdrop-blur-lg rounded-2xl shadow-lg border border-white/30 w-50 w-full">
-            <div className="m-5 space-y-4 w-full">
+          <div
+            className="
+    mb-4 p-6
+    bg-gradient-to-br from-white/15 to-white/5
+    backdrop-blur-[15px]
+    rounded-2xl
+    border border-white/30
+    shadow-[0_4px_30px_rgba(0,0,0,0.1)]
+    w-full
+    transition-all duration-300
+    hover:shadow-[0_6px_40px_rgba(255,255,255,0.2)]
+  "
+          >
+            <div className="m-5">
               {insight.summary && (
                 <div>
                   <h2 className="text-xl font-semibold mb-2">Summary</h2>
-                  <p>{safeString(insight.summary)}</p>
+                  <p>{insight.summary}</p>
                 </div>
               )}
 
@@ -78,7 +84,7 @@ const InsightPage = () => {
                 <div>
                   <h2 className="text-xl font-semibold mb-2">Overall Tone</h2>
                   <p className="capitalize">
-                    {capitalizeFirstLetter(safeString(insight.overallTone))}
+                    {safeString(insight.overallTone)}
                   </p>
                 </div>
               )}

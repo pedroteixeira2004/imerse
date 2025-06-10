@@ -14,7 +14,7 @@ function Navbar() {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <div className="sidebar">
+    <div className="sidebar flex flex-col justify-center">
       <div className="logo">
         <img src={logo} alt="logo" />
       </div>

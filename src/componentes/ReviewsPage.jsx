@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
-import TimestampConverter from "./timestampConverter";
 import AppLayout from "./Layout";
 import { useNavigate } from "react-router-dom";
 import LoadingReviews from "./LoadingReviews";
 import add_library from "../assets/icones/add_library.png";
 import background1 from "../assets/imagens/gradiente_game_details.svg";
-import like from "../assets/icones/like.png";
 import Background from "./background";
 import mouse from "../assets/icones/mouse.png";
-import smile from "../assets/icones/smile.png";
+import ReviewCard from "./ReviewCard";
+
 const ReviewsPage = () => {
   const { appId } = useParams();
   const [searchParams] = useSearchParams();
@@ -152,7 +151,7 @@ const ReviewsPage = () => {
             backgroundRepeat: "no-repeat",
           }}
         ></div>
-        <div className="flex-1 flex flex-col justify-end pl-20 min-h-screen flex z-20">
+        <div className="flex-1 flex-col justify-end pl-20 min-h-screen flex z-20">
           <div className="font-sf text-white game-details">
             <div className="flex">
               <div className="text-6xl font-bold mb-2 z-30">
@@ -172,25 +171,25 @@ const ReviewsPage = () => {
               className="flex flex-wrap mt-7 mb-5 w-full gap-6 justify-center"
               id="overall info"
             >
-              <div className="flex-1 min-w-[250px] max-w-[350px] flex flex-col items-center justify-center text-center bg-white/20 backdrop-blur-lg rounded-2xl shadow-lg border border-white/30 p-6">
+              <div className="flex-1 min-w-[250px] max-w-[350px] flex flex-col items-center justify-center text-center bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-[15px] rounded-2xl border border-white/30 shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-6">
                 <p className="text-4xl font-medium">{dayRange} days</p>
                 <p className="text-xl mt-1">Selected timeframe</p>
               </div>
-              <div className="flex-1 min-w-[300px] max-w-[400px] flex flex-col items-center justify-center text-center bg-white/20 backdrop-blur-lg rounded-2xl shadow-lg border border-white/30 p-6">
+              <div className="flex-1 min-w-[300px] max-w-[400px] flex flex-col items-center justify-center text-center bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-[15px] rounded-2xl border border-white/30 shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-6">
                 <p className="text-4xl font-medium">
                   {reviewSummary.review_score_desc}
                 </p>
                 <p className="text-xl mt-1">Overall score</p>
               </div>
-              <div className="flex-1 min-w-[200px] max-w-[300px] flex flex-col items-center justify-center text-center bg-white/20 backdrop-blur-lg rounded-2xl shadow-lg border border-white/30 p-6">
+              <div className="flex-1 min-w-[200px] max-w-[300px] flex flex-col items-center justify-center text-center bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-[15px] rounded-2xl border border-white/30 shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-6">
                 <p className="text-4xl font-medium">{percentPositive}%</p>
                 <p className="text-xl mt-1">Total positive</p>
               </div>
-              <div className="flex-1 min-w-[200px] max-w-[300px] flex flex-col items-center justify-center text-center bg-white/20 backdrop-blur-lg rounded-2xl shadow-lg border border-white/30 p-6">
+              <div className="flex-1 min-w-[200px] max-w-[300px] flex flex-col items-center justify-center text-center bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-[15px] rounded-2xl border border-white/30 shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-6">
                 <p className="text-4xl font-medium">{percentNegative}%</p>
                 <p className="text-xl mt-1">Total negative</p>
               </div>
-              <div className="flex-1 min-w-[300px] max-w-[400px] flex flex-col items-center justify-center text-center bg-white/20 backdrop-blur-lg rounded-2xl shadow-lg border border-white/30 p-6">
+              <div className="flex-1 min-w-[300px] max-w-[400px] flex flex-col items-center justify-center text-center bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-[15px] rounded-2xl border border-white/30 shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-6">
                 <p className="text-4xl font-medium">{averagePlaytime} hours</p>
                 <p className="text-xl mt-1">Average playtime</p>
               </div>
@@ -209,9 +208,9 @@ const ReviewsPage = () => {
               <AppLayout>
                 <div className="m-10 p-6 z-40">
                   {/* AI Analysis */}
-                  <h1 className="text-3xl font-bold mb-4 font-sf text-white">
+                  <p className="text-3xl font-bold mb-4 font-sf text-white">
                     AI Analysis
-                  </h1>
+                  </p>
                   <div className="mb-4 flex gap-4 flex-wrap">
                     <button
                       onClick={() => handleAnalyze("general")}
@@ -245,59 +244,12 @@ const ReviewsPage = () => {
                   )}
 
                   {/* Reviews */}
-                  <h1 className="text-3xl font-bold mb-4 font-sf text-white">
+                  <p className="text-3xl font-bold mb-4 font-sf text-white">
                     Reviews
-                  </h1>
+                  </p>
                   <ul>
                     {reviews.map((review, index) => (
-                      <li
-                        key={index}
-                        className="mb-4 p-4 bg-white/20 backdrop-blur-lg rounded-2xl shadow-lg border border-white/30 mt-10"
-                      >
-                        <div className="m-5">
-                          <p className="text-white font-sf text-lg font-regular">
-                            {review.review}
-                          </p>
-                          <div className="mt-6 text-lg flex justify-between items-center font-medium">
-                            <div className="flex flex-col justify-center text-right">
-                              <div className="flex align-center mb-1">
-                                <div className="flex">
-                                  <img
-                                    src={like}
-                                    alt="like"
-                                    className="w-6 h-6 mr-2"
-                                  />
-                                  <p className="text-white font-sf">
-                                    {review.votes_up}
-                                  </p>
-                                </div>
-                                <div className="flex ml-6 align-center">
-                                  <img
-                                    src={smile}
-                                    alt="smile"
-                                    className="w-6 h-6 mr-2"
-                                  />
-                                  <p className="text-white font-sf">
-                                    {review.votes_funny}
-                                  </p>
-                                </div>
-                              </div>
-                              <p className="text-white font-sf">
-                                Playtime at the review:{" "}
-                                {Math.round(
-                                  review.author.playtime_at_review / 60
-                                )}
-                                h
-                              </p>
-                            </div>
-                            <div className="font-sf text-white">
-                              <TimestampConverter
-                                timestamp={review.timestamp_created}
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      </li>
+                      <ReviewCard review={review} key={index} />
                     ))}
                   </ul>
                 </div>

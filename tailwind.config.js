@@ -11,6 +11,7 @@ module.exports = {
     "./src/componentes/Layout.jsx",
     "./src/componentes/Reports.jsx",
     "./src/componentes/Filters.jsx",
+    "./src/componentes/ReviewCard.jsx",
   ],
   theme: {
     extend: {

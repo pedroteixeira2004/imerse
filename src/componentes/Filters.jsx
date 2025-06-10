@@ -81,7 +81,7 @@ const FiltersPage = () => {
                 analysis.
               </p>
             </div>
-            <div className=" shadow-[0_0_20px_rgba(255,255,255,0.2)] outline-none mt-10 ml-10 mr-10 mb-6 card-filters flex">
+            <div className="outline-none mt-10 ml-10 mr-10 mb-6 card-filters flex">
               <div className="filters-content flex items-center font-sf">
                 {step === 1 && (
                   <div className="items-center">
@@ -103,35 +103,38 @@ const FiltersPage = () => {
                         styles={{
                           control: (base, state) => ({
                             ...base,
-                            backgroundColor: "rgba(255, 255, 255, 0.08)",
-                            backdropFilter: "blur(10px)",
-                            webkitBackdropFilter: "blur(10px)",
+                            background:
+                              "linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05))",
+                            backdropFilter: "blur(15px)",
+                            WebkitBackdropFilter: "blur(15px)", // correção de capital W
                             borderRadius: "2rem",
                             border: state.isFocused
                               ? "2px solid rgba(255, 255, 255, 0.5)"
                               : "2px solid rgba(255, 255, 255, 0.2)",
-                            boxShadow: "none",
+                            boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
                             padding: "0.5vh 1vw",
                             width: "20vw",
                             height: "7vh",
                             transition: "all 0.3s ease",
                             zIndex: 10,
+                            color: "white",
                           }),
                           menu: (base) => ({
                             ...base,
-                            backgroundColor: "rgba(255, 255, 255, 0.06)",
-                            backdropFilter: "blur(80px)",
-                            webkitBackdropFilter: "blur(80px)",
+                            background:
+                              "linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
+                            backdropFilter: "blur(25px)",
+                            WebkitBackdropFilter: "blur(25px)",
                             color: "white",
                             borderRadius: "1rem",
                             border: "1px solid rgba(255, 255, 255, 0.2)",
-                            boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
+                            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
                             marginTop: "8px",
-                            overflow: "hidden", // garante que o blur aplique corretamente
+                            overflow: "hidden",
                           }),
                           menuPortal: (base) => ({
                             ...base,
-                            zIndex: 9999, // garante que fique sobre outros elementos
+                            zIndex: 9999,
                           }),
                           option: (base, state) => ({
                             ...base,
@@ -150,7 +153,7 @@ const FiltersPage = () => {
                           }),
                           placeholder: (base) => ({
                             ...base,
-                            color: "rgba(255, 255, 255)",
+                            color: "rgba(255, 255, 255, 0.7)",
                             fontSize: "1rem",
                             fontWeight: "400",
                           }),
@@ -189,35 +192,38 @@ const FiltersPage = () => {
                         styles={{
                           control: (base, state) => ({
                             ...base,
-                            backgroundColor: "rgba(255, 255, 255, 0.08)",
-                            backdropFilter: "blur(10px)",
-                            webkitBackdropFilter: "blur(10px)",
+                            background:
+                              "linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05))",
+                            backdropFilter: "blur(15px)",
+                            WebkitBackdropFilter: "blur(15px)", // correção de capital W
                             borderRadius: "2rem",
                             border: state.isFocused
                               ? "2px solid rgba(255, 255, 255, 0.5)"
                               : "2px solid rgba(255, 255, 255, 0.2)",
-                            boxShadow: "none",
+                            boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
                             padding: "0.5vh 1vw",
                             width: "20vw",
                             height: "7vh",
                             transition: "all 0.3s ease",
                             zIndex: 10,
+                            color: "white",
                           }),
                           menu: (base) => ({
                             ...base,
-                            backgroundColor: "rgba(255, 255, 255, 0.06)",
-                            backdropFilter: "blur(80px)",
-                            webkitBackdropFilter: "blur(80px)",
+                            background:
+                              "linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
+                            backdropFilter: "blur(25px)",
+                            WebkitBackdropFilter: "blur(25px)",
                             color: "white",
                             borderRadius: "1rem",
                             border: "1px solid rgba(255, 255, 255, 0.2)",
-                            boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
+                            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
                             marginTop: "8px",
-                            overflow: "hidden", // garante que o blur aplique corretamente
+                            overflow: "hidden",
                           }),
                           menuPortal: (base) => ({
                             ...base,
-                            zIndex: 9999, // garante que fique sobre outros elementos
+                            zIndex: 9999,
                           }),
                           option: (base, state) => ({
                             ...base,
@@ -236,7 +242,7 @@ const FiltersPage = () => {
                           }),
                           placeholder: (base) => ({
                             ...base,
-                            color: "rgba(255, 255, 255)",
+                            color: "rgba(255, 255, 255, 0.7)",
                             fontSize: "1rem",
                             fontWeight: "400",
                           }),

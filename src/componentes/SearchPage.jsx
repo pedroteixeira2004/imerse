@@ -29,13 +29,26 @@ const SearchPage = () => {
               <p>Dominate the game. </p>
             </h2>
             <div className="mt-8">
-              <input
-                type="text"
-                placeholder="Search games"
-                value={searchTerm}
-                className=" barra_pesquisa px-10 py-3 text-white text-lg rounded-full bg-white/10 backdrop-blur-lg border border-white/30 shadow-[0_0_20px_rgba(255,255,255,0.2)] outline-none placeholder-white/70 font-sf"
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
+              <div
+                className="barra_pesquisa pl-6 pr-10 py-3 text-white text-lg rounded-full 
+                bg-gradient-to-br from-white/10 to-white/30 backdrop-blur-3xl 
+                border border-white/40 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]
+                outline-none flex gap-2 items-center transition-all duration-500"
+              >
+                <img
+                  src={search}
+                  alt="Search Icon"
+                  className="mr-2 w-6 h-6 opacity-80"
+                />
+                <input
+                  type="text"
+                  placeholder="Search games"
+                  value={searchTerm}
+                  className="bg-transparent placeholder-white/70 font-sf w-full focus:outline-none"
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
+
               <div className="mt-10">
                 <button
                   onClick={handleSearch}
