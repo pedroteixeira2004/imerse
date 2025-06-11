@@ -13,12 +13,23 @@ module.exports = {
     "./src/componentes/Filters.jsx",
     "./src/componentes/ReviewCard.jsx",
     "./src/componentes/InsightPage.jsx",
+    "./src/componentes/SearchBar.jsx",
+    "./src/componentes/GameCard.jsx",
   ],
   theme: {
     extend: {
       fontFamily: {
         sf: ["SF Pro Display", "sans-serif"],
         moonwalk: ["moonwalk", "sans-serif"],
+      },
+      keyframes: {
+        bounceMouse: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(6px)" },
+        },
+      },
+      animation: {
+        bounceMouse: "bounceMouse 1.5s infinite",
       },
     },
   },

@@ -3,12 +3,13 @@ import { useNavigate, useLocation } from "react-router-dom";
 import LoadingList from "./LoadingList";
 import Background from "./background";
 import AppLayout2 from "./Layout2";
+import SearchBar from "./SearchBar";
+import GameCard from "./GameCard";
 
 const GameListPage = () => {
   const [games, setGames] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const searchTerm = searchParams.get("search");
@@ -19,7 +20,9 @@ const GameListPage = () => {
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[-_]/g, " ")
         .replace(/[^a-z0-9\s]/g, "")
+        .replace(/\s+/g, " ")
         .trim();
     };
 
@@ -55,34 +58,19 @@ const GameListPage = () => {
       <Background />
       <AppLayout2>
         <div className="p-4 m-10">
-          <h2 className="text-5xl font-bold mb-4 font-sf text-white">
+          <div className="flex justify-center mb-6">
+            <SearchBar />
+          </div>
+          <h2 className="text-3xl font-bold mb-4 font-sf text-white">
             Search Results
           </h2>
 
           {error ? (
             <p className="text-red-500">{error}</p>
           ) : games.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 font-sf">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 font-sf mt-8">
               {games.map((game) => (
-                <div
-                  key={game.appid}
-                  className="bg-white bg-opacity-30 backdrop-blur-lg shadow-lg rounded-3xl overflow-hidden transform transition duration-300 hover:scale-105"
-                >
-                  <div className="p-4">
-                    <h3 className="text-xl font-semibold mb-2 text-white">
-                      {game.name}
-                    </h3>
-                    <button
-                      onClick={() => navigate(`/details/${game.appid}`)}
-                      className="px-5 py-2 text-white font-bold rounded-full 
-                        bg-gradient-to-r from-blue-400 to-teal-400 text-sm
-                        backdrop-blur-xl transition-all duration-500 
-                        hover:shadow-[0_0_40px_rgba(0,255,255,0.9)]"
-                    >
-                      Explore game
-                    </button>
-                  </div>
-                </div>
+                <GameCard key={game.appid} game={game} />
               ))}
             </div>
           ) : (

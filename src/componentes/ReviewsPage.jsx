@@ -210,7 +210,11 @@ const ReviewsPage = () => {
             </div>
             <div className="backdrop-blur-lg rounded-2xl text-3xl mt-14 justify-center font-medium flex">
               <div>Scroll to see reviews</div>
-              <img src={mouse} alt="mouse" className="ml-4 w-10 h-10" />
+              <img
+                src={mouse}
+                alt="mouse"
+                className="ml-4 w-10 h-10 animate-bounceMouse"
+              />
             </div>
           </div>
         </div>
