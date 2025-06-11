@@ -10,10 +10,59 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+/* Seu estilo CSS único aqui */
+
 .barra_pesquisa {
   width: 30vw;
   margin-top: 5vh;
   margin-bottom: 3vh;
+  position: relative; /* Necessário para pseudo-elementos */
+  overflow: hidden; /* Garante que o pseudo-elemento fique dentro dos limites */
+}
+
+.barra_pesquisa:hover {
+  transform: translateY(-2px) scale(1.01); /* Levanta e escala ligeiramente ao passar o mouse */
+  border-color: rgba(
+    255,
+    255,
+    255,
+    0.6
+  ); /* Borda ligeiramente mais brilhante ao passar o mouse */
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.45); /* Sombra mais pronunciada ao passar o mouse */
+}
+
+.barra_pesquisa::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  pointer-events: none; /* Permite que os cliques passem */
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: -1; /* Mantém atrás do conteúdo */
+}
+
+.barra_pesquisa:hover::before {
+  opacity: 1; /* Mostra o reflexo sutil ao passar o mouse */
+}
+
+.barra_pesquisa input {
+  background-color: transparent;
+  color: white;
+  outline: none;
+  caret-color: white;
+}
+
+.barra_pesquisa input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
 }
 .card-filters {
   width: 80vw;
@@ -57,6 +106,8 @@ body {
   margin-right: 3rem;
   backdrop-filter: blur(20px); /* backdrop-blur-xl */
   transition: all 0.5s;
+  box-shadow: 0 0 15px rgba(184, 74, 255, 0.4),
+    0 0 25px rgba(211, 112, 255, 0.3);
 }
 
 .button:hover {
@@ -105,6 +156,8 @@ body {
 .button2 {
   background: linear-gradient(135deg, #b84aff, #d370ff, #8c4dff);
   border: none;
+  box-shadow: 0 0 15px rgba(184, 74, 255, 0.4),
+    0 0 25px rgba(211, 112, 255, 0.3);
   transition: all 0.5s ease;
 }
 .button2:hover {
@@ -146,6 +199,8 @@ body {
   background: linear-gradient(135deg, #b84aff, #d370ff, #8c4dff);
   border: 1px solid transparent;
   color: white;
+  box-shadow: 0 0 15px rgba(184, 74, 255, 0.4),
+    0 0 25px rgba(211, 112, 255, 0.3);
 }
 .expandable-button {
   display: inline-flex;

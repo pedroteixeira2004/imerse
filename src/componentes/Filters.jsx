@@ -278,7 +278,7 @@ const FiltersPage = () => {
                         <button
                           key={option.value}
                           onClick={() => setDayRange(option.value)}
-                          className={`button-filters px-6 py-1 rounded-3xl border  font-medium${
+                          className={`button-filters px-6 py-1 rounded-3xl border font-medium ${
                             dayRange === option.value ? "active" : ""
                           }`}
                         >
@@ -327,7 +327,7 @@ const FiltersPage = () => {
                         <button
                           key={option.value}
                           onClick={() => setFilter(option.value)}
-                          className={`button-filters px-6 py-1 rounded-3xl border font-medium${
+                          className={`button-filters px-6 py-1 rounded-3xl border font-medium ${
                             filter === option.value ? "active" : ""
                           }`}
                         >
@@ -370,6 +370,8 @@ const FiltersPage = () => {
                     width: `${progress}%`,
                     background:
                       "linear-gradient(135deg, #b84aff, #d370ff, #8c4dff)",
+                    boxShadow:
+                      "0 0 15px rgba(184, 74, 255, 0.4), 0 0 25px rgba(211, 112, 255, 0.3)",
                   }}
                 ></div>
               </div>

@@ -63,14 +63,13 @@ export default function ReviewCard({ review }) {
   return (
     <li
       className="
-        mb-4 p-4
+        mb-8 p-4
         bg-white/10
         backdrop-blur-[15px]
         rounded-2xl
         border
         border-white/30
         shadow-[0_4px_30px_rgba(0,0,0,0.1)]
-        mt-10
         text-white
       "
     >
@@ -87,7 +86,7 @@ export default function ReviewCard({ review }) {
         </div>
 
         {showReadMore && (
-          <div className="flex justify-end mt-4">
+          <div className="flex justify-end mt-6">
             <button
               onClick={() => setIsCollapsed(!isCollapsed)}
               className="
@@ -99,7 +98,7 @@ export default function ReviewCard({ review }) {
                 text-white
                 font-sf
                 font-semibold
-                transition
+                transition-all duration-300
                 hover:bg-white/30
                 shadow-lg
               "

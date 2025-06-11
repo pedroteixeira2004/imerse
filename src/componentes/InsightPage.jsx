@@ -17,8 +17,8 @@ const InsightPage = () => {
 
   const renderStringList = (title, items) => (
     <div className="mb-4">
-      <h2 className="text-xl font-semibold mb-2">{title}</h2>
-      <ul className="list-disc list-inside space-y-1">
+      <h2 className="text-2xl font-semibold mb-4">{title}</h2>
+      <ul className="list-disc list-inside space-y-1 text-lg">
         {items.map((item, index) => (
           <li key={index}>{safeString(item)}</li>
         ))}
@@ -28,8 +28,8 @@ const InsightPage = () => {
 
   const renderKeywordsList = (keywords) => (
     <div className="mb-4">
-      <h2 className="text-xl font-semibold mb-2">Keywords</h2>
-      <ul className="list-disc list-inside space-y-1">
+      <h2 className="text-2xl font-semibold mb-4">Keywords</h2>
+      <ul className="list-disc list-inside space-y-1 text-lg">
         {keywords.map((item, index) => (
           <li key={index}>
             {safeString(item.term)} (frequency: {safeString(item.frequency)})
@@ -45,7 +45,7 @@ const InsightPage = () => {
         <Background />
         <AppLayout>
           <div className="p-6 text-white">
-            <h1 className="text-2xl font-bold mb-4">AI Analysis</h1>
+            <h1 className="text-5xl font-bold mb-4">AI Analysis</h1>
             <p>No insight provided.</p>
           </div>
         </AppLayout>
@@ -58,7 +58,7 @@ const InsightPage = () => {
       <Background />
       <AppLayout>
         <div className="p-6 text-white m-10">
-          <h1 className="text-3xl font-bold mb-10 font-sf">AI Analysis</h1>
+          <h1 className="text-5xl font-bold mb-10 font-sf">AI Analysis</h1>
 
           <div
             className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 xl:grid-cols-6 auto-rows-min
@@ -76,8 +76,8 @@ const InsightPage = () => {
               shadow-[0_4px_30px_rgba(0,0,0,0.1)]
             "
               >
-                <h2 className="text-xl font-semibold mb-2">Summary</h2>
-                <p>{insight.summary}</p>
+                <h2 className="text-2xl font-semibold mb-4">Summary</h2>
+                <p className="text-lg">{insight.summary}</p>
               </div>
             )}
 
@@ -94,8 +94,8 @@ const InsightPage = () => {
               shadow-[0_4px_30px_rgba(0,0,0,0.1)]
             "
               >
-                <h2 className="text-xl font-semibold mb-2">Overall Tone</h2>
-                <p className="capitalize">{safeString(insight.overallTone)}</p>
+                <h2 className="text-2xl font-semibold mb-4">Overall Tone</h2>
+                <p className="text-lg">{safeString(insight.overallTone)}</p>
               </div>
             )}
 

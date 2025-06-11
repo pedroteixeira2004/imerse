@@ -54,8 +54,8 @@ const GameListPage = () => {
     <div>
       <Background />
       <AppLayout2>
-        <div className="p-4">
-          <h2 className="text-2xl font-bold mb-4 font-sf text-white">
+        <div className="p-4 m-10">
+          <h2 className="text-5xl font-bold mb-4 font-sf text-white">
             Search Results
           </h2>
 
@@ -66,7 +66,7 @@ const GameListPage = () => {
               {games.map((game) => (
                 <div
                   key={game.appid}
-                  className="bg-white bg-opacity-30 backdrop-blur-lg shadow-lg rounded-3xl overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[0_0_40px_rgba(0,255,255,0.9)]"
+                  className="bg-white bg-opacity-30 backdrop-blur-lg shadow-lg rounded-3xl overflow-hidden transform transition duration-300 hover:scale-105"
                 >
                   <div className="p-4">
                     <h3 className="text-xl font-semibold mb-2 text-white">
@@ -74,7 +74,7 @@ const GameListPage = () => {
                     </h3>
                     <button
                       onClick={() => navigate(`/details/${game.appid}`)}
-                      className="px-5 py-2 text-white text-lg font-bold rounded-full 
+                      className="px-5 py-2 text-white font-bold rounded-full 
                         bg-gradient-to-r from-blue-400 to-teal-400 text-sm
                         backdrop-blur-xl transition-all duration-500 
                         hover:shadow-[0_0_40px_rgba(0,255,255,0.9)]"

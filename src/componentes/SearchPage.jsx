@@ -31,9 +31,9 @@ const SearchPage = () => {
             <div className="mt-8">
               <div
                 className="barra_pesquisa pl-6 pr-10 py-3 text-white text-lg rounded-full 
-                bg-gradient-to-br from-white/10 to-white/30 backdrop-blur-3xl 
-                border border-white/40 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]
-                outline-none flex gap-2 items-center transition-all duration-500"
+             bg-gradient-to-br from-white/10 to-white/30 backdrop-blur-3xl 
+             border border-white/40 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]
+             outline-none flex gap-2 items-center transition-all duration-500"
               >
                 <img
                   src={search}

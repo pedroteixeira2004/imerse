@@ -136,7 +136,7 @@ Analyze the emotional sentiment and patterns expressed in the reviews below.
 Return only a valid JSON object, strictly in this format:
 {
   "summary": "Brief summary of the overall information focusing on the emotions.",
-  "overallTone": "Very Positive" | "Positive" |"Mixed"| "Negative" | "Very Negative",
+  "overallTone": explain if the overall tone of the reviews is Very Positive, Positive, Mixed, Negative or Very Negative and explain why exposing the main reasons,
   "positiveAspects": ["aspect1", "aspect2", "aspect3", ...],
   "negativeAspects": ["aspect1", "aspect2", "aspect3", ...],
   "emotionalExpressions": ["emotion1", "emotion2", "emotion3", ...],
@@ -146,7 +146,7 @@ Return only a valid JSON object, strictly in this format:
 
 Guidelines:
 - "summary" must summarize all the content, focusing on the emotions and where they are expressed.
-- "overallTone" must summarize the dominant emotional tone.
+- "overallTone" must summarize the dominant emotional tone and the main reasons.
 - "positiveAspects" should include all the positive aspects mentioned related to the positive emotions.
 - "negativeAspects" should include all the negative aspects mentioned related to the negative emotions.
 - "emotionalExpressions" should include both explicit emotions (joy, frustration) and subtle feelings.
@@ -211,7 +211,7 @@ Based on the reviews below, generate a complete insight about how players are fe
 Return only a valid JSON object, strictly in this format:
 {
 "summary": "Brief summary and balance of how players are feeling, suggestions, positive and negative aspects, keywords.",
-"overallTone": "Very Positive"| "Positive"|"Mixed"|"Negative"| "Very Negative",
+"overallTone": "explain if the overall tone of the reviews is Very Positive, Positive, Mixed, Negative or Very Negative and explain why exposing the main reasons",
 "emotionExpressions": ["emotion1", "emotion2", "emotion3", ...],
   "themes": ["theme1", "theme2", "theme3", ...],
   "positiveAspects": ["aspect1", "aspect2", "aspect3", ...],
@@ -222,7 +222,7 @@ Return only a valid JSON object, strictly in this format:
 
 Guidelines:
 - Be concise and clear in "summary".
-- "overallTone" summarizes the dominant tone and balance of the reviews.
+- "overallTone" summarizes the dominant tone and balance of the reviews and the main reasons.
 - "emotionalExpressions" should highlight both strong and subtle emotions.
 - "themes" capture broad topics of player discussion.
 - "positiveAspects" should highlight specific positive areas of the game.

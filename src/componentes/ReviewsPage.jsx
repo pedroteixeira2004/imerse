@@ -208,10 +208,10 @@ const ReviewsPage = () => {
               <AppLayout>
                 <div className="m-10 p-6 z-40">
                   {/* AI Analysis */}
-                  <p className="text-3xl font-bold mb-4 font-sf text-white">
+                  <p className="text-5xl font-bold mb-6 font-sf text-white">
                     AI Analysis
                   </p>
-                  <div className="mb-4 flex gap-4 flex-wrap">
+                  <div className="mb-10 flex gap-4 flex-wrap">
                     <button
                       onClick={() => handleAnalyze("general")}
                       className={`px-4 py-2 rounded-full text-white font-bold transition-all duration-300 button2 font-sf
@@ -244,7 +244,7 @@ const ReviewsPage = () => {
                   )}
 
                   {/* Reviews */}
-                  <p className="text-3xl font-bold mb-4 font-sf text-white">
+                  <p className="text-5xl font-bold mb-6 font-sf text-white">
                     Reviews
                   </p>
                   <ul>
