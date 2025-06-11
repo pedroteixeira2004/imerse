@@ -127,7 +127,7 @@ app.post("/api/analyze-reviews", async (req, res) => {
     let prompt = "";
 
     switch (type) {
-      case "sentiment":
+      case "Sentiment analysis":
         prompt = `
 You are an expert AI analyst for game reviews.
 
@@ -165,7 +165,7 @@ ${limitedComments}
 `;
         break;
 
-      case "keywords":
+      case "Keywords extraction":
         prompt = `
 You are an expert AI analyst for game reviews.
 
@@ -202,7 +202,7 @@ ${limitedComments}
 
         break;
 
-      case "general":
+      case "General analysis":
         prompt = `
 You are an expert AI analyst for game reviews.
 

@@ -46,6 +46,11 @@ const SearchPage = () => {
                   value={searchTerm}
                   className="bg-transparent placeholder-white/70 font-sf w-full focus:outline-none"
                   onChange={(e) => setSearchTerm(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleSearch();
+                    }
+                  }}
                 />
               </div>
 

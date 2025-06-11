@@ -7,6 +7,9 @@ import add_library from "../assets/icones/add_library.png";
 import background1 from "../assets/imagens/gradiente_game_details.svg";
 import Background from "./background";
 import mouse from "../assets/icones/mouse.png";
+import sentiment_analysis from "../assets/icones/sentiment_analysis.png";
+import keywords from "../assets/icones/keywords.png";
+import general from "../assets/icones/general.png";
 import ReviewCard from "./ReviewCard";
 
 const ReviewsPage = () => {
@@ -115,7 +118,18 @@ const ReviewsPage = () => {
 
       const data = await response.json();
       if (data.insight) {
-        navigate("/insight", { state: { insight: data.insight } });
+        console.log("Navigating to Insight with:", {
+          insight: data.insight,
+          analysisType: type,
+          gameName: gameDetails?.name,
+        });
+        navigate("/insight", {
+          state: {
+            insight: data.insight,
+            analysisType: type,
+            gameName: gameDetails.name,
+          },
+        });
       } else {
         setAnalysisStatus("A análise falhou.");
       }
@@ -208,33 +222,46 @@ const ReviewsPage = () => {
               <AppLayout>
                 <div className="m-10 p-6 z-40">
                   {/* AI Analysis */}
-                  <p className="text-5xl font-bold mb-6 font-sf text-white">
+                  <p className="text-5xl font-bold font-sf text-white mb-2">
                     AI Analysis
                   </p>
-                  <div className="mb-10 flex gap-4 flex-wrap">
-                    <button
-                      onClick={() => handleAnalyze("general")}
-                      className={`px-4 py-2 rounded-full text-white font-bold transition-all duration-300 button2 font-sf
-      ${analysisType === "general"}`}
-                    >
-                      General analysis
-                    </button>
-
-                    <button
-                      onClick={() => handleAnalyze("sentiment")}
-                      className={`px-4 py-2 rounded-full text-white font-bold transition-all duration-300 button2 font-sf
-      ${analysisType === "sentiment"}`}
-                    >
-                      Sentiment analysis
-                    </button>
-
-                    <button
-                      onClick={() => handleAnalyze("keywords")}
-                      className={`px-4 py-2 rounded-full text-white font-bold transition-all duration-300 button2 font-sf
-      ${analysisType === "keywords"}`}
-                    >
-                      Keyword extraction
-                    </button>
+                  <p className="text-xl font-regular font-sf text-white mb-6">
+                    Click to choose the type of analysis to run with AI
+                  </p>
+                  <div className="mb-16 flex gap-4 flex-wrap">
+                    <div className="flex justify-center">
+                      <button
+                        onClick={() => handleAnalyze("General analysis")}
+                        className={`flex flex-col items-center justify-center text-white font-bold transition-all duration-300 button-filters font-sf px-6 py-1 rounded-3xl 
+    ${analysisType === "General analysis"}`}
+                      >
+                        <img src={general} className="h-20 w-20 mb-2" />
+                        <span>General analysis</span>
+                      </button>
+                    </div>
+                    <div className="flex justify-center">
+                      <button
+                        onClick={() => handleAnalyze("Sentiment analysis")}
+                        className={` flex flex-col items-center justify-center text-white font-bold transition-all duration-300 button-filters font-sf px-6 py-1 rounded-3xl 
+      ${analysisType === "Sentiment analysis"}`}
+                      >
+                        <img
+                          src={sentiment_analysis}
+                          className="h-20 w-20 mb-2"
+                        />
+                        Sentiment analysis
+                      </button>
+                    </div>
+                    <div className="flex justify-center">
+                      <button
+                        onClick={() => handleAnalyze("Keywords extraction")}
+                        className={` flex flex-col items-center justify-center text-white font-bold transition-all duration-300 button-filters font-sf px-6 py-1 rounded-3xl 
+      ${analysisType === "Keywords extraction"}`}
+                      >
+                        <img src={keywords} className="h-20 w-20 mb-2" />
+                        Keywords extraction
+                      </button>
+                    </div>
                   </div>
 
                   {analysisStatus && (
@@ -244,8 +271,12 @@ const ReviewsPage = () => {
                   )}
 
                   {/* Reviews */}
-                  <p className="text-5xl font-bold mb-6 font-sf text-white">
+                  <p className="text-5xl font-bold mb-3 font-sf text-white">
                     Reviews
+                  </p>
+                  <p className="text-xl font-regular font-sf text-white mb-6">
+                    Check the {numPerPage} reviews according to the filters
+                    applied
                   </p>
                   <ul>
                     {reviews.map((review, index) => (
