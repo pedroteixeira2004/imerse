@@ -131,8 +131,8 @@ body {
   padding: 1.5vh 2vw;
 }
 .barra-progresso {
-  width: 55vw;
-  height: 4vh;
+  width: 100%;
+  height: 2vh;
   border-radius: 50px; /* bordas arredondadas para suavidade */
   border: 2px solid rgba(255, 255, 255, 0.3);
 

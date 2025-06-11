@@ -217,7 +217,7 @@ const ReviewsPage = () => {
                       className={`px-4 py-2 rounded-full text-white font-bold transition-all duration-300 button2 font-sf
       ${analysisType === "general"}`}
                     >
-                      General Insight
+                      General analysis
                     </button>
 
                     <button
@@ -225,7 +225,7 @@ const ReviewsPage = () => {
                       className={`px-4 py-2 rounded-full text-white font-bold transition-all duration-300 button2 font-sf
       ${analysisType === "sentiment"}`}
                     >
-                      Sentiment Analysis
+                      Sentiment analysis
                     </button>
 
                     <button
@@ -233,7 +233,7 @@ const ReviewsPage = () => {
                       className={`px-4 py-2 rounded-full text-white font-bold transition-all duration-300 button2 font-sf
       ${analysisType === "keywords"}`}
                     >
-                      Keyword Extraction
+                      Keyword extraction
                     </button>
                   </div>
 

@@ -92,7 +92,7 @@ export default function ReviewCard({ review }) {
               className="
                 px-6 py-2
                 rounded-full
-                bg-white/20
+                bg-white/10
                 backdrop-blur-lg
                 border border-white/30
                 text-white
@@ -101,6 +101,7 @@ export default function ReviewCard({ review }) {
                 transition-all duration-300
                 hover:bg-white/30
                 shadow-lg
+                hover:[box-shadow:0_6px_40px_rgba(255,255,255,0.2),0_0_10px_rgba(255,255,255,0.1)]
               "
             >
               {isCollapsed ? (

@@ -362,7 +362,7 @@ const FiltersPage = () => {
                 </div>
               )}
             </div>
-            <div className="justify-center flex mt-10">
+            <div className="justify-center flex mt-10 mr-10 ml-10">
               <div className="barra-progresso rounded-full overflow-hidden mb-8 justify-center">
                 <div
                   className="h-full transition-all duration-500"
