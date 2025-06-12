@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const AnimatedSection = ({ title, children }) => {
   const [isOpen, setIsOpen] = useState(true);

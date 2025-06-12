@@ -1,7 +1,7 @@
 import React from "react";
-import Background from "./background";
 import AppLayout from "./Layout";
 import SearchBar from "./SearchBar";
+import Background from "./background";
 
 const SearchPage = () => {
   return (

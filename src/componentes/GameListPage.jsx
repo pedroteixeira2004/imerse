@@ -10,6 +10,7 @@ const GameListPage = () => {
   const [games, setGames] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [gamesLoaded, setGamesLoaded] = useState(0);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const searchTerm = searchParams.get("search");
@@ -28,6 +29,7 @@ const GameListPage = () => {
 
     const fetchGames = async () => {
       setLoading(true);
+      setGamesLoaded(0);
       try {
         const response = await fetch("http://localhost:5000/api/game-list");
         const data = await response.json();
@@ -48,6 +50,12 @@ const GameListPage = () => {
 
     if (searchTerm) fetchGames();
   }, [searchTerm]);
+
+  useEffect(() => {
+    if (games.length > 0 && gamesLoaded === games.length) {
+      setLoading(false);
+    }
+  }, [gamesLoaded, games.length]);
 
   if (loading) {
     return <LoadingList />;
@@ -70,7 +78,11 @@ const GameListPage = () => {
           ) : games.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 font-sf mt-8">
               {games.map((game) => (
-                <GameCard key={game.appid} game={game} />
+                <GameCard
+                  key={game.appid}
+                  game={game}
+                  onLoad={() => setGamesLoaded((prev) => prev + 1)}
+                />
               ))}
             </div>
           ) : (

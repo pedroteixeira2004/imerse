@@ -8,6 +8,7 @@ import GameDetails from "./componentes/GameDetails";
 import InsightPage from "./componentes/InsightPage";
 import Reports from "./componentes/Reports";
 import Filters from "./componentes/Filters";
+import RegistrationForm from "./componentes/Registo";
 function App() {
   return (
     <Router>
@@ -20,6 +21,8 @@ function App() {
           <Route path="/insight" element={<InsightPage />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/filters/:appId" element={<Filters />} />
+          <Route path="/registration" element={<RegistrationForm />} />
+          {/* Adicione outras rotas conforme necessário */}
         </Routes>
       </div>
     </Router>

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import "../background.css";
 
-const Background = ({ visible = false }) => {
+const Background = ({ visible = true }) => {
   const containerRef = useRef(null);
 
   // Feito com ajuda do ChatGPT
