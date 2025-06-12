@@ -20,7 +20,8 @@ body {
   overflow: hidden; /* Garante que o pseudo-elemento fique dentro dos limites */
 }
 
-.barra_pesquisa:hover {
+.barra_pesquisa:hover,
+.barra_pesquisa:focus {
   transform: translateY(-2px) scale(1.01); /* Levanta e escala ligeiramente ao passar o mouse */
   border-color: rgba(
     255,
@@ -31,7 +32,8 @@ body {
   box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.45); /* Sombra mais pronunciada ao passar o mouse */
 }
 
-.barra_pesquisa::before {
+.barra_pesquisa::before,
+.barra_pesquisa:focus::before {
   content: "";
   position: absolute;
   top: 0;

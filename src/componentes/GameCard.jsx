@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import gradiente from "../assets/imagens/gradiente_cards.svg";
-import fallbackImage from "../assets/imagens/fundo_jogos.png";
+import fallbackImage from "../assets/imagens/fundo_jogos2.png";
 
 const GameCard = ({ game }) => {
   const navigate = useNavigate();
@@ -9,6 +9,7 @@ const GameCard = ({ game }) => {
   const [typeGame, setTypeGame] = useState("");
   const [dateGame, setDateGame] = useState("");
   const [reviewSummary, setReviewSummary] = useState("");
+  const [description, setDescription] = useState("");
   const extractYear = (rawDate) => {
     if (!rawDate || typeof rawDate !== "string") return "";
 
@@ -35,6 +36,7 @@ const GameCard = ({ game }) => {
         }
         setTypeGame(details?.type || "");
         setDateGame(details?.release_date?.date || "");
+        setDescription(details?.short_description || "");
       } catch (error) {
         console.error("Erro ao buscar detalhes do jogo:", error);
       }
@@ -58,7 +60,16 @@ const GameCard = ({ game }) => {
 
   return (
     <div
-      onClick={() => navigate(`/details/${game.appid}`)}
+      onClick={() =>
+        navigate(`/details/${game.appid}`, {
+          state: {
+            backgroundUrl,
+            reviewSummary,
+            description,
+            name: game.name,
+          },
+        })
+      }
       className="h-80 w-80 rounded-3xl overflow-hidden transform transition duration-300 hover:scale-105 relative border border-white/30 shadow-[0_4px_30px_rgba(0,0,0,0.1)] hover:border-white/50 
     hover:shadow-[0_6px_40px_rgba(255,255,255,0.2)] "
     >
