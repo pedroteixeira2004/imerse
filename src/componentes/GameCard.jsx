@@ -67,7 +67,7 @@ const GameCard = ({ game, onLoad }) => {
           },
         })
       }
-      className="h-80 w-80 rounded-3xl overflow-hidden transform transition duration-300 hover:scale-105 relative border border-white/30 shadow-[0_4px_30px_rgba(0,0,0,0.1)] hover:border-white/50 
+      className="h-80 w-80 rounded-3xl overflow-hidden transform transition duration-300 hover:scale-105 relative border border-white/50 shadow-[0_4px_30px_rgba(0,0,0,0.1)] hover:border-white/50 
       hover:shadow-[0_6px_40px_rgba(255,255,255,0.2)] "
     >
       <div

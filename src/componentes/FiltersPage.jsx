@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AppLayout from "./Layout";
 import Background from "./background";
-import positive from "../assets/icones/positive.png";
-import negative from "../assets/icones/negative.png";
-import all from "../assets/icones/all.png";
 import ReviewsNumberAndLanguage from "./Filters/ReviewsNumberAndLanguage";
 import TimePeriod from "./Filters/TimePeriod";
 import Playtime from "./Filters/Playtime";
+import PurchaseCharacter from "./Filters/PurchaseCharacter";
+import TypeReview from "./Filters/TypeReview";
+import Filter from "./Filters/Filter";
 const FiltersPage = () => {
   const { appId } = useParams();
   const navigate = useNavigate();
@@ -22,19 +22,10 @@ const FiltersPage = () => {
   const [filter, setFilter] = useState("all");
   const [minPlaytime, setMinPlaytime] = useState("");
   const [maxPlaytime, setMaxPlaytime] = useState("");
+  const [purchaseType, setPurchaseType] = useState("");
 
   const handleNext = () => setStep((prev) => prev + 1);
   const handleBack = () => setStep((prev) => prev - 1);
-  const typeReview = [
-    { value: "all", label: "All", image: all },
-    { value: "positive", label: "Positive", image: positive },
-    { value: "negative", label: "Negative", image: negative },
-  ];
-  const typeFilter = [
-    { value: "recent", label: "Newest first" },
-    { value: "updated", label: "Updated recently" },
-    { value: "all", label: "Most relevant" },
-  ];
   const handleSubmit = () => {
     const query = new URLSearchParams({
       filter: filter,
@@ -46,7 +37,7 @@ const FiltersPage = () => {
 
     navigate(`/reviews/${appId}?${query}`);
   };
-  const progress = (step / 5) * 100;
+  const progress = (step / 6) * 100;
   return (
     <div className="">
       <Background />
@@ -86,53 +77,20 @@ const FiltersPage = () => {
                   />
                 )}
                 {step === 4 && (
-                  <div>
-                    <p className="mb-2 font-semibold text-white text-4xl">
-                      Type of Review
-                    </p>
-                    <p className="text-white mb-6">
-                      Select the type of review you want to analyse.
-                    </p>
-                    <div className="flex flex-wrap gap-2 justify-center">
-                      {typeReview.map((type) => (
-                        <button
-                          key={type.value}
-                          onClick={() => setReviewType(type.value)}
-                          className={`button-filters px-6 py-1 rounded-3xl border font-medium ${
-                            reviewType === type.value ? "active" : ""
-                          }`}
-                        >
-                          <img src={type.image} className="h-16 w-16" />
-                          {type.label}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
+                  <TypeReview
+                    reviewType={reviewType}
+                    setReviewType={setReviewType}
+                  />
                 )}
 
                 {step === 5 && (
-                  <div>
-                    <p className="mb-2 font-semibold text-white text-4xl">
-                      Reviews sorting
-                    </p>
-                    <p className="text-white mb-6">
-                      Pick a way to organize and dive into the reviews.
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {typeFilter.map((option) => (
-                        <button
-                          key={option.value}
-                          onClick={() => setFilter(option.value)}
-                          className={`button-filters px-6 py-1 rounded-3xl border font-medium ${
-                            filter === option.value ? "active" : ""
-                          }`}
-                        >
-                          {option.label}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
+                  <PurchaseCharacter
+                    purchaseType={purchaseType}
+                    setPurchaseType={setPurchaseType}
+                  />
                 )}
+
+                {step === 6 && <Filter filter={filter} setFilter={setFilter} />}
 
                 {/* Navegação dos passos */}
               </div>
@@ -143,14 +101,14 @@ const FiltersPage = () => {
                   Back
                 </button>
               )}
-              {step < 5 && (
+              {step < 6 && (
                 <div className="w-full flex justify-end">
                   <button onClick={handleNext} className="button">
                     Next
                   </button>
                 </div>
               )}
-              {step === 5 && (
+              {step === 6 && (
                 <div className="w-full flex justify-end">
                   <button onClick={handleSubmit} className="button">
                     Apply filters
