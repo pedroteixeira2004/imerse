@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth"; // Apenas a função de registro
 import { doc, setDoc } from "firebase/firestore"; // Funções para Firestore: referência e escrita de documento
 import { auth, db } from "../firebase/Inicializacao"; // Importamos auth E db
+import { sendEmailVerification } from "firebase/auth";
 
 function RegistrationForm() {
   // Estados para os campos do formulário
@@ -26,56 +27,51 @@ function RegistrationForm() {
 
   // Handler para o envio do formulário
   const handleRegistration = async (e) => {
-    e.preventDefault(); // Evita o recarregamento da página
-    setError(null); // Limpa erros anteriores
-    setSuccess(false); // Limpa status de sucesso anterior
-    setLoading(true); // Começa o indicador de carregamento
+    e.preventDefault();
+    setError(null);
+    setSuccess(false);
+    setLoading(true);
 
     try {
-      // PASSO 1: Criar o usuário no Firebase Authentication
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
-      const user = userCredential.user; // Obtém o objeto do usuário recém-criado
-      const userId = user.uid; // Obtém o UID único do usuário
+      const user = userCredential.user;
+      const userId = user.uid;
 
       console.log("Usuário autenticado criado com sucesso! UID:", userId);
 
-      // PASSO 2: Salvar as informações adicionais no Firestore
-      // Criamos uma referência para o documento na coleção 'users'
-      // usando o UID do usuário como o ID do documento.
+      // ✅ Enviar verificação por e-mail
+      await sendEmailVerification(user);
+      console.log("E-mail de verificação enviado para:", user.email);
+
       const userDocRef = doc(db, "users", userId);
-
-      // Dados a serem salvos no Firestore
       const userData = {
-        name: name,
-        occupation: occupation,
-        organization: organization,
-        email: user.email, // Opcional: salvar o email também no Firestore
-        createdAt: new Date(), // Opcional: adicionar timestamp de criação
+        name,
+        occupation,
+        organization,
+        email: user.email,
+        createdAt: new Date(),
       };
-
-      // Usamos setDoc para criar (ou sobrescrever) o documento
       await setDoc(userDocRef, userData);
 
       console.log("Informações do usuário salvas no Firestore com sucesso!");
 
-      // Se tudo deu certo
       setSuccess(true);
-      // Limpar o formulário após o sucesso (opcional)
+      alert(
+        "Conta criada com sucesso! Verifique seu e-mail antes de acessar o sistema."
+      );
       setEmail("");
       setPassword("");
       setName("");
       setOccupation("");
       setOrganization("");
     } catch (error) {
-      // Tratamento de erros
       console.error("Erro durante o registro:", error);
       let errorMessage = "Ocorreu um erro desconhecido durante o registro.";
 
-      // Mapear códigos de erro comuns do Firebase Auth
       switch (error.code) {
         case "auth/email-already-in-use":
           errorMessage = "Este e-mail já está em uso por outra conta.";
@@ -86,16 +82,13 @@ function RegistrationForm() {
         case "auth/weak-password":
           errorMessage = "A senha deve ter pelo menos 6 caracteres.";
           break;
-        // Adicione outros casos de erro do Auth ou Firestore se necessário
         default:
-          // Se for um erro do Firestore ou outro, mostre a mensagem padrão
           errorMessage = error.message;
           break;
       }
       setError(errorMessage);
     } finally {
-      // Isso executa independentemente de sucesso ou erro
-      setLoading(false); // Remove o indicador de carregamento
+      setLoading(false);
     }
   };
 

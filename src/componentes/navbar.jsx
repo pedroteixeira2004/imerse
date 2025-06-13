@@ -19,7 +19,7 @@ function Navbar() {
         <img src={logo} alt="logo" />
       </div>
       <nav className="nav-list">
-        <Link to="/">
+        <Link to="/home">
           <button className={`navButton ${isActive("/") ? "active" : ""}`}>
             <img src={home} alt="Home" />
             <span className="font-sf">Home</span>

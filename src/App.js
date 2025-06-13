@@ -9,19 +9,72 @@ import InsightPage from "./componentes/InsightPage";
 import Reports from "./componentes/Reports";
 import Filters from "./componentes/FiltersPage";
 import RegistrationForm from "./componentes/Registo";
+import LoginForm from "./componentes/LoginForm"; // Importando o componente de login
+import ProtectedRoute from "./componentes/ProtectedRoute"; // Importando a rota protegida
 function App() {
   return (
     <Router>
       <div>
         <Routes>
-          <Route path="/" element={<SearchPage />} />
-          <Route path="/games" element={<GameListPage />} />
-          <Route path="/reviews/:appId" element={<ReviewsPage />} />
-          <Route path="/details/:appId" element={<GameDetails />} />
-          <Route path="/insight" element={<InsightPage />} />
-          <Route path="/reports" element={<Reports />} />
-          <Route path="/filters/:appId" element={<Filters />} />
-          <Route path="/registration" element={<RegistrationForm />} />
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute>
+                <SearchPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/games"
+            element={
+              <ProtectedRoute>
+                <GameListPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/reviews/:appId"
+            element={
+              <ProtectedRoute>
+                <ReviewsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/details/:appId"
+            element={
+              <ProtectedRoute>
+                <GameDetails />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/insight"
+            element={
+              <ProtectedRoute>
+                <InsightPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/reports"
+            element={
+              <ProtectedRoute>
+                <Reports />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/filters/:appId"
+            element={
+              <ProtectedRoute>
+                <Filters />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/signup" element={<RegistrationForm />} />
+          <Route path="/login" element={<LoginForm />} />{" "}
+          {/* Rota para o login */}
           {/* Adicione outras rotas conforme necessário */}
         </Routes>
       </div>
