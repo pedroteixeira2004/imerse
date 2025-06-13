@@ -1,9 +1,10 @@
 // src/components/RegistrationForm.jsx
 // RegistrationForm.jsx
 import React, { useState } from "react";
-import StepOne from "./StepOne";
-import StepTwo from "./StepTwo";
-import StepThree from "./StepThree";
+import StepOne from "./SignupSteps/StepOne";
+import StepTwo from "./SignupSteps/StepTwo";
+import StepThree from "./SignupSteps/StepThree";
+import StepFour from "./SignupSteps/StepFour";
 import {
   createUserWithEmailAndPassword,
   fetchSignInMethodsForEmail,
@@ -82,7 +83,7 @@ const RegistrationForm = () => {
       await setDoc(doc(db, "users", user.uid), userDoc);
 
       setSuccess(true);
-      alert("Conta criada! Verifique seu e-mail.");
+      setStep(4);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -95,10 +96,12 @@ const RegistrationForm = () => {
       <Background />
       <div className="flex items-center min-h-screen p-4 mx-10 justify-between">
         <div className="flex-1 flex flex-col items-center">
-          <img src={logo} alt="Logo" className="w-[30rem]" />
-          <p className="text-6xl font-bold mt-7">Welcome.</p>
+          <div>
+            <img src={logo} alt="Logo" className="w-[30rem]" />
+            <p className="text-6xl font-bold mt-7">Welcomes you.</p>
+          </div>
         </div>
-        <div className="flex-1">
+        <div className="flex-1 flex flex-col justify-center items-center">
           {step === 1 && (
             <StepOne
               formData={formData}
@@ -127,9 +130,7 @@ const RegistrationForm = () => {
               error={error}
             />
           )}
-          {success && (
-            <p className="text-green-400 mt-4">Registro concluído!</p>
-          )}
+          {step === 4 && <StepFour />}
         </div>
       </div>
     </div>
