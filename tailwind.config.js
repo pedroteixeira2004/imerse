@@ -10,7 +10,7 @@ module.exports = {
     "./src/componentes/background2.js",
     "./src/componentes/Layout.jsx",
     "./src/componentes/Reports.jsx",
-    "./src/componentes/Filters.jsx",
+    "./src/componentes/FiltersPage.jsx",
     "./src/componentes/ReviewCard.jsx",
     "./src/componentes/InsightPage.jsx",
     "./src/componentes/SearchBar.jsx",

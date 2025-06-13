@@ -65,28 +65,40 @@ const GameListPage = () => {
     <div>
       <Background />
       <AppLayout2>
-        <div className="p-4 m-10">
-          <div className="flex justify-center mb-6">
-            <SearchBar />
-          </div>
-          <h2 className="text-3xl font-bold mb-4 font-sf text-white">
-            Search Results
-          </h2>
-
+        <div className="p-4 m-10 w-full">
           {error ? (
             <p className="text-red-500">{error}</p>
           ) : games.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 font-sf mt-8">
-              {games.map((game) => (
-                <GameCard
-                  key={game.appid}
-                  game={game}
-                  onLoad={() => setGamesLoaded((prev) => prev + 1)}
-                />
-              ))}
+            <div>
+              {/* SearchBar centralizada, apenas quando há resultados */}
+              <div className="flex justify-center mb-6 items-center">
+                <SearchBar />
+              </div>
+
+              <h2 className="text-3xl font-bold mb-4 font-sf text-white">
+                Search Results
+              </h2>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 font-sf mt-8">
+                {games.map((game) => (
+                  <GameCard
+                    key={game.appid}
+                    game={game}
+                    onLoad={() => setGamesLoaded((prev) => prev + 1)}
+                  />
+                ))}
+              </div>
             </div>
           ) : (
-            <p className="text-white font-sf">No results founded.</p>
+            <div className="items-center justify-center w-full h-screen">
+              <div className="justify-center mb-6 items-center">
+                <SearchBar />
+              </div>
+
+              <p className="text-white font-sf font-medium text-center text-3xl">
+                No results found for "{searchTerm}".
+              </p>
+            </div>
           )}
         </div>
       </AppLayout2>

@@ -7,7 +7,7 @@ import ReviewsPage from "./componentes/ReviewsPage";
 import GameDetails from "./componentes/GameDetails";
 import InsightPage from "./componentes/InsightPage";
 import Reports from "./componentes/Reports";
-import Filters from "./componentes/Filters";
+import Filters from "./componentes/FiltersPage";
 import RegistrationForm from "./componentes/Registo";
 function App() {
   return (

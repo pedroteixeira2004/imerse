@@ -9,7 +9,11 @@ const SearchBar = ({ initialSearch = "", onSearch }) => {
 
   const handleSearch = () => {
     if (!searchTerm.trim()) {
-      setError("Insert a game title!");
+      setError(
+        <div className="font-sf text-white text-lg mt-6">
+          Insert a game title!
+        </div>
+      );
       return;
     }
     setError(null);
