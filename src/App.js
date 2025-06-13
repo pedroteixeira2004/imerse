@@ -7,6 +7,7 @@ import ReviewsPage from "./componentes/ReviewsPage";
 import GameDetails from "./componentes/GameDetails";
 import InsightPage from "./componentes/InsightPage";
 import Reports from "./componentes/Reports";
+import Profile from "./componentes/Profile"; // Importando o componente de perfil
 import Filters from "./componentes/FiltersPage";
 import RegistrationForm from "./componentes/Registo";
 import LoginForm from "./componentes/LoginForm"; // Importando o componente de login
@@ -61,6 +62,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Reports />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
               </ProtectedRoute>
             }
           />

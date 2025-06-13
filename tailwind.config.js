@@ -15,6 +15,8 @@ module.exports = {
     "./src/componentes/InsightPage.jsx",
     "./src/componentes/SearchBar.jsx",
     "./src/componentes/GameCard.jsx",
+    "./src/componentes/LoginForm.jsx",
+    "./src/componentes/Registo.jsx",
   ],
   theme: {
     extend: {

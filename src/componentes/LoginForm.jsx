@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/Inicializacao";
 import { useNavigate } from "react-router-dom";
+import Background from "./background";
+import logo from "../assets/imerselogo_white.png"; // Importando o logo
+import { Link } from "react-router-dom";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -61,35 +64,88 @@ function LoginForm() {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <div>
-          <label htmlFor="email">E-mail:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+    <div className="font-sf text-white">
+      <Background />
+      <div className="flex items-center min-h-screen p-4 mx-10 justify-between">
+        {/* Lado esquerdo: logo e Welcome back */}
+        <div className="flex-1 flex flex-col items-center">
+          <div>
+            <img src={logo} alt="Logo" className="w-[30rem]" />
+            <p className="text-6xl font-bold mt-7">Welcome back.</p>
+          </div>
         </div>
-        <div>
-          <label htmlFor="password">Senha:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" disabled={loading}>
-          {loading ? "Entrando..." : "Entrar"}
-        </button>
-      </form>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+        {/* Lado direito: login */}
+        <div className="flex-1 flex flex-col justify-center items-center">
+          <div>
+            <h2 className="text-5xl font-bold mb-4">Login</h2>
+            <div className="text-2xl font-medium mb-6">
+              Hey there! Please login to your account
+            </div>
+            <form onSubmit={handleLogin} className="w-full max-w-md space-y-5">
+              <div>
+                <label htmlFor="email">E-mail:</label>
+                <div
+                  className="pl-6 pr-10 py-3 text-white text-lg rounded-full 
+              bg-gradient-to-br from-white/10 to-white/30 backdrop-blur-3xl 
+              border border-white/40 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]
+              outline-none flex gap-2 items-center transition-all duration-500 mt-4"
+                >
+                  <input
+                    className="bg-transparent placeholder-white/70 font-sf w-full focus:outline-none"
+                    placeholder="Enter your email"
+                    type="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label htmlFor="password">Password:</label>
+                <div
+                  className="pl-6 pr-10 py-3 text-white text-lg rounded-full 
+              bg-gradient-to-br from-white/10 to-white/30 backdrop-blur-3xl 
+              border border-white/40 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]
+              outline-none flex gap-2 items-center transition-all duration-500 mt-4"
+                >
+                  <input
+                    className="bg-transparent placeholder-white/70 font-sf w-full focus:outline-none"
+                    placeholder="Enter your password"
+                    type="password"
+                    id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="flex justify-end mt-4">
+                  <p>Forgot your password?</p>
+                </div>
+              </div>
+              <div className="justify-center flex">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="button2 w-1/3 py-3 mt-4 rounded-full text-white font-bold hover:bg-gray-300 transition text-lg"
+                >
+                  {loading ? "Entrando..." : "Login"}
+                </button>
+              </div>
+              <div className="flex justify-center mt-8">
+                <div className="inline-flex items-center gap-1">
+                  <div>Don’t have an account?</div>
+                  <div className="underline">
+                    <Link to="/signup">Sign up here</Link>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          {error && <p className="text-red-500 mt-4">{error}</p>}
+        </div>
+      </div>
     </div>
   );
 }

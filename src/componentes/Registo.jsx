@@ -1,175 +1,139 @@
 // src/components/RegistrationForm.jsx
+// RegistrationForm.jsx
 import React, { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth"; // Apenas a função de registro
-import { doc, setDoc } from "firebase/firestore"; // Funções para Firestore: referência e escrita de documento
-import { auth, db } from "../firebase/Inicializacao"; // Importamos auth E db
-import { sendEmailVerification } from "firebase/auth";
+import StepOne from "./StepOne";
+import StepTwo from "./StepTwo";
+import StepThree from "./StepThree";
+import {
+  createUserWithEmailAndPassword,
+  fetchSignInMethodsForEmail,
+  sendEmailVerification,
+} from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { auth, db } from "../firebase/Inicializacao";
+import Background from "./background";
+import logo from "../assets/imerselogo_white.png";
 
-function RegistrationForm() {
-  // Estados para os campos do formulário
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [occupation, setOccupation] = useState("");
-  const [organization, setOrganization] = useState("");
+const RegistrationForm = () => {
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    occupation: "",
+    organization: "",
+    password: "",
+    confirmPassword: "",
+  });
 
-  // Estados para feedback UI
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false); // Para indicar que algo está acontecendo
-  const [success, setSuccess] = useState(false); // Para indicar sucesso
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
-  // Handlers para os inputs
-  const handleEmailChange = (e) => setEmail(e.target.value);
-  const handlePasswordChange = (e) => setPassword(e.target.value);
-  const handleNameChange = (e) => setName(e.target.value);
-  const handleOccupationChange = (e) => setOccupation(e.target.value);
-  const handleOrganizationChange = (e) => setOrganization(e.target.value);
+  const nextStep = () => setStep(step + 1);
+  const prevStep = () => setStep(step - 1);
 
-  // Handler para o envio do formulário
-  const handleRegistration = async (e) => {
-    e.preventDefault();
-    setError(null);
-    setSuccess(false);
+  const updateForm = (field, value) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const checkEmailExists = async () => {
+    try {
+      const methods = await fetchSignInMethodsForEmail(auth, formData.email);
+      if (methods.length > 0) {
+        setError("Este e-mail já está em uso.");
+        return false;
+      }
+      return true;
+    } catch (err) {
+      setError("Erro ao verificar o e-mail.");
+      return false;
+    }
+  };
+
+  const handleSubmit = async () => {
     setLoading(true);
+    setError(null);
+
+    if (formData.password !== formData.confirmPassword) {
+      setError("As senhas não coincidem.");
+      setLoading(false);
+      return;
+    }
 
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
-        email,
-        password
+        formData.email,
+        formData.password
       );
       const user = userCredential.user;
-      const userId = user.uid;
-
-      console.log("Usuário autenticado criado com sucesso! UID:", userId);
-
-      // ✅ Enviar verificação por e-mail
       await sendEmailVerification(user);
-      console.log("E-mail de verificação enviado para:", user.email);
 
-      const userDocRef = doc(db, "users", userId);
-      const userData = {
-        name,
-        occupation,
-        organization,
-        email: user.email,
+      const userDoc = {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        occupation: formData.occupation,
+        organization: formData.organization,
+        email: formData.email,
         createdAt: new Date(),
       };
-      await setDoc(userDocRef, userData);
 
-      console.log("Informações do usuário salvas no Firestore com sucesso!");
+      await setDoc(doc(db, "users", user.uid), userDoc);
 
       setSuccess(true);
-      alert(
-        "Conta criada com sucesso! Verifique seu e-mail antes de acessar o sistema."
-      );
-      setEmail("");
-      setPassword("");
-      setName("");
-      setOccupation("");
-      setOrganization("");
-    } catch (error) {
-      console.error("Erro durante o registro:", error);
-      let errorMessage = "Ocorreu um erro desconhecido durante o registro.";
-
-      switch (error.code) {
-        case "auth/email-already-in-use":
-          errorMessage = "Este e-mail já está em uso por outra conta.";
-          break;
-        case "auth/invalid-email":
-          errorMessage = "O formato do e-mail é inválido.";
-          break;
-        case "auth/weak-password":
-          errorMessage = "A senha deve ter pelo menos 6 caracteres.";
-          break;
-        default:
-          errorMessage = error.message;
-          break;
-      }
-      setError(errorMessage);
+      alert("Conta criada! Verifique seu e-mail.");
+    } catch (err) {
+      setError(err.message);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div>
-      <h2>Registrar-se</h2>
-
-      <form onSubmit={handleRegistration}>
-        <div>
-          <label htmlFor="email">E-mail:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={handleEmailChange}
-            required
-          />
+    <div className="font-sf text-white">
+      <Background />
+      <div className="flex items-center min-h-screen p-4 mx-10 justify-between">
+        <div className="flex-1 flex flex-col items-center">
+          <img src={logo} alt="Logo" className="w-[30rem]" />
+          <p className="text-6xl font-bold mt-7">Welcome.</p>
         </div>
-        <div>
-          <label htmlFor="password">Senha:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={handlePasswordChange}
-            required
-            minLength="6" // Boa prática, alinhado com a mensagem de erro 'auth/weak-password'
-          />
+        <div className="flex-1">
+          {step === 1 && (
+            <StepOne
+              formData={formData}
+              updateForm={updateForm}
+              next={async () => {
+                if (await checkEmailExists()) nextStep();
+              }}
+              error={error}
+            />
+          )}
+          {step === 2 && (
+            <StepTwo
+              formData={formData}
+              updateForm={updateForm}
+              next={nextStep}
+              back={prevStep}
+            />
+          )}
+          {step === 3 && (
+            <StepThree
+              formData={formData}
+              updateForm={updateForm}
+              back={prevStep}
+              submit={handleSubmit}
+              loading={loading}
+              error={error}
+            />
+          )}
+          {success && (
+            <p className="text-green-400 mt-4">Registro concluído!</p>
+          )}
         </div>
-        <div>
-          <label htmlFor="name">Nome:</label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={handleNameChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="occupation">Ocupação:</label>
-          <input
-            type="text"
-            id="occupation"
-            value={occupation}
-            onChange={handleOccupationChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="organization">Organização:</label>
-          <input
-            type="text"
-            id="organization"
-            value={organization}
-            onChange={handleOrganizationChange}
-            required
-          />
-        </div>
-
-        <button type="submit" disabled={loading}>
-          {loading ? "Registrando..." : "Criar Conta"}
-        </button>
-      </form>
-
-      {/* Exibir status */}
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {success && (
-        <p style={{ color: "green" }}>
-          Registro bem-sucedido! Você agora está logado.
-        </p>
-      )}
-
-      {/*
-        Observação: Após o registro bem-sucedido com createUserWithEmailAndPassword,
-        o usuário é automaticamente logado no Firebase Authentication.
-        Seu aplicativo precisará de uma lógica para detectar essa mudança
-        (usando onAuthStateChanged) e atualizar a UI ou redirecionar o usuário.
-      */}
+      </div>
     </div>
   );
-}
+};
 
 export default RegistrationForm;
