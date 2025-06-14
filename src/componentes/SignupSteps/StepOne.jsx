@@ -29,6 +29,10 @@ const StepOne = ({ formData, updateForm, next, error }) => {
                 value={formData.firstName}
                 onChange={(e) => updateForm("firstName", e.target.value)}
                 className="bg-transparent placeholder-white/70 font-sf w-full focus:outline-none"
+                onInvalid={(e) =>
+                  e.target.setCustomValidity("Please, enter your first name")
+                }
+                onInput={(e) => e.target.setCustomValidity("")}
               />
             </div>
           </div>
@@ -45,6 +49,10 @@ const StepOne = ({ formData, updateForm, next, error }) => {
                 type="text"
                 placeholder="Enter last name"
                 required
+                onInvalid={(e) =>
+                  e.target.setCustomValidity("Please, enter your last name")
+                }
+                onInput={(e) => e.target.setCustomValidity("")}
                 value={formData.lastName}
                 onChange={(e) => updateForm("lastName", e.target.value)}
                 className="bg-transparent placeholder-white/70 font-sf w-full focus:outline-none"
@@ -68,6 +76,10 @@ const StepOne = ({ formData, updateForm, next, error }) => {
               value={formData.email}
               onChange={(e) => updateForm("email", e.target.value)}
               className="bg-transparent placeholder-white/70 font-sf w-full focus:outline-none"
+              onInvalid={(e) =>
+                e.target.setCustomValidity("Please, enter your e-mail")
+              }
+              onInput={(e) => e.target.setCustomValidity("")}
             />
           </div>
         </div>

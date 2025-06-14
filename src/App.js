@@ -11,6 +11,7 @@ import Profile from "./componentes/Profile"; // Importando o componente de perfi
 import Filters from "./componentes/FiltersPage";
 import RegistrationForm from "./componentes/Registo";
 import LoginForm from "./componentes/LoginForm"; // Importando o componente de login
+import ForgotPassword from "./componentes/ForgotPassword";
 import ProtectedRoute from "./componentes/ProtectedRoute"; // Importando a rota protegida
 function App() {
   return (
@@ -83,6 +84,7 @@ function App() {
           />
           <Route path="/signup" element={<RegistrationForm />} />
           <Route path="/login" element={<LoginForm />} />{" "}
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           {/* Rota para o login */}
           {/* Adicione outras rotas conforme necessário */}
         </Routes>

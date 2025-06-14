@@ -109,7 +109,6 @@ const StepTwo = ({ formData, updateForm, next, back }) => {
             <input
               type="text"
               placeholder="Enter your organization"
-              required
               value={formData.organization}
               onChange={(e) => updateForm("organization", e.target.value)}
               className="bg-transparent placeholder-white/70 font-sf w-full focus:outline-none"

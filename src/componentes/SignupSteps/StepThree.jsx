@@ -27,6 +27,10 @@ const StepThree = ({ formData, updateForm, back, submit, loading, error }) => {
                 value={formData.password}
                 onChange={(e) => updateForm("password", e.target.value)}
                 className="bg-transparent placeholder-white/70 font-sf w-full focus:outline-none"
+                onInvalid={(e) =>
+                  e.target.setCustomValidity("Please, enter your password")
+                }
+                onInput={(e) => e.target.setCustomValidity("")}
               />
             </div>
           </div>
@@ -45,6 +49,10 @@ const StepThree = ({ formData, updateForm, back, submit, loading, error }) => {
                 value={formData.confirmPassword}
                 onChange={(e) => updateForm("confirmPassword", e.target.value)}
                 className="bg-transparent placeholder-white/70 font-sf w-full focus:outline-none"
+                onInvalid={(e) =>
+                  e.target.setCustomValidity("Please, enter your password")
+                }
+                onInput={(e) => e.target.setCustomValidity("")}
               />
             </div>
           </div>

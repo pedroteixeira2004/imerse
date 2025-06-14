@@ -6,6 +6,7 @@ import Background from "./background";
 import logo from "../assets/imerselogo_white.png"; // Importando o logo
 import { Link } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
+import { traduzirErroFirebase } from "./TraduzirErrosFirebase";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -30,7 +31,9 @@ function LoginForm() {
       if (!user.emailVerified) {
         // ✅ Se o e-mail não estiver verificado, impede o login
         if (!user.emailVerified) {
-          setError("Por favor, verifique seu e-mail antes de fazer login.");
+          setError(
+            "Your account is not verified. Please check your email to verify your account."
+          );
           await auth.signOut(); // <- IMPORTANTE usar await aqui
           return;
         }
@@ -42,23 +45,8 @@ function LoginForm() {
       navigate("/home");
     } catch (err) {
       console.error("Erro no login:", err);
-      let message = "Erro ao tentar fazer login.";
-
-      switch (err.code) {
-        case "auth/user-not-found":
-          message = "Usuário não encontrado.";
-          break;
-        case "auth/wrong-password":
-          message = "Senha incorreta.";
-          break;
-        case "auth/invalid-email":
-          message = "E-mail inválido.";
-          break;
-        default:
-          message = err.message;
-      }
-
-      setError(message);
+      const mensagem = traduzirErroFirebase(err.code);
+      setError(mensagem);
     } finally {
       setLoading(false);
     }
@@ -124,14 +112,19 @@ function LoginForm() {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                     onInvalid={(e) =>
-                      e.target.setCustomValidity("Please, enter the password")
+                      e.target.setCustomValidity("Please, enter your password")
                     }
                     onInput={(e) => e.target.setCustomValidity("")}
                   />
                 </div>
                 <div className="flex justify-end mt-4">
-                  <p>Forgot your password?</p>
+                  <Link to="/forgot-password" className="underline">
+                    Forgot your password?
+                  </Link>
                 </div>
+              </div>
+              <div className="flex justify-center">
+                {error && <p className="text-red-500 mt-4">{error}</p>}
               </div>
               <div className="justify-center flex">
                 <button
@@ -149,14 +142,13 @@ function LoginForm() {
               <div className="flex justify-center mt-8">
                 <div className="inline-flex items-center gap-1">
                   <div>Don’t have an account?</div>
-                  <div className="underline">
+                  <div className="underline font-bold">
                     <Link to="/signup">Sign up here</Link>
                   </div>
                 </div>
               </div>
             </form>
           </div>
-          {error && <p className="text-red-500 mt-4">{error}</p>}
         </div>
       </div>
     </div>

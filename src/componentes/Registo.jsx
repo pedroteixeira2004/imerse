@@ -15,6 +15,7 @@ import { auth, db } from "../firebase/Inicializacao";
 import Background from "./background";
 import logo from "../assets/imerselogo_white.png";
 import { Link } from "react-router-dom";
+import { traduzirErroFirebase } from "./TraduzirErrosFirebase";
 
 const RegistrationForm = () => {
   const [step, setStep] = useState(1);
@@ -43,12 +44,12 @@ const RegistrationForm = () => {
     try {
       const methods = await fetchSignInMethodsForEmail(auth, formData.email);
       if (methods.length > 0) {
-        setError("Este e-mail já está em uso.");
+        setError("This e-mail is already in use.");
         return false;
       }
       return true;
     } catch (err) {
-      setError("Erro ao verificar o e-mail.");
+      setError("Error on verifying your e-mail");
       return false;
     }
   };
@@ -58,7 +59,7 @@ const RegistrationForm = () => {
     setError(null);
 
     if (formData.password !== formData.confirmPassword) {
-      setError("As senhas não coincidem.");
+      setError("Passwords doesn't match.");
       setLoading(false);
       return;
     }
@@ -86,7 +87,9 @@ const RegistrationForm = () => {
       setSuccess(true);
       setStep(4);
     } catch (err) {
-      setError(err.message);
+      console.error("Erro no login:", err);
+      const mensagem = traduzirErroFirebase(err.code);
+      setError(mensagem);
     } finally {
       setLoading(false);
     }
