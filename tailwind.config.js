@@ -17,6 +17,8 @@ module.exports = {
     "./src/componentes/GameCard.jsx",
     "./src/componentes/LoginForm.jsx",
     "./src/componentes/Registo.jsx",
+    "./src/componentes/SignupSteps/StepTwo.jsx",
+    "./src/componentes/SignupSteps/StepThree.jsx",
   ],
   theme: {
     extend: {

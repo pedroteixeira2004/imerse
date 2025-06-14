@@ -14,6 +14,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase/Inicializacao";
 import Background from "./background";
 import logo from "../assets/imerselogo_white.png";
+import { Link } from "react-router-dom";
 
 const RegistrationForm = () => {
   const [step, setStep] = useState(1);

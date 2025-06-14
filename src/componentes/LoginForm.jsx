@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Background from "./background";
 import logo from "../assets/imerselogo_white.png"; // Importando o logo
 import { Link } from "react-router-dom";
+import { BeatLoader } from "react-spinners";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -99,6 +100,10 @@ function LoginForm() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    onInvalid={(e) =>
+                      e.target.setCustomValidity("Please, enter a valid email")
+                    }
+                    onInput={(e) => e.target.setCustomValidity("")}
                   />
                 </div>
               </div>
@@ -118,6 +123,10 @@ function LoginForm() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    onInvalid={(e) =>
+                      e.target.setCustomValidity("Please, enter the password")
+                    }
+                    onInput={(e) => e.target.setCustomValidity("")}
                   />
                 </div>
                 <div className="flex justify-end mt-4">
@@ -130,7 +139,11 @@ function LoginForm() {
                   disabled={loading}
                   className="button2 w-1/3 py-2 mt-4 rounded-full text-white font-bold hover:bg-gray-300 transition text-lg"
                 >
-                  {loading ? "Entrando..." : "Login"}
+                  {loading ? (
+                    <BeatLoader color="#ffffff" size={15} className="mt-2" />
+                  ) : (
+                    "Login"
+                  )}
                 </button>
               </div>
               <div className="flex justify-center mt-8">
