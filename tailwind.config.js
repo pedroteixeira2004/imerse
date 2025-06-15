@@ -19,6 +19,7 @@ module.exports = {
     "./src/componentes/Registo.jsx",
     "./src/componentes/SignupSteps/StepTwo.jsx",
     "./src/componentes/SignupSteps/StepThree.jsx",
+    "./src/componentes/GlassToast.jsx",
   ],
   theme: {
     extend: {

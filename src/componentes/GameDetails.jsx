@@ -5,7 +5,8 @@ import Gradiente from "../assets/imagens/gradiente_game_details.svg";
 import add_library from "../assets/icones/add_library.png";
 import LoadingDetails from "./LoadingDetails";
 import imagem_default from "../assets/imagens/fundo_jogos2.png"; // Imagem padrão para o background
-
+import ComparisonButton from "./ComparisonButton";
+import { auth } from "../firebase/Inicializacao";
 const GameDetails = () => {
   const { appId } = useParams();
   const navigate = useNavigate();
@@ -139,6 +140,7 @@ const GameDetails = () => {
                       Add to library
                     </span>
                   </button>
+                  <ComparisonButton appId={appId} user={auth.currentUser} />
                 </div>
               )}
           </div>

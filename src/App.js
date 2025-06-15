@@ -7,16 +7,30 @@ import ReviewsPage from "./componentes/ReviewsPage";
 import GameDetails from "./componentes/GameDetails";
 import InsightPage from "./componentes/InsightPage";
 import Reports from "./componentes/Reports";
-import Profile from "./componentes/Profile"; // Importando o componente de perfil
+import Profile from "./componentes/Profile";
 import Filters from "./componentes/FiltersPage";
 import RegistrationForm from "./componentes/Registo";
-import LoginForm from "./componentes/LoginForm"; // Importando o componente de login
+import LoginForm from "./componentes/LoginForm";
 import ForgotPassword from "./componentes/ForgotPassword";
-import ProtectedRoute from "./componentes/ProtectedRoute"; // Importando a rota protegida
+import ProtectedRoute from "./componentes/ProtectedRoute";
+import Compare from "./componentes/ComparePage";
+import { Toaster } from "react-hot-toast";
+
 function App() {
   return (
     <Router>
       <div>
+        <Toaster
+          position="top-center"
+          toastOptions={{
+            duration: 2000,
+            style: {
+              background: "transparent", // para glass funcionar
+              boxShadow: "none",
+            },
+          }}
+        />
+
         <Routes>
           <Route
             path="/home"
@@ -67,6 +81,14 @@ function App() {
             }
           />
           <Route
+            path="/compare"
+            element={
+              <ProtectedRoute>
+                <Compare />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/profile"
             element={
               <ProtectedRoute>
@@ -83,10 +105,8 @@ function App() {
             }
           />
           <Route path="/signup" element={<RegistrationForm />} />
-          <Route path="/login" element={<LoginForm />} />{" "}
+          <Route path="/login" element={<LoginForm />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          {/* Rota para o login */}
-          {/* Adicione outras rotas conforme necessário */}
         </Routes>
       </div>
     </Router>
