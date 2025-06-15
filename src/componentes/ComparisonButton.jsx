@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../firebase/Inicializacao";
-import compare from "../assets/icones/compare.png";
+import add_compare from "../assets/icones/add_compare.png";
 import toast from "react-hot-toast";
 import GlassToast from "./GlassToast";
 
@@ -120,7 +120,7 @@ const ComparisonButton = ({ appId, user, game, reviewSummary }) => {
       className={`expandable-button rounded-full mx-6 flex items-center`}
       onClick={handleToggleComparison}
     >
-      <img src={compare} alt="Compare icon" />
+      <img src={add_compare} alt="Compare icon" />
       <span className="text font-sf font-bold">
         {isInComparison ? "Remove from compare" : "Add to compare"}
       </span>

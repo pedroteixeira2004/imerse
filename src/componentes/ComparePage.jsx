@@ -76,7 +76,7 @@ const Compare = () => {
           {/* Área de comparação */}
           <div className="flex justify-center items-start gap-10 flex-wrap min-h-[300px]">
             {bothEmpty ? (
-              <p className="text-2xl text-white font-sf font-medium flex items-center justify-center mt-28">
+              <p className="text-3xl text-white font-sf font-medium flex items-center justify-center mt-28">
                 No games added to compare. Please search for a game.
               </p>
             ) : (

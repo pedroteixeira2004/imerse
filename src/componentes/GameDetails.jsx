@@ -88,6 +88,7 @@ const GameDetails = () => {
 
   if (!game) return <LoadingDetails />;
   console.log("Review summary:", reviewSummary);
+  console.log("game:", game);
   return (
     <div
       className="min-h-screen bg-cover bg-center bg-no-repeat relative"
