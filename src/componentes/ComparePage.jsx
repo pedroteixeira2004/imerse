@@ -6,9 +6,11 @@ import Background from "./background";
 import AppLayout2 from "./Layout2";
 import SearchBar from "./SearchBar";
 import LoadingCompare from "./LoadingCompare";
+import { useNavigate } from "react-router-dom";
 const Compare = () => {
   const [games, setGames] = useState({ game1: null, game2: null });
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const fetchComparison = async () => {
     const user = auth.currentUser;
@@ -49,6 +51,16 @@ const Compare = () => {
   const onlyOne =
     (!!games.game1 && !games.game2) || (!games.game1 && !!games.game2);
 
+  const handleCompare = () => {
+    if (games.game1 && games.game2) {
+      navigate("/game-comparison", {
+        state: {
+          game1Id: games.game1.appId,
+          game2Id: games.game2.appId,
+        },
+      });
+    }
+  };
   return loading ? (
     <div>
       <LoadingCompare />
@@ -63,7 +75,9 @@ const Compare = () => {
             Compare games
           </div>
           <div className="text-2xl text-white font-sf flex justify-center mt-2">
-            Select two titles to compare their statistics
+            {bothEmpty || onlyOne
+              ? "Search for two games to compare."
+              : "Everything is ready. Choose the way you want to compare."}
           </div>
 
           {/* Barra de pesquisa */}
@@ -74,32 +88,68 @@ const Compare = () => {
           )}
 
           {/* Área de comparação */}
-          <div className="flex justify-center items-start gap-10 flex-wrap min-h-[300px]">
+          {/* Área de comparação */}
+          <div
+            className={`flex justify-center items-start gap-12 flex-wrap ${
+              !(bothEmpty || onlyOne) ? "mt-12" : ""
+            }`}
+          >
             {bothEmpty ? (
               <p className="text-3xl text-white font-sf font-medium flex items-center justify-center mt-28">
                 No games added to compare. Please search for a game.
               </p>
             ) : (
               <>
-                {games.game1 && (
-                  <ComparisonCard
-                    game={games.game1}
-                    user={user}
-                    onRemove={handleRemove}
-                  />
-                )}
+                {(games.game1 || games.game2) && (
+                  <div className="flex items-center justify-center gap-6 flex-wrap">
+                    {games.game1 && (
+                      <ComparisonCard
+                        game={games.game1}
+                        user={user}
+                        onRemove={handleRemove}
+                      />
+                    )}
 
-                {games.game2 && (
-                  <ComparisonCard
-                    game={games.game2}
-                    user={user}
-                    onRemove={handleRemove}
-                  />
+                    {games.game1 && games.game2 && (
+                      <div className="text-white font-sf font-bold text-4xl mx-4 drop-shadow-lg">
+                        VS
+                      </div>
+                    )}
+
+                    {games.game2 && (
+                      <ComparisonCard
+                        game={games.game2}
+                        user={user}
+                        onRemove={handleRemove}
+                      />
+                    )}
+                  </div>
                 )}
 
                 {onlyOne && (
                   <div className="flex items-center justify-center text-white font-sf text-2xl font-medium h-80 w-80 text-center border border-dashed border-white/30 rounded-3xl p-6">
                     Add another game to compare
+                  </div>
+                )}
+                {games.game1 && games.game2 && (
+                  <div className="flex justify-center mt-10 w-full">
+                    <div className="flex flex-col sm:flex-row gap-6">
+                      <button
+                        onClick={handleCompare}
+                        className=" text-white px-8 py-2 rounded-full font-sf text-lg button2 font-bold"
+                      >
+                        Compare games
+                      </button>
+
+                      <button
+                        onClick={() => {
+                          alert("Função de Análise AI ainda não implementada.");
+                        }}
+                        className=" text-white px-6 py-3 rounded-full font-sf text-lg transition-all duration-300 button-filters font-bold"
+                      >
+                        AI Comparison
+                      </button>
+                    </div>
                   </div>
                 )}
               </>

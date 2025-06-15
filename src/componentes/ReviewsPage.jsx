@@ -11,6 +11,7 @@ import sentiment_analysis from "../assets/icones/sentiment_analysis.png";
 import keywords from "../assets/icones/keywords.png";
 import general from "../assets/icones/general.png";
 import ReviewCard from "./ReviewCard";
+import ComparisonButton from "./ComparisonButton";
 
 const ReviewsPage = () => {
   const { appId } = useParams();

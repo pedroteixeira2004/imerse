@@ -15,6 +15,7 @@ import ForgotPassword from "./componentes/ForgotPassword";
 import ProtectedRoute from "./componentes/ProtectedRoute";
 import Compare from "./componentes/ComparePage";
 import { Toaster } from "react-hot-toast";
+import GameComparison from "./componentes/GameComparison";
 
 function App() {
   return (
@@ -101,6 +102,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Filters />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/game-comparison"
+            element={
+              <ProtectedRoute>
+                <GameComparison />
               </ProtectedRoute>
             }
           />

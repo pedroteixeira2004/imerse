@@ -22,6 +22,8 @@ module.exports = {
     "./src/componentes/SignupSteps/StepThree.jsx",
     "./src/componentes/GlassToast.jsx",
     "./src/componentes/ComparisonCard.jsx",
+    "./src/componentes/GameComparison.jsx",
+    "./src/componentes/CompareInfo.jsx",
   ],
   theme: {
     extend: {

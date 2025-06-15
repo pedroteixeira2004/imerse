@@ -103,7 +103,7 @@ app.get("/api/game-details/:appId", async (req, res) => {
   try {
     const { appId } = req.params;
     const response = await axios.get(
-      `https://store.steampowered.com/api/appdetails?appids=${appId}`
+      `https://store.steampowered.com/api/appdetails?appids=${appId}&l=english`
     );
 
     res.json(response.data);
