@@ -20,6 +20,8 @@ const GameDetails = () => {
           name: preloaded.name,
           short_description: preloaded.description || "",
           background_raw: preloaded.backgroundUrl || null,
+          year: preloaded.year,
+          typeGame: preloaded.typeGame,
         }
       : null
   );
@@ -58,13 +60,13 @@ const GameDetails = () => {
         if (detailsData[appId]?.success) {
           setGame(detailsData[appId].data);
         } else {
-          throw new Error("Dados de jogo inválidos ou não disponíveis.");
+          throw new Error("Game data not available");
         }
 
         setReviewSummary(reviewsData.review_summary || null);
       } catch (err) {
         if (err.name !== "AbortError") {
-          console.error("Erro no fetch:", err);
+          console.error("Error on fetch:", err);
           setError(err.message);
         }
       }
@@ -140,7 +142,12 @@ const GameDetails = () => {
                       Add to library
                     </span>
                   </button>
-                  <ComparisonButton appId={appId} user={auth.currentUser} />
+                  <ComparisonButton
+                    appId={appId}
+                    user={auth.currentUser}
+                    game={game}
+                    reviewSummary={reviewSummary}
+                  />
                 </div>
               )}
           </div>

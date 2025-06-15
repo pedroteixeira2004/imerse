@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import search from "../assets/icones/search.png";
-
+import toast from "react-hot-toast";
+import GlassToast from "./GlassToast";
 const SearchBar = ({ initialSearch = "", onSearch }) => {
   const [searchTerm, setSearchTerm] = useState(initialSearch);
   const [error, setError] = useState(null);
@@ -9,10 +10,15 @@ const SearchBar = ({ initialSearch = "", onSearch }) => {
 
   const handleSearch = () => {
     if (!searchTerm.trim()) {
-      setError(
-        <div className="font-sf text-white text-lg mt-6">
-          Insert a game title!
-        </div>
+      toast.custom(
+        (t) => (
+          <GlassToast
+            t={t}
+            message="Insert a game title please."
+            type="warning"
+          />
+        ),
+        { duration: 3000, position: "top-center" }
       );
       return;
     }
@@ -60,8 +66,6 @@ const SearchBar = ({ initialSearch = "", onSearch }) => {
             Discover
           </button>
         </div>
-
-        {error && <p className="text-white font-sf mt-2">{error}</p>}
       </div>
     </div>
   );

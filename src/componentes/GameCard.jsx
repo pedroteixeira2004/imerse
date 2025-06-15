@@ -54,7 +54,7 @@ const GameCard = ({ game, onLoad }) => {
 
     fetchAll();
   }, [game.appid]);
-
+  const year = extractYear(dateGame);
   return (
     <div
       onClick={() =>
@@ -63,6 +63,8 @@ const GameCard = ({ game, onLoad }) => {
             backgroundUrl,
             reviewSummary,
             description,
+            year,
+            typeGame,
             name: game.name,
           },
         })
@@ -95,9 +97,7 @@ const GameCard = ({ game, onLoad }) => {
           <h3 className="text-lg font-regular text-white mr-3">{typeGame}</h3>
         </div>
         <div className=" inset-0 z-20 flex flex-col p-4">
-          <h3 className="text-lg font-regular text-white ml-3">
-            {extractYear(dateGame)}
-          </h3>
+          <h3 className="text-lg font-regular text-white ml-3">{year}</h3>
         </div>
       </div>
     </div>
