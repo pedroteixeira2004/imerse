@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import star from "../assets/icones/star.png";
 
-const AICompareButton = ({ game1Id, game2Id }) => {
-  const [loading, setLoading] = useState(false);
+const AICompareButton = ({ game1Id, game2Id, setLoading }) => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isComparisonPage = location.pathname === "/game-comparison";
 
   const fetchGameData = async (appId) => {
     const [detailsRes, reviewsRes] = await Promise.all([
@@ -77,14 +79,32 @@ const AICompareButton = ({ game1Id, game2Id }) => {
     }
   };
 
+  if (isComparisonPage) {
+    return (
+      <button
+        onClick={handleAICompare}
+        className="fixed bottom-6 right-6 bg-gradient-to-br from-white/15 to-white/5
+              backdrop-blur-[15px] border border-white/30 text-white flex items-center overflow-hidden transition-all duration-300 rounded-full px-4 py-3 shadow-lg group"
+      >
+        <img
+          src={star}
+          alt="ai button"
+          className="h-10 w-10 transition-all duration-300"
+        />
+        <span className="ml-0 max-w-0 overflow-hidden opacity-0 group-hover:opacity-100 group-hover:ml-3 group-hover:max-w-[150px] transition-all duration-300 whitespace-nowrap font-sf text-lg font-bold">
+          AI Comparison
+        </span>
+      </button>
+    );
+  }
+
   return (
     <button
       onClick={handleAICompare}
-      disabled={loading}
       className="text-white px-6 py-3 rounded-full font-sf text-lg transition-all duration-300 button-filters font-bold flex items-center"
     >
-      {loading ? "Analyzing..." : "AI Comparison"}
-      {!loading && <img src={star} alt="ai button" className="h-6 w-6 ml-3" />}
+      <div>AI Comparison</div>
+      <img src={star} alt="ai button" className="h-6 w-6 ml-3" />
     </button>
   );
 };

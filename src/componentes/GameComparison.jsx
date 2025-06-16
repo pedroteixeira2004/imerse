@@ -4,7 +4,8 @@ import Background from "./background";
 import AppLayout2 from "./Layout2";
 import CompareInfo from "./CompareInfo";
 import LoadingCompareInfo from "./LoadingCompareInfo";
-
+import LoadingAIComparison from "./LoadingAIComparison";
+import AICompareButton from "./AICompareButton";
 const GameComparison = () => {
   const location = useLocation();
   const { game1Id, game2Id } = location.state || {};
@@ -14,7 +15,7 @@ const GameComparison = () => {
   const [game1Summary, setGame1Summary] = useState(null);
   const [game2Summary, setGame2Summary] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const [aiLoading, setAiLoading] = useState(false);
   useEffect(() => {
     const fetchDetailsAndSummary = async () => {
       try {
@@ -57,6 +58,9 @@ const GameComparison = () => {
   if (loading) {
     return <LoadingCompareInfo />;
   }
+  if (aiLoading) {
+    return <LoadingAIComparison />;
+  }
 
   return (
     <div>
@@ -70,6 +74,11 @@ const GameComparison = () => {
             <CompareInfo game={game1Details} summary={game1Summary} />
             <CompareInfo game={game2Details} summary={game2Summary} />
           </div>
+          <AICompareButton
+            game1Id={game1Id}
+            game2Id={game2Id}
+            setLoading={setAiLoading}
+          />
         </div>
       </AppLayout2>
     </div>

@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../firebase/Inicializacao";
 import ComparisonCard from "./ComparisonCard";
 import Background from "./background";
 import AppLayout2 from "./Layout2";
 import SearchBar from "./SearchBar";
 import LoadingCompare from "./LoadingCompare";
+import LoadingAIComparison from "./LoadingAIComparison";
 import { useNavigate } from "react-router-dom";
 import AICompareButton from "./AICompareButton";
+
 const Compare = () => {
   const [games, setGames] = useState({ game1: null, game2: null });
   const [loading, setLoading] = useState(true);
+  const [aiLoading, setAiLoading] = useState(false); // 👈 novo estado
   const navigate = useNavigate();
 
   const fetchComparison = async () => {
@@ -62,16 +65,16 @@ const Compare = () => {
       });
     }
   };
-  return loading ? (
-    <div>
-      <LoadingCompare />
-    </div>
-  ) : (
+
+  if (loading) return <LoadingCompare />;
+
+  if (aiLoading) return <LoadingAIComparison />;
+
+  return (
     <div>
       <Background />
       <AppLayout2>
         <div className="m-10 w-full">
-          {/* Título */}
           <div className="text-5xl text-white flex justify-center font-bold font-sf">
             Compare games
           </div>
@@ -81,15 +84,12 @@ const Compare = () => {
               : "Everything is ready. Choose the way you want to compare."}
           </div>
 
-          {/* Barra de pesquisa */}
           {(bothEmpty || onlyOne) && (
             <div className="flex justify-center items-center mt-6 mb-10">
               <SearchBar />
             </div>
           )}
 
-          {/* Área de comparação */}
-          {/* Área de comparação */}
           <div
             className={`flex justify-center items-start gap-12 flex-wrap ${
               !(bothEmpty || onlyOne) ? "mt-12" : ""
@@ -132,6 +132,7 @@ const Compare = () => {
                     Add another game to compare
                   </div>
                 )}
+
                 {games.game1 && games.game2 && (
                   <div className="flex justify-center mt-10 w-full">
                     <div className="flex flex-col sm:flex-row gap-6">
@@ -145,6 +146,7 @@ const Compare = () => {
                       <AICompareButton
                         game1Id={games.game1.appId}
                         game2Id={games.game2.appId}
+                        setLoading={setAiLoading} // 👈 passa o setter
                       />
                     </div>
                   </div>
@@ -157,4 +159,5 @@ const Compare = () => {
     </div>
   );
 };
+
 export default Compare;

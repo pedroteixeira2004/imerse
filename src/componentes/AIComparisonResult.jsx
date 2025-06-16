@@ -29,91 +29,173 @@ const AIComparisonResult = () => {
       <AppLayout2>
         <div className="font-sf text-white m-10">
           <h1 className="text-5xl font-bold mb-3 font-sf">AI Comparison</h1>
-          <div className=" text-3xl font-medium">
+          <div className=" text-4xl font-medium">
             {game1Name} vs {game2Name}
           </div>
-
-          <div className="space-y-6 text-lg font-sf">
-            <div>
-              <strong>Summary:</strong> {result.summary}
+          <div
+            className="mt-10 grid grid-cols-2 auto-rows-min
+            gap-10 w-full"
+          >
+            <div
+              className="col-span-2
+              p-6
+              bg-gradient-to-br from-white/15 to-white/5
+              backdrop-blur-[15px]
+              rounded-2xl
+              border border-white/30
+              shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
+            >
+              <div className="text-2xl font-semibold mb-4">Summary</div>
+              <div className="text-lg">{result.summary}</div>
             </div>
 
-            <div>
-              <strong>{game1Name} - Strengths:</strong>
-              <ul className="list-disc list-inside">
+            <div
+              className="col-span-1
+              p-6
+              bg-gradient-to-br from-white/15 to-white/5
+              backdrop-blur-[15px]
+              rounded-2xl
+              border border-white/30
+              shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
+            >
+              <div className="text-2xl font-semibold mb-4">
+                {game1Name} - Strengths
+              </div>
+              <ul className="list-disc list-inside text-lg">
                 {result.strengthsGame1?.map((item, idx) => (
                   <li key={idx}>{item}</li>
                 ))}
               </ul>
             </div>
 
-            <div>
-              <strong>{game1Name} - Weaknesses:</strong>
-              <ul className="list-disc list-inside">
+            <div
+              className="col-span-1
+              p-6
+              bg-gradient-to-br from-white/15 to-white/5
+              backdrop-blur-[15px]
+              rounded-2xl
+              border border-white/30
+              shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
+            >
+              <div className="text-2xl font-semibold mb-4">
+                {game1Name} - Weaknesses
+              </div>
+              <ul className="list-disc list-inside text-lg">
                 {result.weaknessesGame1?.map((item, idx) => (
                   <li key={idx}>{item}</li>
                 ))}
               </ul>
             </div>
 
-            <div>
-              <strong>{game2Name} - Strengths:</strong>
-              <ul className="list-disc list-inside">
+            <div
+              className="col-span-1
+              p-6
+              bg-gradient-to-br from-white/15 to-white/5
+              backdrop-blur-[15px]
+              rounded-2xl
+              border border-white/30
+              shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
+            >
+              <div className="text-2xl font-semibold mb-4">
+                {game2Name} - Strengths
+              </div>
+              <ul className="list-disc list-inside text-lg">
                 {result.strengthsGame2?.map((item, idx) => (
                   <li key={idx}>{item}</li>
                 ))}
               </ul>
             </div>
 
-            <div>
-              <strong>{game2Name} - Weaknesses:</strong>
-              <ul className="list-disc list-inside">
+            <div
+              className="col-span-1
+              p-6
+              bg-gradient-to-br from-white/15 to-white/5
+              backdrop-blur-[15px]
+              rounded-2xl
+              border border-white/30
+              shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
+            >
+              <div className="text-2xl font-semibold mb-4">
+                {game2Name} - Weaknesses
+              </div>
+              <ul className="list-disc list-inside text-lg">
                 {result.weaknessesGame2?.map((item, idx) => (
                   <li key={idx}>{item}</li>
                 ))}
               </ul>
             </div>
-            <div>
-              <strong>Age Rating:</strong>
-              <p>{result.ageRatingAnalysis}</p>
+            <div
+              className="col-span-1
+              p-6
+              bg-gradient-to-br from-white/15 to-white/5
+              backdrop-blur-[15px]
+              rounded-2xl
+              border border-white/30
+              shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
+            >
+              <div className="text-2xl font-semibold mb-4">Age Rating</div>
+              <p className="text-lg">{result.ageRatingAnalysis}</p>
             </div>
-            <div>
-              <strong>System Requirements Comparison:</strong>
+            <div
+              className="col-span-1
+              p-6
+              bg-gradient-to-br from-white/15 to-white/5
+              backdrop-blur-[15px]
+              rounded-2xl
+              border border-white/30
+              shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
+            >
+              <div className="text-2xl font-semibold mb-4">
+                System Requirements Comparison
+              </div>
               <div>
-                <strong>Minimum Requirements:</strong>
-                <p>
+                <div className="mb-2 font-medium text-xl">
+                  Minimum Requirements:
+                </div>
+                <p className="text-lg">
                   {result.systemRequirementsComparison?.minimumRequirements}
                 </p>
               </div>
               <div>
-                <strong>Recommended Requirements:</strong>
-                <p>
+                <div className=" mt-2 mb-2 font-medium text-xl">
+                  Recommended Requirements:
+                </div>
+                <p className="text-lg">
                   {result.systemRequirementsComparison?.recommendedRequirements}
                 </p>
               </div>
             </div>
 
-            <div>
-              <strong>Key Differences:</strong>
-              <ul className="list-disc list-inside">
+            <div
+              className="col-span-1
+              p-6
+              bg-gradient-to-br from-white/15 to-white/5
+              backdrop-blur-[15px]
+              rounded-2xl
+              border border-white/30
+              shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
+            >
+              <div className="text-2xl font-semibold mb-4">Key Differences</div>
+              <ul className="list-disc list-inside text-lg">
                 {result.keyDifferences?.map((item, idx) => (
                   <li key={idx}>{item}</li>
                 ))}
               </ul>
             </div>
 
-            <div>
-              <strong>Recommendation:</strong>
-              <p>{result.recommendation}</p>
+            <div
+              className="col-span-1
+              p-6
+              bg-gradient-to-br from-white/15 to-white/5
+              backdrop-blur-[15px]
+              rounded-2xl
+              border border-white/30
+              shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
+            >
+              <div className="text-2xl font-semibold mb-4">Recommendation</div>
+              <p className="text-lg">{result.recommendation}</p>
             </div>
           </div>
-
-          <button
-            onClick={() => navigate("/compare")}
-            className="mt-10 bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-full font-bold text-white"
-          >
-            Back to Comparison
-          </button>
         </div>
       </AppLayout2>
     </div>
