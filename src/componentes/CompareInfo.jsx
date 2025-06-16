@@ -23,33 +23,37 @@ const CompareInfo = ({ game, summary }) => {
       <img
         src={game.header_image}
         alt={game.name}
-        className="rounded-lg mb-4 w-full object-cover h-44"
+        className="rounded-lg mb-6 w-full object-cover h-44"
       />
       <h2 className="text-4xl font-bold mb-2">{game.name}</h2>
 
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2  gap-5 justify-items-start/end">
         {/* Product */}
-        <div>
+        <div className="mt-5 pr-3">
           <div className="text-2xl font-medium">Product</div>
-          <div className="text-xl font-regular">{game.type}</div>
+          <div className="text-xl font-regular mt-2">{game.type}</div>
         </div>
 
         {/* Release Date */}
-        <div>
+        <div className="mt-5 pl-3">
           <div className="text-2xl font-medium">Release date</div>
-          <div>{game.release_date?.date || "Not available"}</div>
+          <div className="text-xl mt-2">
+            {game.release_date?.date || "Not available"}
+          </div>
         </div>
 
         {/* Developers */}
-        <div>
+        <div className="mt-3 pr-3">
           <div className="text-2xl font-medium">Developers</div>
-          <div>{game.developers?.join(", ") || "Not available"}</div>
+          <div className="text-xl mt-2">
+            {game.developers?.join(", ") || "Not available"}
+          </div>
         </div>
 
         {/* Publishers */}
-        <div>
+        <div className="mt-3 pl-3">
           <div className="text-2xl font-medium">Publishers</div>
-          <div>
+          <div className="text-xl mt-2">
             {game.publishers?.length
               ? game.publishers.join(", ")
               : "Not available"}
@@ -57,31 +61,33 @@ const CompareInfo = ({ game, summary }) => {
         </div>
 
         {/* Metacritic */}
-        <div>
+        <div className="mt-3 pr-3">
           <div className="text-2xl font-medium">Metacritic</div>
           {game.metacritic?.score ? (
             <a
               href={game.metacritic.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="block"
+              className="block text-xl mt-2"
             >
               <MetacriticScore score={game.metacritic.score} />
             </a>
           ) : (
-            <div className="text-white/60 text-lg">Not available</div>
+            <div className="text-white/60 text-xl mt-2">Not available</div>
           )}
         </div>
 
         {/* PEGI */}
-        <div>
-          <div className="text-2xl font-medium">Age restriction</div>
+        <div className="mt-3 pl-3">
+          <div className="text-2xl font-medium">PEGI rating</div>
           {game.ratings?.pegi?.rating ? (
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 mt-2">
               <div className="h-11 w-11">
                 <PegiRating rating={game.ratings.pegi.rating} />
               </div>
-              <div>{game.ratings.pegi.descriptors || "No descriptors"}</div>
+              <div className="text-xl mt-2">
+                {game.ratings.pegi.descriptors || "No descriptors"}
+              </div>
             </div>
           ) : (
             <div className="text-white/60 text-lg">Not available</div>
@@ -89,9 +95,9 @@ const CompareInfo = ({ game, summary }) => {
         </div>
 
         {/* Price */}
-        <div>
+        <div className="mt-3 pr-3">
           <div className="text-2xl font-medium">Price</div>
-          <div>
+          <div className="mt-2 text-xl">
             {game.price_overview?.final_formatted ? (
               <div>{game.price_overview.final_formatted}</div>
             ) : (
@@ -101,9 +107,9 @@ const CompareInfo = ({ game, summary }) => {
         </div>
 
         {/* Genres */}
-        <div>
+        <div className="mt-3 pl-3">
           <div className="text-2xl font-medium">Genres</div>
-          <div>
+          <div className="mt-2 text-xl">
             {game.genres?.length > 0 ? (
               <ul className="list-disc list-inside">
                 {game.genres.map((genre) => (
@@ -111,15 +117,15 @@ const CompareInfo = ({ game, summary }) => {
                 ))}
               </ul>
             ) : (
-              <p className="text-white/60">No genres available</p>
+              <p className="text-white/60 text-xl mt-2">No genres available</p>
             )}
           </div>
         </div>
 
         {/* Minimum requirements */}
-        <div>
+        <div className="mt-3 pr-3">
           <div className="text-2xl font-medium">Minimum requirements</div>
-          <div>
+          <div className="text-xl mt-2">
             {game.pc_requirements?.minimum ? (
               <div
                 dangerouslySetInnerHTML={{
@@ -127,15 +133,15 @@ const CompareInfo = ({ game, summary }) => {
                 }}
               />
             ) : (
-              <p className="text-white/60">Not available</p>
+              <p className="text-white/60 text-xl mt-2">Not available</p>
             )}
           </div>
         </div>
 
         {/* Recommended requirements */}
-        <div>
+        <div className="mt-3 pl-3">
           <div className="text-2xl font-medium">Recommended requirements</div>
-          <div>
+          <div className="text-xl mt-2">
             {game.pc_requirements?.recommended ? (
               <div
                 dangerouslySetInnerHTML={{
@@ -143,33 +149,33 @@ const CompareInfo = ({ game, summary }) => {
                 }}
               />
             ) : (
-              <p className="text-white/60">Not available</p>
+              <p className="text-white/60 text-xl mt-2">Not available</p>
             )}
           </div>
         </div>
-        <div>
+        <div className="mt-3 pr-3">
           <div className="text-2xl font-medium">Total reviews</div>
-          <div>
+          <div className="text-xl mt-2">
             {summaryFinal?.total_reviews ? (
               <div>{summaryFinal.total_reviews}</div>
             ) : (
-              <p className="text-white/60">Not available</p>
+              <p className="text-white/60 mt-2 text-xl">Not available</p>
             )}
           </div>
         </div>
-        <div>
+        <div className="mt-3 pl-3">
           <div className="text-2xl font-medium">Overall reviews</div>
-          <div>
+          <div className="text-xl mt-2">
             {summaryFinal?.review_score_desc ? (
               <div>{summaryFinal.review_score_desc}</div>
             ) : (
-              <p className="text-white/60">Not available</p>
+              <p className="text-white/60 mt-2 text-xl">Not available</p>
             )}
           </div>
         </div>
-        <div>
+        <div className="mt-3 pr-3">
           <div className="text-2xl font-medium">Positive Reviews</div>
-          <div>
+          <div className="text-xl mt-2">
             {totalPositive ? (
               <div>
                 {percentagePositive}% ({totalPositive})
@@ -179,9 +185,9 @@ const CompareInfo = ({ game, summary }) => {
             )}
           </div>
         </div>
-        <div>
+        <div className="mt-3 pl-3">
           <div className="text-2xl font-medium">Negative Reviews</div>
-          <div>
+          <div className="text-xl mt-2">
             {totalNegative ? (
               <div>
                 {percentageNegative}% ({totalNegative})

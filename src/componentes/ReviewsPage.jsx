@@ -12,6 +12,7 @@ import keywords from "../assets/icones/keywords.png";
 import general from "../assets/icones/general.png";
 import ReviewCard from "./ReviewCard";
 import ComparisonButton from "./ComparisonButton";
+import star from "../assets/icones/star.png";
 
 const ReviewsPage = () => {
   const { appId } = useParams();
@@ -132,18 +133,17 @@ const ReviewsPage = () => {
           },
         });
       } else {
-        setAnalysisStatus("A análise falhou.");
+        setAnalysisStatus("The analysis failed");
       }
     } catch (err) {
-      setAnalysisStatus("Erro ao conectar ao serviço de IA.");
+      setAnalysisStatus("Error while connecting to Gemini");
     } finally {
       setLoading(false);
     }
   };
   if (error) return <p className="text-red-500">{error}</p>;
   if (loading) return <LoadingReviews />;
-  if (!reviews.length)
-    return <p className="text-black">Nenhuma avaliação encontrada.</p>;
+  if (!reviews.length) return <p className="text-black">No review founded.</p>;
   return (
     <div>
       <Background />
@@ -227,9 +227,16 @@ const ReviewsPage = () => {
               <AppLayout>
                 <div className="m-10 p-6 z-40">
                   {/* AI Analysis */}
-                  <p className="text-5xl font-bold font-sf text-white mb-2">
-                    AI Analysis
-                  </p>
+                  <div className="flex items-center">
+                    <p className="text-5xl font-bold font-sf text-white mb-2">
+                      AI Analysis
+                    </p>
+                    <img
+                      src={star}
+                      alt="ai anlaysis"
+                      className=" ml-4 h-11 w-11"
+                    />
+                  </div>
                   <p className="text-xl font-regular font-sf text-white mb-6">
                     Click to choose the type of analysis to run with AI
                   </p>

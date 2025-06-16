@@ -300,6 +300,113 @@ ${limitedComments}
   }
 });
 
+app.post("/api/compare-games", async (req, res) => {
+  try {
+    const { comments1, comments2, details1, details2, game1Name, game2Name } =
+      req.body;
+
+    if (
+      !comments1 ||
+      !Array.isArray(comments1) ||
+      !comments2 ||
+      !Array.isArray(comments2) ||
+      !details1 ||
+      !details2 ||
+      !game1Name ||
+      !game2Name
+    ) {
+      return res.status(400).json({ error: "Missing comparison data." });
+    }
+
+    const limited1 = comments1.slice(0, 50).join("\n\n");
+    const limited2 = comments2.slice(0, 50).join("\n\n");
+
+    const prompt = `
+You are an expert AI analyst of game reviews.
+
+Compare the two games "${game1Name}" and "${game2Name}" based on their game details and player reviews.
+
+Game 1 Details:
+${JSON.stringify(details1, null, 2)}
+
+Game 1 Reviews:
+${limited1}
+
+Game 2 Details:
+${JSON.stringify(details2, null, 2)}
+
+Game 2 Reviews:
+${limited2}
+
+Return only a valid JSON object strictly in this format:
+{
+  "summary": "Overall comparison summary of how both games are perceived by the players.",
+  "strengthsGame1": ["Point1", "Point2", "Point3", ...],
+  "weaknessesGame1": ["Point1", "Point2", "Point3", ...],
+  "strengthsGame2": ["Point1", "Point2", "Point3", ...],
+  "weaknessesGame2": ["Point1", "Point2", "Point3", ...],
+  "ageRatingAnalysis": "Detailed analysis of the age ratings for both games and the impact on potential players.",
+  "systemRequirementsComparison": {
+    "minimumRequirements": "Which game has higher minimum specs and why, comparing CPU, GPU, RAM, and storage.",
+    "recommendedRequirements": "Which game has higher recommended specs and why, comparing CPU, GPU, RAM, and storage."
+  },
+  "keyDifferences": ["Major difference 1", "Major difference 2", ...],
+  "recommendation": "A conclusion about which game may be better suited for different types of players, with reasoning."
+}
+
+- Use the details to explain differences in features, gameplay, graphics, or other relevant aspects.
+- Focus on sentiments and repeated points from the reviews.
+- Respond ONLY with valid JSON. Do not include explanations or extra text.
+- Capitalize first letter of list items and use spaces for multi-word terms.
+`;
+    console.log("Sending prompt to Gemini...");
+    console.log("Prompt length:", prompt.length);
+    console.log("Prompt preview:", prompt.substring(0, 300));
+    console.log("Using Gemini API key:", !!process.env.GEMINI_API_KEY);
+    const response = await axios.post(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+      {
+        contents: [
+          {
+            role: "user",
+            parts: [{ text: prompt }],
+          },
+        ],
+      }
+    );
+
+    let aiText =
+      response.data.candidates[0]?.content?.parts[0]?.text?.trim() || "";
+    console.log("Received from Gemini:", aiText);
+    const jsonMatch = aiText.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) {
+      throw new Error("Could not extract JSON from AI response.");
+    }
+
+    const jsonText = jsonMatch[0];
+
+    let parsedInsight;
+    try {
+      parsedInsight = JSON.parse(jsonText);
+    } catch (parseError) {
+      console.error("Failed to parse JSON:", parseError);
+      console.error("JSON text:", jsonText);
+      return res.status(500).json({ error: "Invalid JSON format from AI." });
+    }
+
+    res.json({ insight: parsedInsight });
+  } catch (error) {
+    console.error("Error comparing games with Gemini:");
+    if (error.response) {
+      console.error("Status:", error.response.status);
+      console.error("Details:", error.response.data);
+    } else {
+      console.error(error);
+    }
+    res.status(500).json({ error: "Error comparing games with Gemini." });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });

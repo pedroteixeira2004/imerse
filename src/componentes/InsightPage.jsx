@@ -58,7 +58,7 @@ const InsightPage = () => {
       <AppLayout>
         <div className="p-6 text-white m-10">
           <h1 className="text-5xl font-bold mb-3 font-sf">{analysisType}</h1>
-          <p className="text-3xl mb-10 font-medium">{gameName}</p>
+          <p className="text-4xl mb-10 font-medium font-sf">{gameName}</p>
           <div
             className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 xl:grid-cols-6 auto-rows-min
             gap-10 font-sf"

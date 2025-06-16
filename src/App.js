@@ -16,6 +16,7 @@ import ProtectedRoute from "./componentes/ProtectedRoute";
 import Compare from "./componentes/ComparePage";
 import { Toaster } from "react-hot-toast";
 import GameComparison from "./componentes/GameComparison";
+import AIComparisonResult from "./componentes/AIComparisonResult";
 
 function App() {
   return (
@@ -110,6 +111,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <GameComparison />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/ai-comparison-result"
+            element={
+              <ProtectedRoute>
+                <AIComparisonResult />
               </ProtectedRoute>
             }
           />

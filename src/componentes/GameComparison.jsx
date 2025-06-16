@@ -63,7 +63,7 @@ const GameComparison = () => {
       <Background />
       <AppLayout2>
         <div className="m-10 w-full">
-          <h1 className="text-5xl text-white font-bold font-sf text-center mb-10">
+          <h1 className="text-5xl text-white font-bold font-sf text-center mb-14">
             Game Comparison
           </h1>
           <div className="flex flex-wrap justify-center items-start gap-10">

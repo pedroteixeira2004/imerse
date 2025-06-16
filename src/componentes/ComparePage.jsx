@@ -7,6 +7,7 @@ import AppLayout2 from "./Layout2";
 import SearchBar from "./SearchBar";
 import LoadingCompare from "./LoadingCompare";
 import { useNavigate } from "react-router-dom";
+import AICompareButton from "./AICompareButton";
 const Compare = () => {
   const [games, setGames] = useState({ game1: null, game2: null });
   const [loading, setLoading] = useState(true);
@@ -141,14 +142,10 @@ const Compare = () => {
                         Compare games
                       </button>
 
-                      <button
-                        onClick={() => {
-                          alert("Função de Análise AI ainda não implementada.");
-                        }}
-                        className=" text-white px-6 py-3 rounded-full font-sf text-lg transition-all duration-300 button-filters font-bold"
-                      >
-                        AI Comparison
-                      </button>
+                      <AICompareButton
+                        game1Id={games.game1.appId}
+                        game2Id={games.game2.appId}
+                      />
                     </div>
                   </div>
                 )}
