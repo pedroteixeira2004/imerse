@@ -79,17 +79,17 @@ const ComparisonCard = ({ game, user, onRemove }) => {
         />
 
         {/* Conteúdo */}
-        <div className="absolute inset-0 z-20 flex flex-col justify-center items-center text-center p-4">
+        <div className="absolute inset-0 z-20 flex flex-col justify-center items-center text-center p-4 font-sf">
           <h3 className="text-2xl font-semibold text-white">{game.name}</h3>
           <span className="text-xl text-white mt-6">{game.reviewSummary}</span>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 z-20 flex justify-between items-center m-1">
+        <div className="absolute bottom-0 left-0 right-0 z-20 flex justify-between items-center m-1 font-sf">
           <div className="inset-0 z-20 flex flex-col p-4">
             <h3 className="text-lg font-regular text-white mr-3">
               {game.type}
             </h3>
           </div>
-          <div className="inset-0 z-20 flex flex-col p-4">
+          <div className="inset-0 z-20 flex flex-col p-4 font-sf">
             <h3 className="text-lg font-regular text-white ml-3">
               {game.year}
             </h3>

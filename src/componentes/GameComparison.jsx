@@ -11,34 +11,49 @@ const GameComparison = () => {
 
   const [game1Details, setGame1Details] = useState(null);
   const [game2Details, setGame2Details] = useState(null);
+  const [game1Summary, setGame1Summary] = useState(null);
+  const [game2Summary, setGame2Summary] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchDetails = async () => {
+    const fetchDetailsAndSummary = async () => {
       try {
-        const [res1, res2] = await Promise.all([
+        const [res1, res2, rev1, rev2] = await Promise.all([
           fetch(`http://localhost:5000/api/game-details/${game1Id}`),
           fetch(`http://localhost:5000/api/game-details/${game2Id}`),
+          fetch(`http://localhost:5000/api/reviews/${game1Id}`),
+          fetch(`http://localhost:5000/api/reviews/${game2Id}`),
         ]);
-        const [data1, data2] = await Promise.all([res1.json(), res2.json()]);
+
+        const [data1, data2, summary1, summary2] = await Promise.all([
+          res1.json(),
+          res2.json(),
+          rev1.json(),
+          rev2.json(),
+        ]);
 
         setGame1Details(data1[game1Id].data);
         setGame2Details(data2[game2Id].data);
+
+        // Ajuste conforme o formato exato do seu retorno da API
+        setGame1Summary(summary1);
+        setGame2Summary(summary2);
+
         setLoading(false);
       } catch (err) {
-        console.error("Error fetching game details:", err);
+        console.error("Error fetching game details or reviews:", err);
       }
     };
 
     if (game1Id && game2Id) {
-      fetchDetails();
+      fetchDetailsAndSummary();
     }
   }, [game1Id, game2Id]);
 
   if (!game1Id || !game2Id) {
     return <div className="text-white p-10 text-2xl">No games selected.</div>;
   }
-
+  console.log(game1Summary);
   if (loading) {
     return <LoadingCompareInfo />;
   }
@@ -52,8 +67,8 @@ const GameComparison = () => {
             Game Comparison
           </h1>
           <div className="flex flex-wrap justify-center items-start gap-10">
-            <CompareInfo game={game1Details} />
-            <CompareInfo game={game2Details} />
+            <CompareInfo game={game1Details} summary={game1Summary} />
+            <CompareInfo game={game2Details} summary={game2Summary} />
           </div>
         </div>
       </AppLayout2>

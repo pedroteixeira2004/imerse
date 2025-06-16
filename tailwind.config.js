@@ -24,6 +24,7 @@ module.exports = {
     "./src/componentes/ComparisonCard.jsx",
     "./src/componentes/GameComparison.jsx",
     "./src/componentes/CompareInfo.jsx",
+    "./src/componentes/MetacriticScore.jsx",
   ],
   theme: {
     extend: {
