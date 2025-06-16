@@ -27,6 +27,7 @@ module.exports = {
     "./src/componentes/MetacriticScore.jsx",
     "./src/componentes/AIComparisonResult.jsx",
     "./src/componentes/AICompareButton.jsx",
+    "./src/componentes/Library.jsx",
   ],
   theme: {
     extend: {

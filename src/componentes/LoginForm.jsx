@@ -133,7 +133,7 @@ function LoginForm() {
                   className="button2 w-1/3 py-2 mt-4 rounded-full text-white font-bold hover:bg-gray-300 transition text-lg"
                 >
                   {loading ? (
-                    <BeatLoader color="#ffffff" size={15} className="mt-2" />
+                    <BeatLoader color="#ffffff" size={12} className="mt-2" />
                   ) : (
                     "Login"
                   )}

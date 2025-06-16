@@ -17,117 +17,129 @@ import Compare from "./componentes/ComparePage";
 import { Toaster } from "react-hot-toast";
 import GameComparison from "./componentes/GameComparison";
 import AIComparisonResult from "./componentes/AIComparisonResult";
+import Library from "./componentes/Library";
+import { UserProvider } from "./context/UserContext";
 
 function App() {
   return (
-    <Router>
-      <div>
-        <Toaster
-          position="top-center"
-          toastOptions={{
-            duration: 2000,
-            style: {
-              background: "transparent", // para glass funcionar
-              boxShadow: "none",
-            },
-          }}
-        />
+    <UserProvider>
+      <Router>
+        <div>
+          <Toaster
+            position="top-center"
+            toastOptions={{
+              duration: 2000,
+              style: {
+                background: "transparent", // para glass funcionar
+                boxShadow: "none",
+              },
+            }}
+          />
 
-        <Routes>
-          <Route
-            path="/home"
-            element={
-              <ProtectedRoute>
-                <SearchPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/games"
-            element={
-              <ProtectedRoute>
-                <GameListPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/reviews/:appId"
-            element={
-              <ProtectedRoute>
-                <ReviewsPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/details/:appId"
-            element={
-              <ProtectedRoute>
-                <GameDetails />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/insight"
-            element={
-              <ProtectedRoute>
-                <InsightPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/reports"
-            element={
-              <ProtectedRoute>
-                <Reports />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/compare"
-            element={
-              <ProtectedRoute>
-                <Compare />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/filters/:appId"
-            element={
-              <ProtectedRoute>
-                <Filters />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/game-comparison"
-            element={
-              <ProtectedRoute>
-                <GameComparison />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/ai-comparison-result"
-            element={
-              <ProtectedRoute>
-                <AIComparisonResult />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/signup" element={<RegistrationForm />} />
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-        </Routes>
-      </div>
-    </Router>
+          <Routes>
+            <Route
+              path="/home"
+              element={
+                <ProtectedRoute>
+                  <SearchPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/games"
+              element={
+                <ProtectedRoute>
+                  <GameListPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/reviews/:appId"
+              element={
+                <ProtectedRoute>
+                  <ReviewsPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/details/:appId"
+              element={
+                <ProtectedRoute>
+                  <GameDetails />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/insight"
+              element={
+                <ProtectedRoute>
+                  <InsightPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/reports"
+              element={
+                <ProtectedRoute>
+                  <Reports />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/compare"
+              element={
+                <ProtectedRoute>
+                  <Compare />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/library"
+              element={
+                <ProtectedRoute>
+                  <Library />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/filters/:appId"
+              element={
+                <ProtectedRoute>
+                  <Filters />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/game-comparison"
+              element={
+                <ProtectedRoute>
+                  <GameComparison />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/ai-comparison-result"
+              element={
+                <ProtectedRoute>
+                  <AIComparisonResult />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/signup" element={<RegistrationForm />} />
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+          </Routes>
+        </div>
+      </Router>
+    </UserProvider>
   );
 }
 

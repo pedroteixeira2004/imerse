@@ -90,7 +90,7 @@ const CompareInfo = ({ game, summary }) => {
               </div>
             </div>
           ) : (
-            <div className="text-white/60 text-lg">Not available</div>
+            <div className="text-white/60 text-xl">Not available</div>
           )}
         </div>
 
@@ -101,7 +101,7 @@ const CompareInfo = ({ game, summary }) => {
             {game.price_overview?.final_formatted ? (
               <div>{game.price_overview.final_formatted}</div>
             ) : (
-              <div className="text-white/60 text-lg">Not available</div>
+              <div className="text-white/60 text-xl">Not available</div>
             )}
           </div>
         </div>
@@ -181,7 +181,7 @@ const CompareInfo = ({ game, summary }) => {
                 {percentagePositive}% ({totalPositive})
               </div>
             ) : (
-              <p className="text-white/60">Not available</p>
+              <p className="text-white/60 text-xl">Not available</p>
             )}
           </div>
         </div>
@@ -193,7 +193,7 @@ const CompareInfo = ({ game, summary }) => {
                 {percentageNegative}% ({totalNegative})
               </div>
             ) : (
-              <p className="text-white/60">Not available</p>
+              <p className="text-white/60 text-xl">Not available</p>
             )}
           </div>
         </div>
