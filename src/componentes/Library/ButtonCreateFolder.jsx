@@ -6,7 +6,7 @@ import create from "../../assets/icones/create_folder.png";
 import toast from "react-hot-toast";
 import GlassToast from "../GlassToast";
 
-const ButtonCreateFolder = ({ onFolderCreated }) => {
+const ButtonCreateFolder = ({ onFolderCreated, isEmpty = false }) => {
   const [isOverlayOpen, setOverlayOpen] = useState(false);
 
   const userId = auth.currentUser?.uid;
@@ -53,9 +53,19 @@ const ButtonCreateFolder = ({ onFolderCreated }) => {
     <div>
       <button
         onClick={openOverlay}
-        className=" text-white  rounded-2xl transition-all duration-300 button-filters"
+        className={`transition-all duration-300 rounded-2xl flex items-center justify-center ${
+          isEmpty
+            ? "text-white button-filters p-6 w-44 h-44"
+            : "text-white button-filters w-24"
+        }`}
       >
-        <img src={create} alt="create folder" className="w-10 h-10" />
+        <img
+          src={create}
+          alt="create folder"
+          className={`transition-transform duration-300 ${
+            isEmpty ? "w-28 h-28" : "w-12 h-12"
+          }`}
+        />
       </button>
 
       <CreateFolderOverlay
