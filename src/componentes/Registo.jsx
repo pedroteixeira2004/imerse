@@ -10,7 +10,7 @@ import {
   fetchSignInMethodsForEmail,
   sendEmailVerification,
 } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, collection, addDoc } from "firebase/firestore";
 import { auth, db } from "../firebase/Inicializacao";
 import Background from "./background";
 import logo from "../assets/imerselogo_white.png";
@@ -83,6 +83,12 @@ const RegistrationForm = () => {
       };
 
       await setDoc(doc(db, "users", user.uid), userDoc);
+      // 🔹 Criação da subcoleção "library" com um primeiro documento vazio ou base
+      const libraryRef = collection(db, "users", user.uid, "library");
+      await addDoc(libraryRef, {
+        nome: "My folder",
+        criadoEm: new Date(),
+      });
 
       setSuccess(true);
       setStep(4);
@@ -140,5 +146,4 @@ const RegistrationForm = () => {
     </div>
   );
 };
-
 export default RegistrationForm;
