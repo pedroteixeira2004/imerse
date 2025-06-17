@@ -4,6 +4,7 @@ import { auth, db } from "../firebase/Inicializacao";
 import Background from "./background";
 import AppLayout2 from "./Layout2";
 import ButtonCreateFolder from "./Library/ButtonCreateFolder";
+import folder_img from "../assets/icones/folder.png";
 
 const Library = () => {
   const [folders, setFolders] = useState([]);
@@ -20,7 +21,7 @@ const Library = () => {
       }));
       setFolders(foldersData);
     } catch (error) {
-      console.error("Erro ao buscar pastas:", error);
+      console.error("Error trying to fetch folders", error);
     }
   };
 
@@ -37,30 +38,36 @@ const Library = () => {
     <div className="text-white font-sf">
       <Background />
       <AppLayout2>
-        <div className="text-5xl text-center font-bold w-full m-10">
-          Welcome to your library,
-        </div>
-        <div className="mb-6">
-          {/* Passa função para atualizar lista */}
-          <ButtonCreateFolder onFolderCreated={handleFolderCreated} />
-        </div>
+        <div className=" mx-auto px-4">
+          {/* Título central */}
+          <div className="text-5xl text-center font-bold mb-16 mt-10">
+            Welcome to your library,
+          </div>
 
-        <div className="mt-6">
-          <h3 className="text-3xl mb-4">Suas pastas</h3>
-          {folders.length === 0 ? (
-            <p>Nenhuma pasta criada ainda.</p>
-          ) : (
-            <ul className="space-y-3">
-              {folders.map((folder) => (
-                <li
-                  key={folder.id}
-                  className="p-4 bg-gray-800 rounded hover:bg-gray-700 cursor-pointer"
-                >
-                  {folder.nome}
-                </li>
-              ))}
-            </ul>
-          )}
+          {/* Grid de pastas e botão */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            {folders.length === 0 ? (
+              <p className="col-span-full text-center">Your library is empty</p>
+            ) : (
+              folders.map((folder) => (
+                <div key={folder.id} className="w-44 text-center">
+                  <button className="h-44 w-44">
+                    <img
+                      src={folder_img}
+                      alt="folder"
+                      className="h-44 w-44  transition-transform duration-300 hover:scale-110"
+                    />
+                  </button>
+                  <div className="text-xl font-medium mt-2">{folder.nome}</div>
+                </div>
+              ))
+            )}
+
+            {/* Botão para criar nova pasta */}
+            <div className="w-44 flex items-center mb-16 ml-4">
+              <ButtonCreateFolder onFolderCreated={handleFolderCreated} />
+            </div>
+          </div>
         </div>
       </AppLayout2>
     </div>

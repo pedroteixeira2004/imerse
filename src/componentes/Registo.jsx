@@ -87,6 +87,8 @@ const RegistrationForm = () => {
       const libraryRef = collection(db, "users", user.uid, "library");
       await addDoc(libraryRef, {
         nome: "My folder",
+        jogos: [], // opcional para guardar jogos
+        reports: [],
         criadoEm: new Date(),
       });
 

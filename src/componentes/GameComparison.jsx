@@ -70,7 +70,7 @@ const GameComparison = () => {
           <h1 className="text-5xl text-white font-bold font-sf text-center mb-14">
             Game Comparison
           </h1>
-          <div className="flex flex-wrap justify-center items-start gap-10">
+          <div className="flex flex-wrap justify-center gap-10 items-stretch">
             <CompareInfo game={game1Details} summary={game1Summary} />
             <CompareInfo game={game2Details} summary={game2Summary} />
           </div>

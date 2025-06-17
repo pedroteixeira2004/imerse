@@ -84,14 +84,20 @@ const AICompareButton = ({ game1Id, game2Id, setLoading }) => {
       <button
         onClick={handleAICompare}
         className="fixed bottom-6 right-6 bg-gradient-to-br from-white/15 to-white/5
-              backdrop-blur-[15px] border border-white/30 text-white flex items-center overflow-hidden transition-all duration-300 rounded-full px-4 py-3 shadow-lg group"
+    backdrop-blur-[15px] border border-white/30 text-white flex items-center 
+    overflow-hidden transition-all duration-300 rounded-full px-4 py-3 shadow-lg group
+     hover:shadow-[0_0_15px_rgba(255,255,255,0.8)]"
       >
         <img
           src={star}
           alt="ai button"
           className="h-10 w-10 transition-all duration-300"
         />
-        <span className="ml-0 max-w-0 overflow-hidden opacity-0 group-hover:opacity-100 group-hover:ml-3 group-hover:max-w-[150px] transition-all duration-300 whitespace-nowrap font-sf text-lg font-bold">
+        <span
+          className="ml-0 max-w-0 overflow-hidden opacity-0 
+    group-hover:opacity-100 group-hover:ml-3 group-hover:max-w-[150px] 
+    transition-all duration-300 whitespace-nowrap font-sf text-lg font-bold"
+        >
           AI Comparison
         </span>
       </button>

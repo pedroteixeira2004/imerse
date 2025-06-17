@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db, auth } from "../../firebase/Inicializacao";
 import CreateFolderOverlay from "./CreateFolderOverlay";
+import create from "../../assets/icones/create_folder.png";
+import toast from "react-hot-toast";
+import GlassToast from "../GlassToast";
 
 const ButtonCreateFolder = ({ onFolderCreated }) => {
   const [isOverlayOpen, setOverlayOpen] = useState(false);
@@ -25,7 +28,16 @@ const ButtonCreateFolder = ({ onFolderCreated }) => {
         jogos: [], // opcional para guardar jogos
         reports: [], // opcional para guardar reports
       });
-      alert(`Pasta "${folderName}" criada com sucesso!`);
+      toast.custom(
+        (t) => (
+          <GlassToast
+            t={t}
+            message="Folder created with success!"
+            type="success"
+          />
+        ),
+        { duration: 3000, position: "top-center" }
+      );
       closeOverlay();
 
       if (onFolderCreated) {
@@ -41,9 +53,9 @@ const ButtonCreateFolder = ({ onFolderCreated }) => {
     <div>
       <button
         onClick={openOverlay}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500"
+        className=" text-white  rounded-2xl transition-all duration-300 button-filters"
       >
-        Criar nova pasta
+        <img src={create} alt="create folder" className="w-10 h-10" />
       </button>
 
       <CreateFolderOverlay

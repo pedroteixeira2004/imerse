@@ -28,6 +28,8 @@ module.exports = {
     "./src/componentes/AIComparisonResult.jsx",
     "./src/componentes/AICompareButton.jsx",
     "./src/componentes/Library.jsx",
+    "./src/componentes/Library/CreateFolderOverlay.jsx",
+    "./src/componentes/Library/ButtonCreateFolder.jsx",
   ],
   theme: {
     extend: {
