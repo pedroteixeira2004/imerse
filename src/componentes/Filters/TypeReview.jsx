@@ -23,8 +23,10 @@ const TypeReview = ({ reviewType, setReviewType }) => {
               reviewType === type.value ? "active" : ""
             }`}
           >
-            <img src={type.image} className="h-16 w-16" />
-            {type.label}
+            <div>
+              <img src={type.image} className="h-16 w-16" />
+              <div>{type.label}</div>
+            </div>
           </button>
         ))}
       </div>

@@ -11,8 +11,8 @@ import sentiment_analysis from "../assets/icones/sentiment_analysis.png";
 import keywords from "../assets/icones/keywords.png";
 import general from "../assets/icones/general.png";
 import ReviewCard from "./ReviewCard";
-import ComparisonButton from "./ComparisonButton";
 import star from "../assets/icones/star.png";
+import BotaoTopo from "./BotaoTopo";
 
 const ReviewsPage = () => {
   const { appId } = useParams();
@@ -37,7 +37,13 @@ const ReviewsPage = () => {
   const dayRange = searchParams.get("day_range") || "365";
   const language = searchParams.get("language") || "english";
   const filter = searchParams.get("filter") || "all";
-
+  const minPlaytimeParam = Number(searchParams.get("min_playtime") || 0);
+  const maxPlaytimeParam =
+    searchParams.get("max_playtime") === ""
+      ? Infinity
+      : Number(searchParams.get("max_playtime"));
+  const purchaseType = searchParams.get("purchase_type");
+  const [filteredCount, setFilteredCount] = useState(0);
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -49,9 +55,27 @@ const ReviewsPage = () => {
         if (!reviewsResponse.ok) throw new Error("Erro ao buscar avaliações.");
 
         const reviewsData = await reviewsResponse.json();
-        const onlyTexts = reviewsData.reviews.map((r) => r.review);
+        const minPlaytimeMinutes = minPlaytimeParam * 60;
+        const maxPlaytimeMinutes =
+          maxPlaytimeParam === Infinity ? Infinity : maxPlaytimeParam * 60;
 
-        setReviews(reviewsData.reviews || []);
+        // Filtro de playtime em minutos
+        const filteredReviews = reviewsData.reviews.filter((review) => {
+          const playtime = review.author?.playtime_at_review || 0;
+          const steamPurchase = review.steam_purchase;
+          const playtimeOk =
+            playtime >= minPlaytimeMinutes && playtime <= maxPlaytimeMinutes;
+
+          const purchaseOk =
+            purchaseType === "" ||
+            (purchaseType === "true" && steamPurchase === true) ||
+            (purchaseType === "false" && steamPurchase === false);
+
+          return playtimeOk && purchaseOk;
+        });
+        const onlyTexts = filteredReviews.map((r) => r.review);
+        setFilteredCount(filteredReviews.length);
+        setReviews(filteredReviews);
         setReviewTexts(onlyTexts);
         // Cálculo da média de horas jogadas
         const totalPlaytime = reviewsData.reviews.reduce((acc, review) => {
@@ -287,8 +311,8 @@ const ReviewsPage = () => {
                     Reviews
                   </p>
                   <p className="text-xl font-regular font-sf text-white mb-6">
-                    Check the {numPerPage} reviews according to the filters
-                    applied
+                    We found {filteredCount} reviews according to the filters
+                    you applied
                   </p>
                   <ul>
                     {reviews.map((review, index) => (
@@ -301,6 +325,7 @@ const ReviewsPage = () => {
           </div>
         </div>
       </div>
+      <BotaoTopo />
     </div>
   );
 };

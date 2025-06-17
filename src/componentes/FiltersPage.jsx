@@ -32,7 +32,10 @@ const FiltersPage = () => {
       num_per_page: numPerPage,
       review_type: reviewType,
       day_range: dayRange,
-      language,
+      language: language,
+      min_playtime: minPlaytime,
+      max_playtime: maxPlaytime,
+      purchase_type: purchaseType,
     }).toString();
 
     navigate(`/reviews/${appId}?${query}`);

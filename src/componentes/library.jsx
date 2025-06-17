@@ -54,14 +54,14 @@ const Library = () => {
             <div className="flex flex-col items-center justify-center min-h-[60vh] mb-20">
               <div className="text-4xl font-medium mb-10 text-center">
                 <p>Your library is empty.</p>
+                <p className="text-lg font-medium mt-5 text-center">
+                  Create a folder to add games and reports.
+                </p>
               </div>
               <ButtonCreateFolder
                 onFolderCreated={handleFolderCreated}
                 isEmpty
               />
-              <p className="text-lg font-medium mt-5 text-center">
-                Create a folder to add games and reports.
-              </p>
             </div>
           ) : (
             // Biblioteca com pastas

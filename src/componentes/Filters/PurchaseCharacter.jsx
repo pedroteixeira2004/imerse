@@ -1,11 +1,6 @@
 import { Range } from "react-range";
 import { useState } from "react";
-const PurchaseCharacter = ({
-  purchaseType,
-  setPurchaseType,
-  characters,
-  setCharacters,
-}) => {
+const PurchaseCharacter = ({ purchaseType, setPurchaseType }) => {
   const purchaseOptions = [
     { value: "", label: "All" },
     { value: "true", label: "Purchased on Steam" },

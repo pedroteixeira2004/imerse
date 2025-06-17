@@ -30,6 +30,8 @@ module.exports = {
     "./src/componentes/Library.jsx",
     "./src/componentes/Library/CreateFolderOverlay.jsx",
     "./src/componentes/Library/ButtonCreateFolder.jsx",
+    "./src/componentes/BotaoTopo.jsx",
+    "./src/componentes/Filters/TypeReview.jsx",
   ],
   theme: {
     extend: {

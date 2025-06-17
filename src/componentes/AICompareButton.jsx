@@ -10,7 +10,7 @@ const AICompareButton = ({ game1Id, game2Id, setLoading }) => {
 
   const fetchGameData = async (appId) => {
     const [detailsRes, reviewsRes] = await Promise.all([
-      fetch(`http://localhost:5000/api/game-details/${appId}`),
+      fetch(`http://localhost:5000/api/game-details/${appId}?num_per_page=50`),
       fetch(`http://localhost:5000/api/reviews/${appId}`),
     ]);
 
@@ -86,12 +86,12 @@ const AICompareButton = ({ game1Id, game2Id, setLoading }) => {
         className="fixed bottom-6 right-6 bg-gradient-to-br from-white/15 to-white/5
     backdrop-blur-[15px] border border-white/30 text-white flex items-center 
     overflow-hidden transition-all duration-300 rounded-full px-4 py-3 shadow-lg group
-     hover:shadow-[0_0_15px_rgba(255,255,255,0.8)]"
+     hover:shadow-[0_6px_40px_rgba(255,255,255,0.2),0_0_10px_rgba(255,255,255,0.1)]"
       >
         <img
           src={star}
           alt="ai button"
-          className="h-10 w-10 transition-all duration-300"
+          className="h-8 w-8 transition-all duration-300"
         />
         <span
           className="ml-0 max-w-0 overflow-hidden opacity-0 

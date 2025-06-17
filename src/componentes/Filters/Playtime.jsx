@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Select from "react-select";
+
 const playtimeOptions = [
   { value: "", label: "No limit" },
   { value: "0", label: "0 hours" },
@@ -10,7 +11,6 @@ const playtimeOptions = [
   { value: "50", label: "50 hours" },
   { value: "100", label: "100 hours" },
   { value: "200", label: "200 hours" },
-  { value: "99999", label: "200+ hours" },
 ];
 
 const Playtime = ({
@@ -20,6 +20,8 @@ const Playtime = ({
   setMaxPlaytime,
 }) => {
   const [error, setError] = useState("");
+  const [filteredMinOptions, setFilteredMinOptions] = useState(playtimeOptions);
+  const [filteredMaxOptions, setFilteredMaxOptions] = useState(playtimeOptions);
 
   useEffect(() => {
     if (
@@ -31,14 +33,29 @@ const Playtime = ({
     } else {
       setError("");
     }
+
+    // Filtrar opções de maxPlaytime com base no minPlaytime
+    const filteredMax = playtimeOptions.filter((option) => {
+      if (minPlaytime === "") return true; // mostrar todas
+      return option.value === "" || Number(option.value) >= Number(minPlaytime);
+    });
+    setFilteredMaxOptions(filteredMax);
+
+    // Filtrar opções de minPlaytime com base no maxPlaytime
+    const filteredMin = playtimeOptions.filter((option) => {
+      if (maxPlaytime === "") return true; // mostrar todas
+      return option.value === "" || Number(option.value) <= Number(maxPlaytime);
+    });
+    setFilteredMinOptions(filteredMin);
   }, [minPlaytime, maxPlaytime]);
+
   const customStyles = {
     control: (base, state) => ({
       ...base,
       background:
         "linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05))",
       backdropFilter: "blur(15px)",
-      WebkitBackdropFilter: "blur(15px)", // correção de capital W
+      WebkitBackdropFilter: "blur(15px)",
       borderRadius: "2rem",
       border: state.isFocused
         ? "2px solid rgba(255, 255, 255, 0.5)"
@@ -100,6 +117,7 @@ const Playtime = ({
       transition: "color 0.2s ease",
     }),
   };
+
   return (
     <div>
       <p className="mb-2 font-semibold text-white text-4xl">Playtime</p>
@@ -107,10 +125,14 @@ const Playtime = ({
         Select the period of hours the user had played at the time of the
         review.
       </p>
+
       <div>
         <p className="text-white text-2xl font-medium mb-3">Minimum</p>
         <Select
-          options={playtimeOptions}
+          value={filteredMinOptions.find(
+            (option) => option.value === minPlaytime
+          )}
+          options={filteredMinOptions}
           onChange={(selected) => setMinPlaytime(selected.value)}
           placeholder="Select the minimum playtime"
           isSearchable={false}
@@ -118,10 +140,14 @@ const Playtime = ({
           menuPortalTarget={document.body}
         />
       </div>
+
       <div className="mt-4">
         <p className="text-white text-2xl font-medium mb-3">Maximum</p>
         <Select
-          options={playtimeOptions}
+          value={filteredMaxOptions.find(
+            (option) => option.value === maxPlaytime
+          )}
+          options={filteredMaxOptions}
           onChange={(selected) => setMaxPlaytime(selected.value)}
           placeholder="Select the maximum playtime"
           isSearchable={false}
