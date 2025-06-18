@@ -18,6 +18,7 @@ import { Toaster } from "react-hot-toast";
 import GameComparison from "./componentes/GameComparison";
 import AIComparisonResult from "./componentes/AIComparisonResult";
 import Library from "./componentes/Library";
+import Cart from "./componentes/Cart";
 
 function App() {
   return (
@@ -47,6 +48,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <GameListPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <ProtectedRoute>
+                <Cart />
               </ProtectedRoute>
             }
           />

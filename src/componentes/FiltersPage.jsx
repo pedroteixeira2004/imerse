@@ -23,6 +23,7 @@ const FiltersPage = () => {
   const [minPlaytime, setMinPlaytime] = useState("");
   const [maxPlaytime, setMaxPlaytime] = useState("");
   const [purchaseType, setPurchaseType] = useState("");
+  const [sorting, setSorting] = useState("");
 
   const handleNext = () => setStep((prev) => prev + 1);
   const handleBack = () => setStep((prev) => prev - 1);
@@ -93,7 +94,14 @@ const FiltersPage = () => {
                   />
                 )}
 
-                {step === 6 && <Filter filter={filter} setFilter={setFilter} />}
+                {step === 6 && (
+                  <Filter
+                    filter={filter}
+                    setFilter={setFilter}
+                    sorting={sorting}
+                    setSorting={setSorting}
+                  />
+                )}
 
                 {/* Navegação dos passos */}
               </div>

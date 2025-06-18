@@ -6,6 +6,7 @@ import AppLayout2 from "./Layout2";
 import ButtonCreateFolder from "./Library/ButtonCreateFolder";
 import folder_img from "../assets/icones/folder.png";
 import useUserData from "./UserData";
+import Loading from "./Loading";
 
 const Library = () => {
   const { userData, loading } = useUserData();
@@ -30,7 +31,7 @@ const Library = () => {
   useEffect(() => {
     fetchFolders();
   }, [userId]);
-  if (loading) return <p>A carregar dados...</p>;
+  if (loading) return <Loading />;
   if (!userData) return <p>Utilizador não autenticado ou sem dados.</p>;
 
   // Passa essa função para o ButtonCreateFolder

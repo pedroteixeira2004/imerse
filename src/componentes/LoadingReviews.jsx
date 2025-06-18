@@ -7,7 +7,7 @@ const LoadingReviews = () => {
   return (
     <div className="">
       <Background />
-      <div className="absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-center items-center">
+      <div className="absolute inset-0 flex flex-col justify-center items-center">
         <div className="mt-6">
           <img src={Logo} alt="Logo" className="mb-6 logo_loading" />
         </div>

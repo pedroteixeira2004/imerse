@@ -22,6 +22,7 @@ module.exports = {
     "./src/componentes/SignupSteps/StepThree.jsx",
     "./src/componentes/GlassToast.jsx",
     "./src/componentes/ComparisonCard.jsx",
+    "./src/componentes/ComparisonButton.jsx",
     "./src/componentes/GameComparison.jsx",
     "./src/componentes/CompareInfo.jsx",
     "./src/componentes/MetacriticScore.jsx",
@@ -32,6 +33,13 @@ module.exports = {
     "./src/componentes/Library/ButtonCreateFolder.jsx",
     "./src/componentes/BotaoTopo.jsx",
     "./src/componentes/Filters/TypeReview.jsx",
+    "./src/componentes/Loading.jsx",
+    "./src/componentes/LoadingAIComparison.jsx",
+    "./src/componentes/LoadingCompare.jsx",
+    "./src/componentes/LoadingCompareInfo.jsx",
+    "./src/componentes/LoadingDetails.jsx",
+    "./src/componentes/LoadingList.jsx",
+    "./src/componentes/LoadingReviews.jsx",
   ],
   theme: {
     extend: {

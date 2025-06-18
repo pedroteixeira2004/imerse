@@ -1,8 +1,12 @@
-const Filter = ({ filter, setFilter }) => {
+const Filter = ({ filter, setFilter, sorting, setSorting }) => {
   const typeFilter = [
     { value: "recent", label: "Newest first" },
     { value: "updated", label: "Updated recently" },
     { value: "all", label: "Most relevant" },
+  ];
+  const typeSorting = [
+    { value: "funny", label: "Most funny" },
+    { value: "playtime", label: "More playtime" },
   ];
   return (
     <div>
@@ -17,6 +21,17 @@ const Filter = ({ filter, setFilter }) => {
             onClick={() => setFilter(option.value)}
             className={`button-filters px-6 py-1 rounded-3xl border font-medium ${
               filter === option.value ? "active" : ""
+            }`}
+          >
+            {option.label}
+          </button>
+        ))}
+        {typeSorting.map((option) => (
+          <button
+            key={option.value}
+            onClick={() => setSorting(option.value)}
+            className={`button-filters px-6 py-1 rounded-3xl border font-medium ${
+              sorting === option.value ? "active" : ""
             }`}
           >
             {option.label}

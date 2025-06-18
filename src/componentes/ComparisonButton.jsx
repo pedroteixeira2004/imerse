@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase/Inicializacao";
 import add_compare from "../assets/icones/add_compare.png";
 import toast from "react-hot-toast";
@@ -9,25 +9,27 @@ const ComparisonButton = ({ appId, user, game, reviewSummary }) => {
   const [comparisonGames, setComparisonGames] = useState([]);
 
   useEffect(() => {
-    const fetchComparison = async () => {
-      if (!user) return;
+    if (!user) return;
 
-      const docRef = doc(
-        db,
-        "users",
-        user.uid,
-        "comparisons",
-        "currentComparison"
-      );
-      const snapshot = await getDoc(docRef);
+    const docRef = doc(
+      db,
+      "users",
+      user.uid,
+      "comparisons",
+      "currentComparison"
+    );
+
+    const unsubscribe = onSnapshot(docRef, (snapshot) => {
       if (snapshot.exists()) {
         const data = snapshot.data();
         const games = [data.game1?.appId, data.game2?.appId].filter(Boolean);
         setComparisonGames(games);
+      } else {
+        setComparisonGames([]);
       }
-    };
+    });
 
-    fetchComparison();
+    return () => unsubscribe();
   }, [user]);
 
   const handleToggleComparison = async () => {
@@ -105,23 +107,44 @@ const ComparisonButton = ({ appId, user, game, reviewSummary }) => {
       );
     }
 
-    setComparisonGames(updatedGames);
-
-    await setDoc(docRef, {
-      ...newData,
-      updatedAt: new Date(),
-    });
+    await setDoc(
+      docRef,
+      {
+        game1: newData.game1 || null,
+        game2: newData.game2 || null,
+        updatedAt: new Date(),
+      },
+      { merge: false } // 🔥 FORÇA substituição completa
+    );
   };
 
   const isInComparison = comparisonGames.includes(appId);
 
   return (
     <button
-      className={`expandable-button rounded-full mx-6 flex items-center`}
       onClick={handleToggleComparison}
+      className={`
+    flex items-center rounded-full px-8 py-2 shadow-lg group overflow-hidden transition-all duration-300 
+    backdrop-blur-[15px] border text-white
+    ${
+      isInComparison
+        ? `
+         button2
+        `
+        : "bg-gradient-to-br from-white/15 to-white/5 border-white/30 hover:shadow-[0_6px_40px_rgba(255,255,255,0.2),0_0_10px_rgba(255,255,255,0.1)]"
+    }
+  `}
     >
-      <img src={add_compare} alt="Compare icon" />
-      <span className="text font-sf font-bold">
+      <img
+        src={add_compare}
+        alt="compare icon"
+        className="h-8 w-8 flex-shrink-0 transition-all duration-300"
+      />
+      <span
+        className="ml-0 max-w-0 overflow-hidden opacity-0 
+      group-hover:opacity-100 group-hover:ml-3 group-hover:max-w-[200px] 
+      transition-all duration-300 whitespace-nowrap font-sf text-lg font-bold"
+      >
         {isInComparison ? "Remove from compare" : "Add to compare"}
       </span>
     </button>

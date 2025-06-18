@@ -58,7 +58,18 @@ const ComparisonCard = ({ game, user, onRemove }) => {
     <div className="relative w-80 group">
       {/* Card com fundo */}
       <div
-        onClick={() => navigate(`/details/${game.appId}`)}
+        onClick={() =>
+          navigate(`/details/${game.appId}`, {
+            state: {
+              backgroundUrl: game.background,
+              reviewSummary: game.reviewSummary,
+              description: game.description,
+              year: game.year,
+              typeGame: game.type,
+              name: game.name,
+            },
+          })
+        }
         className="h-80 w-80 rounded-3xl overflow-hidden transform transition duration-300 hover:scale-105 relative border border-white/50 shadow-[0_4px_30px_rgba(0,0,0,0.1)] hover:border-white/50 
     hover:shadow-[0_6px_40px_rgba(255,255,255,0.2)]"
       >
