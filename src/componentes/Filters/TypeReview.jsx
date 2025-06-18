@@ -3,7 +3,7 @@ import negative from "../../assets/icones/negative.png";
 import all from "../../assets/icones/all.png";
 const TypeReview = ({ reviewType, setReviewType }) => {
   const typeReview = [
-    { value: "all", label: "All", image: all },
+    { value: "", label: "All", image: all },
     { value: "positive", label: "Positive", image: positive },
     { value: "negative", label: "Negative", image: negative },
   ];

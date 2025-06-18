@@ -103,6 +103,7 @@ const ReviewsNumberAndLanguage = ({
         </p>
         <Select
           options={numOptions}
+          value={numOptions.find((opt) => opt.value === numPerPage)}
           onChange={(selected) => setNumPerPage(selected.value)}
           placeholder="Select number of reviews"
           isSearchable={false}

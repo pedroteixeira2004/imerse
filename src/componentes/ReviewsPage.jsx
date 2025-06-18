@@ -43,6 +43,7 @@ const ReviewsPage = () => {
       ? Infinity
       : Number(searchParams.get("max_playtime"));
   const purchaseType = searchParams.get("purchase_type");
+  const sorting = searchParams.get("sorting");
   const [filteredCount, setFilteredCount] = useState(0);
   useEffect(() => {
     const fetchData = async () => {
@@ -73,6 +74,19 @@ const ReviewsPage = () => {
 
           return playtimeOk && purchaseOk;
         });
+        if (sorting === "funny") {
+          filteredReviews.sort(
+            (a, b) => (b.votes_funny || 0) - (a.votes_funny || 0)
+          );
+        } else if (sorting === "playtime") {
+          filteredReviews.sort(
+            (a, b) =>
+              (b.author?.playtime_at_review || 0) -
+              (a.author?.playtime_at_review || 0)
+          );
+        } else if (sorting === "like") {
+          filteredReviews.sort((a, b) => (b.votes_up || 0) - (a.votes_up || 0));
+        }
         const onlyTexts = filteredReviews.map((r) => r.review);
         setFilteredCount(filteredReviews.length);
         setReviews(filteredReviews);

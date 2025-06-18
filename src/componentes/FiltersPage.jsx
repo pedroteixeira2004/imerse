@@ -15,11 +15,11 @@ const FiltersPage = () => {
 
   const [step, setStep] = useState(1);
 
-  const [numPerPage, setNumPerPage] = useState("20");
-  const [reviewType, setReviewType] = useState("all");
-  const [dayRange, setDayRange] = useState("365");
-  const [language, setLanguage] = useState("english");
-  const [filter, setFilter] = useState("all");
+  const [numPerPage, setNumPerPage] = useState("");
+  const [reviewType, setReviewType] = useState("");
+  const [dayRange, setDayRange] = useState("");
+  const [language, setLanguage] = useState("");
+  const [filter, setFilter] = useState("");
   const [minPlaytime, setMinPlaytime] = useState("");
   const [maxPlaytime, setMaxPlaytime] = useState("");
   const [purchaseType, setPurchaseType] = useState("");
@@ -28,8 +28,7 @@ const FiltersPage = () => {
   const handleNext = () => setStep((prev) => prev + 1);
   const handleBack = () => setStep((prev) => prev - 1);
   const handleSubmit = () => {
-    const query = new URLSearchParams({
-      filter: filter,
+    const params = {
       num_per_page: numPerPage,
       review_type: reviewType,
       day_range: dayRange,
@@ -37,10 +36,17 @@ const FiltersPage = () => {
       min_playtime: minPlaytime,
       max_playtime: maxPlaytime,
       purchase_type: purchaseType,
-    }).toString();
+    };
+
+    // Adiciona filter e sorting somente se estiverem preenchidos
+    if (filter) params.filter = filter;
+    if (sorting) params.sorting = sorting;
+
+    const query = new URLSearchParams(params).toString();
 
     navigate(`/reviews/${appId}?${query}`);
   };
+
   const progress = (step / 6) * 100;
   return (
     <div className="">
