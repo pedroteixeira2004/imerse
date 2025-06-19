@@ -13,7 +13,7 @@ import AICompareButton from "./AICompareButton";
 const Compare = () => {
   const [games, setGames] = useState({ game1: null, game2: null });
   const [loading, setLoading] = useState(true);
-  const [aiLoading, setAiLoading] = useState(false); // 👈 novo estado
+  const [aiLoading, setAiLoading] = useState(false);
   const navigate = useNavigate();
 
   const fetchComparison = async () => {

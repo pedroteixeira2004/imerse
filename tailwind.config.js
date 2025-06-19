@@ -43,6 +43,7 @@ module.exports = {
     "./src/componentes/AddLibraryButton.jsx",
     "./src/componentes/AddToPastas.jsx",
     "./src/componentes/OverlayPastas.jsx",
+    "./src/componentes/BackButton.jsx",
   ],
   theme: {
     extend: {

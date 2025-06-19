@@ -9,6 +9,7 @@ import Playtime from "./Filters/Playtime";
 import PurchaseCharacter from "./Filters/PurchaseCharacter";
 import TypeReview from "./Filters/TypeReview";
 import Filter from "./Filters/Filter";
+import BackButton from "./BackButton";
 const FiltersPage = () => {
   const { appId } = useParams();
   const navigate = useNavigate();
@@ -55,9 +56,12 @@ const FiltersPage = () => {
         <div className="font-sf flex justify-center align-center">
           <div>
             <div className="mt-4">
-              <h1 className="text-5xl font-bold text-center text-white">
-                Review Filters
-              </h1>
+              <div className="flex items-center justify-center">
+                <BackButton />
+                <h1 className="text-5xl font-bold text-center text-white">
+                  Review Filters
+                </h1>
+              </div>
               <p className="text-center text-white text-xl mt-2">
                 Filters are optional — choose only the ones that apply to your
                 analysis.

@@ -3,7 +3,6 @@ import { useParams, useSearchParams } from "react-router-dom";
 import AppLayout from "./Layout";
 import { useNavigate } from "react-router-dom";
 import LoadingReviews from "./LoadingReviews";
-import add_library from "../assets/icones/add_library.png";
 import background1 from "../assets/imagens/gradiente_game_details.svg";
 import Background from "./background";
 import mouse from "../assets/icones/mouse.png";
@@ -13,6 +12,8 @@ import general from "../assets/icones/general.png";
 import ReviewCard from "./ReviewCard";
 import star from "../assets/icones/star.png";
 import BotaoTopo from "./BotaoTopo";
+import AddToPastas from "./AddToPastas";
+import BackButton from "./BackButton";
 
 const ReviewsPage = () => {
   const { appId } = useParams();
@@ -206,15 +207,24 @@ const ReviewsPage = () => {
         ></div>
         <div className="flex-1 flex-col justify-end pl-20 min-h-screen flex z-20">
           <div className="font-sf text-white game-details">
-            <div className="flex">
+            <div className="flex z-30">
+              <div className="z-30">
+                <BackButton />
+              </div>
               <div className="text-6xl font-bold mb-2 z-30">
                 {gameDetails.name}
               </div>
-              <div className="items-center space-x-4 flex">
-                <button className="expandable-button rounded-full mx-6">
-                  <img src={add_library} alt="Add to library" />
-                  <span className="text font-sf font-bold">Add to library</span>
-                </button>
+              <div className="items-center space-x-4 flex ml-6">
+                <AddToPastas
+                  game={{
+                    id: appId,
+                    name: gameDetails.name,
+                    background_raw: gameDetails.background_raw,
+                    year: gameDetails.year,
+                    typeGame: gameDetails.type,
+                    reviewSummary: reviewSummary.review_score_desc,
+                  }}
+                />
               </div>
             </div>
             <div className="backdrop-blur w-64 text-4xl mt-6 font-medium">

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-
+import toast from "react-hot-toast";
+import GlassToast from "../GlassToast";
 const CreateFolderOverlay = ({ isOpen, onClose, onCreate }) => {
   const [folderName, setFolderName] = useState("");
 
@@ -7,7 +8,16 @@ const CreateFolderOverlay = ({ isOpen, onClose, onCreate }) => {
 
   const handleSubmit = () => {
     if (folderName.trim() === "") {
-      alert("Por favor, insira um nome válido.");
+      toast.custom(
+        (t) => (
+          <GlassToast
+            t={t}
+            message={`Please add a name to your folder`}
+            type="warning"
+          />
+        ),
+        { duration: 3000, position: "top-center" }
+      );
       return;
     }
     onCreate(folderName.trim());
