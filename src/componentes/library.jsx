@@ -7,11 +7,13 @@ import ButtonCreateFolder from "./Library/ButtonCreateFolder";
 import folder_img from "../assets/icones/folder.png";
 import useUserData from "./UserData";
 import Loading from "./Loading";
+import { useNavigate } from "react-router-dom";
 
 const Library = () => {
   const { userData, loading } = useUserData();
   const [folders, setFolders] = useState([]);
   const userId = auth.currentUser?.uid;
+  const navigate = useNavigate();
 
   const fetchFolders = async () => {
     if (!userId) return;
@@ -69,7 +71,10 @@ const Library = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
               {folders.map((folder) => (
                 <div key={folder.id} className="w-44 text-center">
-                  <button className="h-44 w-44">
+                  <button
+                    onClick={() => navigate(`/library/folder/${folder.id}`)}
+                    className="h-44 w-44"
+                  >
                     <img
                       src={folder_img}
                       alt="folder"

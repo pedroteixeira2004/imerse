@@ -148,6 +148,7 @@ const GameDetails = () => {
                         year: game.year,
                         typeGame: game.typeGame,
                         reviewSummary: reviewSummary,
+                        description: game.short_description,
                       }}
                     />
                     <ComparisonButton

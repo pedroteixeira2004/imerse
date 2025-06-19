@@ -5,6 +5,7 @@ import OverlayPastas from "./OverlayPastas";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import GlassToast from "./GlassToast";
+import { Description } from "@headlessui/react";
 
 const AddToPastas = ({ game }) => {
   const [folders, setFolders] = useState([]);
@@ -50,6 +51,7 @@ const AddToPastas = ({ game }) => {
       year: game.year || "",
       type: game.typeGame || "",
       reviewScore: game.reviewSummary?.review_score_desc || "No reviews",
+      description: game.description,
       addedAt: new Date().toISOString(),
     };
 

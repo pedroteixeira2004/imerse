@@ -19,6 +19,7 @@ import GameComparison from "./componentes/GameComparison";
 import AIComparisonResult from "./componentes/AIComparisonResult";
 import Library from "./componentes/Library";
 import Cart from "./componentes/Cart";
+import FolderContentPage from "./componentes/FolderContentPage";
 
 function App() {
   return (
@@ -112,6 +113,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Library />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/library/folder/:folderId"
+            element={
+              <ProtectedRoute>
+                <FolderContentPage />
               </ProtectedRoute>
             }
           />

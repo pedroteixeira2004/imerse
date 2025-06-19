@@ -44,6 +44,7 @@ module.exports = {
     "./src/componentes/AddToPastas.jsx",
     "./src/componentes/OverlayPastas.jsx",
     "./src/componentes/BackButton.jsx",
+    "./src/componentes/FolderContentPage.jsx",
   ],
   theme: {
     extend: {
