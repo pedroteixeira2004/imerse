@@ -48,6 +48,8 @@ module.exports = {
     "./src/componentes/Library/ConfirmDeleteFolder.jsx",
     "./src/componentes/Library/RenameFolderModal.jsx",
     "./src/componentes/Library/FolderEditControls.jsx",
+    "./src/componentes/Reports/ReportsResults.jsx",
+    "./src/componentes/Reports/ReportsSearchBar.jsx",
   ],
   theme: {
     extend: {

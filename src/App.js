@@ -20,6 +20,8 @@ import AIComparisonResult from "./componentes/AIComparisonResult";
 import Library from "./componentes/Library";
 import Cart from "./componentes/Cart";
 import FolderContentPage from "./componentes/FolderContentPage";
+import ReportsResults from "./componentes/Reports/ReportsResults";
+import ReportDetails from "./componentes/Reports/ReportDetails";
 
 function App() {
   return (
@@ -89,6 +91,22 @@ function App() {
             element={
               <ProtectedRoute>
                 <Reports />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/reports-results"
+            element={
+              <ProtectedRoute>
+                <ReportsResults />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/report-details/:id"
+            element={
+              <ProtectedRoute>
+                <ReportDetails />
               </ProtectedRoute>
             }
           />
