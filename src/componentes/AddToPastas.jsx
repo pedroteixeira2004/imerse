@@ -13,7 +13,7 @@ const AddToPastas = ({ game }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [addedFolderId, setAddedFolderId] = useState(null); // ← guarda onde o jogo está
   const userId = auth.currentUser?.uid;
-
+  console.log(game);
   // 1. Carrega pastas
   useEffect(() => {
     const fetchFolders = async () => {

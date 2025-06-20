@@ -45,6 +45,9 @@ module.exports = {
     "./src/componentes/OverlayPastas.jsx",
     "./src/componentes/BackButton.jsx",
     "./src/componentes/FolderContentPage.jsx",
+    "./src/componentes/Library/ConfirmDeleteFolder.jsx",
+    "./src/componentes/Library/RenameFolderModal.jsx",
+    "./src/componentes/Library/FolderEditControls.jsx",
   ],
   theme: {
     extend: {

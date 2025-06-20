@@ -20,7 +20,7 @@ function Navbar() {
       </div>
       <nav className="nav-list">
         <Link to="/home">
-          <button className={`navButton ${isActive("/") ? "active" : ""}`}>
+          <button className={`navButton ${isActive("/home") ? "active" : ""}`}>
             <img src={home} alt="Home" />
             <span className="font-sf">Home</span>
           </button>

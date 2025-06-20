@@ -14,6 +14,7 @@ import star from "../assets/icones/star.png";
 import BotaoTopo from "./BotaoTopo";
 import AddToPastas from "./AddToPastas";
 import BackButton from "./BackButton";
+import AddLibraryButton from "./AddLibraryButton";
 
 const ReviewsPage = () => {
   const { appId } = useParams();
@@ -46,6 +47,13 @@ const ReviewsPage = () => {
   const purchaseType = searchParams.get("purchase_type");
   const sorting = searchParams.get("sorting");
   const [filteredCount, setFilteredCount] = useState(0);
+  const extractYear = (rawDate) => {
+    if (!rawDate || typeof rawDate !== "string") return "";
+    const normalized = rawDate.toLowerCase().trim();
+    if (normalized.includes("coming soon")) return "Coming Soon";
+    const match = normalized.match(/\b(19|20)\d{2}\b/);
+    return match ? match[0] : "";
+  };
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -183,6 +191,7 @@ const ReviewsPage = () => {
   if (error) return <p className="text-red-500">{error}</p>;
   if (loading) return <LoadingReviews />;
   if (!reviews.length) return <p className="text-black">No review founded.</p>;
+  const year = extractYear(gameDetails.release_date.date);
   return (
     <div>
       <Background />
@@ -220,9 +229,10 @@ const ReviewsPage = () => {
                     id: appId,
                     name: gameDetails.name,
                     background_raw: gameDetails.background_raw,
-                    year: gameDetails.year,
+                    year: year,
                     typeGame: gameDetails.type,
-                    reviewSummary: reviewSummary.review_score_desc,
+                    reviewSummary: reviewSummary,
+                    description: gameDetails.short_description,
                   }}
                 />
               </div>
