@@ -2,6 +2,8 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Background from "../background";
 import AppLayout2 from "../Layout2";
+import { FaCheck } from "react-icons/fa";
+import CartButton from "./CartButton";
 
 const ReportDetails = () => {
   const location = useLocation();
@@ -9,7 +11,6 @@ const ReportDetails = () => {
   const report = location.state;
 
   if (!report) {
-    // Se o state não veio corretamente
     return (
       <div className="text-white text-center mt-20">
         <h1 className="text-2xl">No report data found.</h1>
@@ -27,16 +28,50 @@ const ReportDetails = () => {
     <div>
       <Background />
       <AppLayout2>
-        <div className="text-white m-10 font-sf">
-          <h1 className="text-5xl font-bold mb-4">{report.title}</h1>
-          <div className="text-lg mb-2">
-            <strong>Year:</strong> {report.year}
-          </div>
-          <div className="text-lg mb-6">
-            <strong>Price:</strong> {report.price} €
-          </div>
+        <div className="text-white h-screen flex items-center justify-center font-sf">
+          <div className="flex w-full max-w-7xl justify-between items-center px-10 gap-x-10">
+            {/* Bloco do relatório */}
+            <div className="max-w-[55%]">
+              <h1 className="text-5xl font-bold mb-4">{report.title}</h1>
+              <div className="text-3xl mb-4">{report.year}</div>
+              <div className="text-3xl mb-4 font-bold">Abstract</div>
+              <p className="text-white text-xl mb-4">{report.description}</p>
+              <div className="text-3xl mb-4 font-bold">What's included</div>
+              <div className="grid grid-cols-2 gap-y-4 gap-x-6 text-white text-xl">
+                {report.included.map((item, index) => (
+                  <div key={index} className="flex items-center gap-3">
+                    <FaCheck size={20} className="text-white" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-          <p className="text-white text-xl">{report.description}</p>
+            {/* Bloco do cartão de preço */}
+            <div className=" flex flex-col items-start bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-[15px] rounded-2xl border border-white/30 shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-12 ml-28">
+              <div className="text-5xl font-semibold mb-4">
+                {report.price} €
+              </div>
+              <hr className="w-full border-t border-gray-300 my-2" />
+              <div className="mt-6">
+                <div className="flex items-center mb-4">
+                  <FaCheck size={24} color="white" />
+                  <div className="ml-5 text-xl">
+                    Instant acess after paying by credit card
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <FaCheck size={24} color="white" />
+                  <div className="ml-5 text-xl">
+                    Available for download after purchase{" "}
+                  </div>
+                </div>
+              </div>
+              <div className="flex justify-center w-full mt-7">
+                <CartButton report={report} />
+              </div>
+            </div>
+          </div>
         </div>
       </AppLayout2>
     </div>

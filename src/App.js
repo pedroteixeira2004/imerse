@@ -22,6 +22,7 @@ import Cart from "./componentes/Cart";
 import FolderContentPage from "./componentes/FolderContentPage";
 import ReportsResults from "./componentes/Reports/ReportsResults";
 import ReportDetails from "./componentes/Reports/ReportDetails";
+import Checkout from "./componentes/Checkout";
 
 function App() {
   return (
@@ -163,6 +164,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <AIComparisonResult />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/checkout"
+            element={
+              <ProtectedRoute>
+                <Checkout />
               </ProtectedRoute>
             }
           />

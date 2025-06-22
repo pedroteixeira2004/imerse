@@ -16,7 +16,7 @@ const Reports = () => {
             Access and purchase detailed reports designed to support informed
             decisions and professional growth.
           </div>
-          <div className="mt-8">
+          <div className="mt-3">
             <ReportsSearchBar />
           </div>
         </div>

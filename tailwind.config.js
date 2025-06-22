@@ -50,6 +50,13 @@ module.exports = {
     "./src/componentes/Library/FolderEditControls.jsx",
     "./src/componentes/Reports/ReportsResults.jsx",
     "./src/componentes/Reports/ReportsSearchBar.jsx",
+    "./src/componentes/Reports/ReportDetails.jsx",
+    "./src/componentes/Reports/CartButton.jsx",
+    "./src/componentes/Reports/Cart.jsx",
+    "./src/componentes/navbar.jsx",
+    "./src/componentes/Checkout.jsx",
+    "./src/componentes/AddCardButton.jsx",
+    "./src/componentes/OverlayAddCard.jsx",
   ],
   theme: {
     extend: {
