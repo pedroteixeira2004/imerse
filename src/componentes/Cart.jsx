@@ -35,14 +35,24 @@ const Cart = () => {
     fetchCart();
   }, [user]);
 
-  const removeFromCart = async (report) => {
+  const removeFromCart = async (reportToRemove) => {
     try {
-      await updateDoc(cartRef, {
-        reports: arrayRemove({ title: report.title, price: report.price }),
-      });
-      setReports((prev) =>
-        prev.filter((r) => r.title !== report.title || r.price !== report.price)
+      const cartSnap = await getDoc(cartRef);
+      if (!cartSnap.exists()) return;
+
+      const currentReports = cartSnap.data().reports || [];
+
+      // Remove o relatório com base no id
+      const filteredReports = currentReports.filter(
+        (r) => r.id !== reportToRemove.id
       );
+
+      await updateDoc(cartRef, {
+        reports: filteredReports,
+      });
+
+      setReports(filteredReports);
+
       toast.custom(
         (t) => (
           <GlassToast t={t} message="Report removed from cart" type="error" />
@@ -77,9 +87,9 @@ const Cart = () => {
 
               {/* Lista de relatórios */}
               <div className="space-y-4 w-full bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/30 shadow-md">
-                {reports.map((report, index) => (
-                  <div className="mb-6 mt-6">
-                    <div key={index}>
+                {reports.map((report) => (
+                  <div key={report.id} className="mb-6 mt-6">
+                    <div className="mb-6 mt-6">
                       <div className="flex justify-between items-center">
                         <p className="text-2xl font-medium">{report.title}</p>
                         <p className="text-3xl font-medium">{report.price} €</p>

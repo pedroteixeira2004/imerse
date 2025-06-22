@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../firebase/Inicializacao";
+import { db, auth } from "../../firebase/Inicializacao"; // Importa auth
 import Loading from "../../componentes/Loading";
 import Background from "../background";
 import AppLayout2 from "../Layout2";
@@ -11,10 +11,13 @@ import ReportCard from "./ReportCard";
 const ReportsResults = () => {
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const [purchasedReports, setPurchasedReports] = useState([]);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const searchTerm = searchParams.get("search")?.toLowerCase() ?? "";
+
+  // Pega o usuário atual
+  const user = auth.currentUser;
 
   useEffect(() => {
     const fetchReports = async () => {
@@ -39,9 +42,46 @@ const ReportsResults = () => {
       setLoading(false);
     }
   }, [searchTerm]);
-  {
-    loading && <Loading />;
-  }
+
+  useEffect(() => {
+    if (!user) {
+      setPurchasedReports([]);
+      return;
+    }
+
+    const fetchPurchased = async () => {
+      try {
+        const purchasedRef = collection(
+          db,
+          "users",
+          user.uid,
+          "purchased_reports"
+        );
+        const snapshot = await getDocs(purchasedRef);
+
+        let allPurchasedIds = [];
+
+        snapshot.docs.forEach((doc) => {
+          const data = doc.data();
+          if (Array.isArray(data.reports)) {
+            const ids = data.reports.map((r) => r.id); // assume que o campo é 'id'
+            allPurchasedIds.push(...ids);
+          }
+        });
+
+        console.log("Reports comprados (IDs):", allPurchasedIds); // 🔍 Aqui está o log!
+
+        setPurchasedReports(allPurchasedIds);
+      } catch (error) {
+        console.error("Erro ao buscar reports comprados:", error);
+      }
+    };
+
+    fetchPurchased();
+  }, [user]);
+
+  if (loading) return <Loading />;
+
   return (
     <div>
       <Background />
@@ -54,15 +94,18 @@ const ReportsResults = () => {
           <h1 className="text-3xl font-bold mb-8">
             Results for: "<span className="text-white">{searchTerm}</span>"
           </h1>
-          {!loading && reports.length > 0 && (
+
+          {reports.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {reports.map((report) => (
-                <ReportCard key={report.id} report={report} />
+                <ReportCard
+                  key={report.id}
+                  report={report}
+                  purchasedReports={purchasedReports}
+                />
               ))}
             </div>
-          )}
-
-          {!loading && reports.length === 0 && (
+          ) : (
             <p className="text-center text-xl mt-10">No reports found.</p>
           )}
         </div>

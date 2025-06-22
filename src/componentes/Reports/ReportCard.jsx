@@ -3,21 +3,44 @@ import { useNavigate } from "react-router-dom";
 import gradiente from "../../assets/imagens/gradiente_cards.svg";
 import fallbackImage from "../../assets/imagens/fundo_jogos2.png";
 import CartButton from "./CartButton";
+import { FiDownload } from "react-icons/fi";
+import DownloadButton from "./DownloadButton";
 
-const ReportCard = ({ report }) => {
+const ReportCard = ({ report, purchasedReports = [] }) => {
   const navigate = useNavigate();
+  const isPurchased = purchasedReports.includes(report.id);
+
+  const handleDownload = (e) => {
+    e.stopPropagation();
+    // Aqui você pode fazer o download do arquivo — ou navegar para os detalhes com botão de download ativo
+    navigate(`/report-details/${report.id}`, {
+      state: {
+        id: report.id,
+        title: report.title,
+        background: report.image,
+        year: report.year,
+        price: report.price,
+        description: report.description,
+        included: report.included,
+        link: report.link,
+        download: true, // indica que já foi comprado
+      },
+    });
+  };
 
   return (
     <div
       onClick={() =>
         navigate(`/report-details/${report.id}`, {
           state: {
+            id: report.id,
             title: report.title,
             background: report.image,
             year: report.year,
             price: report.price,
             description: report.description,
             included: report.included,
+            link: report.link,
           },
         })
       }
@@ -42,14 +65,20 @@ const ReportCard = ({ report }) => {
         </h3>
         <span className="text-xl text-white mt-3">{report.year}</span>
       </div>
+
       <div className="absolute bottom-0 left-0 right-0 z-20 flex justify-between items-center m-1">
         <div className="z-20 flex flex-col p-4">
           <h3 className="text-xl font-regular text-white mr-3 font-medium">
-            {report.price} €
+            {isPurchased ? "Purchased" : `${report.price} €`}
           </h3>
         </div>
+
         <div className="mr-3">
-          <CartButton report={report} size="small" />
+          {isPurchased ? (
+            <DownloadButton link={report.link} size="small" />
+          ) : (
+            <CartButton report={report} size="small" />
+          )}
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@ import BackButton from "./BackButton";
 import { MdInfo } from "react-icons/md";
 import AddCardButton from "./AddCardButton";
 import CardProviderLogo from "./CardProviderLogo";
-
+import ButtonPay from "./ButtonPay";
 const Checkout = () => {
   const location = useLocation();
   const { reports, total } = location.state || { reports: [], total: 0 };
@@ -127,16 +127,17 @@ const Checkout = () => {
                   <div className="flex justify-end">{total} €</div>
                 </div>
                 <div className="flex justify-end mt-6">
-                  <button
-                    onClick={() =>
-                      navigate("/checkout", {
-                        state: { reports, total },
-                      })
-                    }
-                    className="button2 rounded-full py-2 px-8 font-bold text-xl"
-                  >
-                    Pay
-                  </button>
+                  <ButtonPay
+                    user={user}
+                    selectedCard={selectedCard}
+                    reports={reports}
+                    total={total}
+                    onSuccess={() => {
+                      // você pode navegar ou atualizar algo aqui após sucesso
+                      // Exemplo:
+                      navigate("/profile");
+                    }}
+                  />
                 </div>
               </div>
             </div>

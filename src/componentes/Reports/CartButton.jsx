@@ -31,7 +31,10 @@ export default function CartButton({ report, size = "default" }) {
         if (cartDocSnap.exists()) {
           const reports = cartDocSnap.data().reports || [];
           const found = reports.some(
-            (r) => r.title === report.title && r.price === report.price
+            (r) =>
+              r.title === report.title &&
+              r.price === report.price &&
+              r.id === report.id
           );
           setInCart(found);
         } else {
@@ -50,7 +53,11 @@ export default function CartButton({ report, size = "default" }) {
 
       if (inCart) {
         await updateDoc(cartDocRef, {
-          reports: arrayRemove({ title: report.title, price: report.price }),
+          reports: arrayRemove({
+            title: report.title,
+            price: report.price,
+            id: report.id,
+          }),
         });
 
         setInCart(false);
@@ -63,11 +70,17 @@ export default function CartButton({ report, size = "default" }) {
       } else {
         if (cartDocSnap.exists()) {
           await updateDoc(cartDocRef, {
-            reports: arrayUnion({ title: report.title, price: report.price }),
+            reports: arrayUnion({
+              title: report.title,
+              price: report.price,
+              id: report.id,
+            }),
           });
         } else {
           await setDoc(cartDocRef, {
-            reports: [{ title: report.title, price: report.price }],
+            reports: [
+              { title: report.title, price: report.price, id: report.id },
+            ],
           });
         }
         setInCart(true);
