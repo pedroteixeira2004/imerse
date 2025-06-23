@@ -23,6 +23,7 @@ import FolderContentPage from "./componentes/FolderContentPage";
 import ReportsResults from "./componentes/Reports/ReportsResults";
 import ReportDetails from "./componentes/Reports/ReportDetails";
 import Checkout from "./componentes/Checkout";
+import PaymentConfirmation from "./componentes/PaymentConfirmation";
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
           toastOptions={{
             duration: 2000,
             style: {
-              background: "transparent", // para glass funcionar
+              background: "transparent",
               boxShadow: "none",
             },
           }}
@@ -172,6 +173,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Checkout />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/payment-confirmation"
+            element={
+              <ProtectedRoute>
+                <PaymentConfirmation />
               </ProtectedRoute>
             }
           />

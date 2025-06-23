@@ -8,20 +8,14 @@ const Profile = () => {
       <AppLayout>
         <div className="font-sf flex justify-center align-center">
           <div>
-            <div className="mt-4">
+            <div>
               <h1 className="text-5xl font-bold text-center text-white">
                 Profile
               </h1>
-              <p className="text-center text-white text-xl mt-2">
-                Manage your account settings and preferences.
-              </p>
             </div>
-            <div className="outline-none mt-10 ml-10 mr-10 mb-6 card-filters flex">
-              <div className="profile-content flex items-center font-sf">
+            <div className="outline-none mt-10 ml-10 mr-10 mb-6 flex h-[35rem] bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/30 shadow-md">
+              <div className="flex items-center font-sf">
                 {/* Profile content goes here */}
-                <p className="text-white">
-                  Profile details will be displayed here.
-                </p>
                 <div>
                   <LogoutButton />
                 </div>

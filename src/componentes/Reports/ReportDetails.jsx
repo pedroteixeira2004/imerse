@@ -9,6 +9,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db, auth } from "../../firebase/Inicializacao";
 import { FiDownload } from "react-icons/fi";
 import DownloadButton from "./DownloadButton";
+import AddToPastas from "../AddToPastas";
 
 const ReportDetails = () => {
   const location = useLocation();
@@ -65,19 +66,19 @@ const ReportDetails = () => {
       </div>
     );
   }
-
+  console.log(report.image);
   return (
     <div>
       <Background />
       <AppLayout2>
-        <div className="text-white h-screen flex items-center justify-center font-sf">
+        <div className="text-white h-screen flex items-center justify-between font-sf">
           <div className="flex w-full max-w-7xl justify-between items-center px-10 gap-x-10">
             {/* Bloco do relatório */}
-            <div className="max-w-[55%]">
+            <div className="max-w-[60%]">
               <h1 className="text-5xl font-bold mb-4">{report.title}</h1>
               <div className="text-3xl mb-4">{report.year}</div>
               <div className="text-3xl mb-4 font-bold">Abstract</div>
-              <p className="text-white text-xl mb-4">{report.description}</p>
+              <p className="text-white text-xl mb-6">{report.description}</p>
               <div className="text-3xl mb-4 font-bold">What's included</div>
               <div className="grid grid-cols-2 gap-y-4 gap-x-6 text-white text-xl">
                 {report.included.map((item, index) => (
@@ -90,8 +91,8 @@ const ReportDetails = () => {
             </div>
 
             {/* Bloco do cartão de preço */}
-            <div className=" flex flex-col items-start bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-[15px] rounded-2xl border border-white/30 shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-12 ml-28">
-              <div className="text-5xl font-semibold mb-4">
+            <div className=" flex flex-col items-center justify-center bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-[15px] rounded-2xl border border-white/30 shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-12 ml-44 w-[80rem]">
+              <div className="text-5xl font-semibold mb-4 text-center">
                 {isPurchased ? "Purchased" : `${report.price} €`}
               </div>
               <hr className="w-full border-t border-gray-300 my-2" />
@@ -113,12 +114,13 @@ const ReportDetails = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex justify-center w-full mt-7">
+              <div className="flex justify-center w-full mt-7 gap-6">
                 {isPurchased ? (
                   <DownloadButton link={report.link} />
                 ) : (
                   <CartButton report={report} />
                 )}
+                <AddToPastas report={report} />
               </div>
             </div>
           </div>

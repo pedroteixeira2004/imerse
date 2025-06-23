@@ -57,6 +57,8 @@ module.exports = {
     "./src/componentes/Checkout.jsx",
     "./src/componentes/AddCardButton.jsx",
     "./src/componentes/OverlayAddCard.jsx",
+    "./src/componentes/PaymentConfirmation.jsx",
+    "./src/componentes/Profile.jsx",
   ],
   theme: {
     extend: {

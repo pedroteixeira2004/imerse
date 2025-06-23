@@ -10,24 +10,6 @@ const ReportCard = ({ report, purchasedReports = [] }) => {
   const navigate = useNavigate();
   const isPurchased = purchasedReports.includes(report.id);
 
-  const handleDownload = (e) => {
-    e.stopPropagation();
-    // Aqui você pode fazer o download do arquivo — ou navegar para os detalhes com botão de download ativo
-    navigate(`/report-details/${report.id}`, {
-      state: {
-        id: report.id,
-        title: report.title,
-        background: report.image,
-        year: report.year,
-        price: report.price,
-        description: report.description,
-        included: report.included,
-        link: report.link,
-        download: true, // indica que já foi comprado
-      },
-    });
-  };
-
   return (
     <div
       onClick={() =>
@@ -41,6 +23,7 @@ const ReportCard = ({ report, purchasedReports = [] }) => {
             description: report.description,
             included: report.included,
             link: report.link,
+            image: report.image,
           },
         })
       }

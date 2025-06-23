@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  updateDoc,
+  collection,
+  getDocs,
+} from "firebase/firestore";
 import { db, auth } from "../firebase/Inicializacao";
 import AppLayout2 from "./Layout2";
 import Background from "./background";
@@ -9,6 +15,8 @@ import Loading from "./Loading";
 import BackButton from "./BackButton";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import ConfirmDelete from "./Library/ConfirmDelete";
+import { FaCheckCircle } from "react-icons/fa";
+import ReportCard from "./Reports/ReportCard";
 
 const FolderContentPage = () => {
   const { folderId } = useParams();
@@ -17,6 +25,8 @@ const FolderContentPage = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [gameToDeleteIndex, setGameToDeleteIndex] = useState(null); // índice do jogo a deletar
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const [purchasedReports, setPurchasedReports] = useState([]);
+  const [reportToDeleteIndex, setReportToDeleteIndex] = useState(null);
 
   const userId = auth.currentUser?.uid;
 
@@ -48,22 +58,63 @@ const FolderContentPage = () => {
   useEffect(() => {
     fetchFolderContent();
   }, [folderId]);
+  useEffect(() => {
+    const fetchPurchasedReports = async () => {
+      if (!userId) return;
 
-  const handleRequestDelete = (index) => {
-    setGameToDeleteIndex(index);
+      try {
+        const purchasedRef = collection(
+          db,
+          "users",
+          userId,
+          "purchased_reports"
+        );
+        const snapshot = await getDocs(purchasedRef);
+
+        let allPurchasedIds = [];
+        snapshot.docs.forEach((doc) => {
+          const data = doc.data();
+          if (Array.isArray(data.reports)) {
+            const ids = data.reports.map((r) => r.id);
+            allPurchasedIds.push(...ids);
+          }
+        });
+
+        setPurchasedReports(allPurchasedIds);
+      } catch (error) {
+        console.error("Erro ao buscar reports comprados:", error);
+      }
+    };
+
+    fetchPurchasedReports();
+  }, [userId]);
+
+  const handleRequestDelete = (index, type) => {
+    if (type === "game") {
+      setGameToDeleteIndex(index);
+    } else if (type === "report") {
+      setReportToDeleteIndex(index);
+    }
     setConfirmOpen(true);
   };
   const handleConfirmDelete = () => {
     if (gameToDeleteIndex !== null) {
       deleteGame(gameToDeleteIndex);
       setGameToDeleteIndex(null);
-      setConfirmOpen(false);
     }
+
+    if (reportToDeleteIndex !== null) {
+      deleteReport(reportToDeleteIndex);
+      setReportToDeleteIndex(null);
+    }
+
+    setConfirmOpen(false);
   };
 
   // Cancelar exclusão
   const handleCancelDelete = () => {
     setGameToDeleteIndex(null);
+    setReportToDeleteIndex(null);
     setConfirmOpen(false);
   };
   // Deleta o jogo do array e atualiza Firestore e estado local
@@ -82,7 +133,22 @@ const FolderContentPage = () => {
       // Atualiza estado local para re-renderizar
       setFolderData((prev) => ({ ...prev, jogos: updatedGames }));
     } catch (error) {
-      console.error("Erro ao deletar jogo:", error);
+      console.error("Error while deleting game", error);
+    }
+  };
+  const deleteReport = async (reportIndex) => {
+    if (!userId || !folderId || !folderData) return;
+
+    try {
+      const updatedReports = [...(folderData.reports || [])];
+      updatedReports.splice(reportIndex, 1);
+
+      const folderRef = doc(db, "users", userId, "library", folderId);
+      await updateDoc(folderRef, { reports: updatedReports });
+
+      setFolderData((prev) => ({ ...prev, reports: updatedReports }));
+    } catch (error) {
+      console.error("Erro ao deletar report:", error);
     }
   };
 
@@ -108,7 +174,7 @@ const FolderContentPage = () => {
                 transition-all duration-300
                 hover:shadow-[0_6px_40px_rgba(255,255,255,0.2),0_0_10px_rgba(255,255,255,0.1)]"
             >
-              <FaEdit size={20} />
+              {isEditing ? <FaCheckCircle size={20} /> : <FaEdit size={20} />}
               <span
                 className={`ml-0 max-w-0 overflow-hidden opacity-0 
                 transition-all duration-300 whitespace-nowrap
@@ -144,13 +210,6 @@ const FolderContentPage = () => {
                   </div>
                 ))}
               </div>
-              <ConfirmDelete
-                isOpen={confirmOpen}
-                onConfirm={handleConfirmDelete}
-                onCancel={handleCancelDelete}
-                title="Delete game?"
-                message="Are you sure you want to delete this game from the folder?"
-              />
             </div>
           )}
 
@@ -160,13 +219,20 @@ const FolderContentPage = () => {
               <h2 className="text-4xl font-semibold mb-6">Reports</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {folderData.reports.map((report, index) => (
-                  <div key={index} className="p-4 bg-white/10 rounded-xl">
-                    <h3 className="text-xl font-semibold text-white mb-2">
-                      {report.title || "Untitled Report"}
-                    </h3>
-                    <p className="text-sm text-white/80">
-                      {report.summary || "No summary available."}
-                    </p>
+                  <div key={index} className="relative">
+                    <ReportCard
+                      report={report}
+                      purchasedReports={purchasedReports}
+                    />
+                    {isEditing && (
+                      <button
+                        onClick={() => handleRequestDelete(index, "report")}
+                        className="absolute top-2 right-2 button2 p-2 rounded-full transition-shadow shadow-white"
+                        title="Delete report"
+                      >
+                        <FaTrash size={16} />
+                      </button>
+                    )}
                   </div>
                 ))}
               </div>
@@ -182,6 +248,19 @@ const FolderContentPage = () => {
                 </p>
               </div>
             )}
+          <ConfirmDelete
+            isOpen={confirmOpen}
+            onConfirm={handleConfirmDelete}
+            onCancel={handleCancelDelete}
+            title={
+              gameToDeleteIndex !== null ? "Delete game?" : "Delete report?"
+            }
+            message={
+              gameToDeleteIndex !== null
+                ? "Are you sure you want to delete this game from the folder?"
+                : "Are you sure you want to delete this report from the folder?"
+            }
+          />
         </div>
       </AppLayout2>
     </div>

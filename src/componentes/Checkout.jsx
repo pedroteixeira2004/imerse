@@ -19,6 +19,13 @@ const Checkout = () => {
   const [selectedCard, setSelectedCard] = React.useState(null);
 
   React.useEffect(() => {
+    const alreadyPaid = sessionStorage.getItem("paymentCompleted");
+    if (alreadyPaid) {
+      navigate("/payment-confirmation", { replace: true });
+    }
+  }, [navigate]);
+
+  React.useEffect(() => {
     const unsubscribeAuth = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
         setUser(firebaseUser);
@@ -133,9 +140,10 @@ const Checkout = () => {
                     reports={reports}
                     total={total}
                     onSuccess={() => {
-                      // você pode navegar ou atualizar algo aqui após sucesso
-                      // Exemplo:
-                      navigate("/profile");
+                      navigate("/payment-confirmation", {
+                        replace: true,
+                        state: { fromCheckout: true }, // 🚨 ESSENCIAL
+                      });
                     }}
                   />
                 </div>

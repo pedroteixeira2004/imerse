@@ -88,7 +88,7 @@ const Cart = () => {
               {/* Lista de relatórios */}
               <div className="space-y-4 w-full bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/30 shadow-md">
                 {reports.map((report) => (
-                  <div key={report.id} className="mb-6 mt-6">
+                  <div key={report.id} className="mb-8 mt-6">
                     <div className="mb-6 mt-6">
                       <div className="flex justify-between items-center">
                         <p className="text-2xl font-medium">{report.title}</p>

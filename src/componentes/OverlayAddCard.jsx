@@ -25,6 +25,16 @@ function OverlayAddCard({ isOpen, onClose }) {
 
     return unsubscribe;
   }, [isOpen]);
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   // Atualiza campos e aplica máscaras/formatação
   const handleChange = (e) => {
@@ -196,8 +206,11 @@ function OverlayAddCard({ isOpen, onClose }) {
         className="bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-[15px] rounded-2xl border border-white/30 shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-8 w-full max-w-lg"
         onClick={(e) => e.stopPropagation()} // evita fechar clicando dentro
       >
-        <h2 id="add-card-title" className="text-white text-3xl mb-6 font-bold">
-          Add New Card
+        <h2
+          id="add-card-title"
+          className="text-white text-4xl mb-6 font-bold text-center"
+        >
+          Add new card
         </h2>
 
         <div className="space-y-4">

@@ -20,6 +20,7 @@ import ConfirmDelete from "./Library/ConfirmDelete";
 import toast from "react-hot-toast";
 import GlassToast from "./GlassToast";
 import { FaEdit } from "react-icons/fa";
+import { FaCheckCircle } from "react-icons/fa";
 
 const Library = () => {
   const { userData, loading } = useUserData();
@@ -154,7 +155,11 @@ const Library = () => {
       transition-all duration-300
       hover:shadow-[0_6px_40px_rgba(255,255,255,0.2),0_0_10px_rgba(255,255,255,0.1)]"
                 >
-                  <FaEdit size={20} />
+                  {isEditing ? (
+                    <FaCheckCircle size={20} />
+                  ) : (
+                    <FaEdit size={20} />
+                  )}
                   <span
                     className={`ml-0 max-w-0 overflow-hidden opacity-0 
         transition-all duration-300 whitespace-nowrap

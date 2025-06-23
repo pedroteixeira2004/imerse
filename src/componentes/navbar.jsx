@@ -92,7 +92,7 @@ function Navbar() {
         <Link to="/cart" className="relative">
           <button className={`navButton ${isActive("/cart") ? "active" : ""}`}>
             <img src={carrinho} alt="Cart" />
-            <span className="font-sf">Cart</span>
+            <span className="font-sf">My Cart</span>
             {cartCount > 0 && (
               <span
                 className="absolute top-0 right-0 mt-4 mr-3 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 button2 rounded-full"
