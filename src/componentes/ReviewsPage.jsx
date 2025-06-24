@@ -14,7 +14,7 @@ import star from "../assets/icones/star.png";
 import BotaoTopo from "./BotaoTopo";
 import AddToPastas from "./AddToPastas";
 import BackButton from "./BackButton";
-import AddLibraryButton from "./AddLibraryButton";
+import DownloadReviewsButton from "./DownloadReviewsButton";
 
 const ReviewsPage = () => {
   const { appId } = useParams();
@@ -190,7 +190,7 @@ const ReviewsPage = () => {
   };
   if (error) return <p className="text-red-500">{error}</p>;
   if (loading) return <LoadingReviews />;
-  if (!reviews.length) return <p className="text-black">No review founded.</p>;
+  if (!reviews.length) return <p className="text-black">No reviews found.</p>;
   const year = extractYear(gameDetails.release_date.date);
   return (
     <div>
@@ -359,6 +359,7 @@ const ReviewsPage = () => {
           </div>
         </div>
       </div>
+      <DownloadReviewsButton reviews={reviews} gameName={gameDetails?.name} />
       <BotaoTopo />
     </div>
   );
