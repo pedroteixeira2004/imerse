@@ -17,6 +17,8 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import ConfirmDelete from "./Library/ConfirmDelete";
 import { FaCheckCircle } from "react-icons/fa";
 import ReportCard from "./Reports/ReportCard";
+import toast from "react-hot-toast";
+import GlassToast from "./GlassToast";
 
 const FolderContentPage = () => {
   const { folderId } = useParams();
@@ -31,12 +33,6 @@ const FolderContentPage = () => {
   const userId = auth.currentUser?.uid;
 
   const fetchFolderContent = async () => {
-    if (!userId || !folderId) {
-      console.error("User ID ou Folder ID ausente.");
-      setLoading(false);
-      return;
-    }
-
     try {
       const folderRef = doc(db, "users", userId, "library", folderId);
       const folderSnap = await getDoc(folderRef);
@@ -132,6 +128,16 @@ const FolderContentPage = () => {
 
       // Atualiza estado local para re-renderizar
       setFolderData((prev) => ({ ...prev, jogos: updatedGames }));
+      toast.custom(
+        (t) => (
+          <GlassToast
+            t={t}
+            message="Game removed from the folder"
+            type="error"
+          />
+        ),
+        { duration: 3000, position: "top-center" }
+      );
     } catch (error) {
       console.error("Error while deleting game", error);
     }
@@ -147,6 +153,16 @@ const FolderContentPage = () => {
       await updateDoc(folderRef, { reports: updatedReports });
 
       setFolderData((prev) => ({ ...prev, reports: updatedReports }));
+      toast.custom(
+        (t) => (
+          <GlassToast
+            t={t}
+            message="Report removed from folder."
+            type="error"
+          />
+        ),
+        { duration: 3000, position: "top-center" }
+      );
     } catch (error) {
       console.error("Erro ao deletar report:", error);
     }
@@ -200,7 +216,7 @@ const FolderContentPage = () => {
                     <FolderGameCard game={game} />
                     {isEditing && (
                       <button
-                        onClick={() => handleRequestDelete(index)}
+                        onClick={() => handleRequestDelete(index, "game")}
                         className="absolute top-2 right-2 button2 p-2 rounded-full transition-shadow shadow-white"
                         title="Delete game"
                       >

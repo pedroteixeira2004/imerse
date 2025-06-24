@@ -59,6 +59,7 @@ module.exports = {
     "./src/componentes/OverlayAddCard.jsx",
     "./src/componentes/PaymentConfirmation.jsx",
     "./src/componentes/Profile.jsx",
+    "./src/componentes/ProfileSections/ProfileInfo.jsx",
   ],
   theme: {
     extend: {

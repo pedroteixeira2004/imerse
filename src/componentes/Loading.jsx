@@ -1,9 +1,10 @@
 import Background from "./background";
 import { BeatLoader } from "react-spinners";
 import Logo from "../assets/imerselogo_white.png";
+import ReactDOM from "react-dom";
 
 const Loading = () => {
-  return (
+  return ReactDOM.createPortal(
     <div className="">
       <Background />
       <div className="absolute inset-0 flex flex-col justify-center items-center">
@@ -15,7 +16,8 @@ const Loading = () => {
           Loading. Wait a moment.
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

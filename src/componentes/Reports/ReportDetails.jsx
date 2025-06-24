@@ -7,7 +7,6 @@ import CartButton from "./CartButton";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db, auth } from "../../firebase/Inicializacao";
-import { FiDownload } from "react-icons/fi";
 import DownloadButton from "./DownloadButton";
 import AddToPastas from "../AddToPastas";
 
@@ -71,10 +70,10 @@ const ReportDetails = () => {
     <div>
       <Background />
       <AppLayout2>
-        <div className="text-white h-screen flex items-center justify-between font-sf">
-          <div className="flex w-full max-w-7xl justify-between items-center px-10 gap-x-10">
+        <div className="text-white h-screen flex items-center font-sf">
+          <div className="flex items-center px-10 gap-x-10 w-full">
             {/* Bloco do relatório */}
-            <div className="max-w-[60%]">
+            <div className="w-[50%]">
               <h1 className="text-5xl font-bold mb-4">{report.title}</h1>
               <div className="text-3xl mb-4">{report.year}</div>
               <div className="text-3xl mb-4 font-bold">Abstract</div>
@@ -90,37 +89,39 @@ const ReportDetails = () => {
               </div>
             </div>
 
-            {/* Bloco do cartão de preço */}
-            <div className=" flex flex-col items-center justify-center bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-[15px] rounded-2xl border border-white/30 shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-12 ml-44 w-[80rem]">
-              <div className="text-5xl font-semibold mb-4 text-center">
-                {isPurchased ? "Purchased" : `${report.price} €`}
-              </div>
-              <hr className="w-full border-t border-gray-300 my-2" />
-              <div className="mt-6">
-                <div className="flex items-center mb-4">
-                  <FaCheck size={24} color="white" />
-                  <div className="ml-5 text-xl">
-                    {isPurchased
-                      ? "You now have full access"
-                      : "Instant access after paying by credit card"}
+            {/* Espaço restante com o card centralizado */}
+            <div className="flex-1 flex justify-center">
+              <div className="w-full max-w-lg flex flex-col items-center justify-center bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-[15px] rounded-2xl border border-white/30 shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-12">
+                <div className="text-5xl font-semibold mb-4 text-center">
+                  {isPurchased ? "Purchased" : `${report.price} €`}
+                </div>
+                <hr className="w-full border-t border-gray-300 my-2" />
+                <div className="mt-6">
+                  <div className="flex items-center mb-4">
+                    <FaCheck size={24} color="white" />
+                    <div className="ml-5 text-xl">
+                      {isPurchased
+                        ? "You now have full access"
+                        : "Instant access after paying by credit card"}
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <FaCheck size={24} color="white" />
+                    <div className="ml-5 text-xl">
+                      {isPurchased
+                        ? "Available for download now"
+                        : "Available for download after purchase"}
+                    </div>
                   </div>
                 </div>
-                <div className="flex items-center">
-                  <FaCheck size={24} color="white" />
-                  <div className="ml-5 text-xl">
-                    {isPurchased
-                      ? "Available for download now"
-                      : "Available for download after purchase"}
-                  </div>
+                <div className="flex justify-center w-full mt-7 gap-6">
+                  {isPurchased ? (
+                    <DownloadButton link={report.link} />
+                  ) : (
+                    <CartButton report={report} />
+                  )}
+                  <AddToPastas report={report} />
                 </div>
-              </div>
-              <div className="flex justify-center w-full mt-7 gap-6">
-                {isPurchased ? (
-                  <DownloadButton link={report.link} />
-                ) : (
-                  <CartButton report={report} />
-                )}
-                <AddToPastas report={report} />
               </div>
             </div>
           </div>
