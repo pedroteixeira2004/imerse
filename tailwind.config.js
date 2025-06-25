@@ -40,6 +40,9 @@ module.exports = {
     "./src/componentes/LoadingDetails.jsx",
     "./src/componentes/LoadingList.jsx",
     "./src/componentes/LoadingReviews.jsx",
+    "./src/componentes/AddLibraryButton.jsx",
+    "./src/componentes/AddToPastas.jsx",
+    "./src/componentes/OverlayPastas.jsx",
   ],
   theme: {
     extend: {

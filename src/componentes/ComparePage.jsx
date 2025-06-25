@@ -134,7 +134,7 @@ const Compare = () => {
                 )}
 
                 {games.game1 && games.game2 && (
-                  <div className="flex justify-center mt-10 w-full">
+                  <div className="flex justify-center items-center mt-10 w-full">
                     <div className="flex flex-col sm:flex-row gap-6">
                       <button
                         onClick={handleCompare}
@@ -146,7 +146,7 @@ const Compare = () => {
                       <AICompareButton
                         game1Id={games.game1.appId}
                         game2Id={games.game2.appId}
-                        setLoading={setAiLoading} // 👈 passa o setter
+                        setLoading={setAiLoading}
                       />
                     </div>
                   </div>

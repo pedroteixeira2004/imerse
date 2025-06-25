@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import AppLayout2 from "./Layout2";
 import Gradiente from "../assets/imagens/gradiente_game_details.svg";
-import add_library from "../assets/icones/add_library.png";
 import LoadingDetails from "./LoadingDetails";
 import imagem_default from "../assets/imagens/fundo_jogos2.png"; // Imagem padrão para o background
 import ComparisonButton from "./ComparisonButton";
 import { auth } from "../firebase/Inicializacao";
+import AddToPastas from "./AddToPastas";
 const GameDetails = () => {
   const { appId } = useParams();
   const navigate = useNavigate();
@@ -137,12 +137,16 @@ const GameDetails = () => {
                   >
                     Analyse game
                   </button>
-                  <button className="expandable-button rounded-full mx-6">
-                    <img src={add_library} alt="Add to library" />
-                    <span className="text font-sf font-bold">
-                      Add to library
-                    </span>
-                  </button>
+                  <AddToPastas
+                    game={{
+                      id: appId,
+                      name: game.name,
+                      background_raw: game.background_raw,
+                      year: game.year,
+                      typeGame: game.typeGame,
+                      reviewSummary: reviewSummary,
+                    }}
+                  />
                   <ComparisonButton
                     appId={appId}
                     user={auth.currentUser}
