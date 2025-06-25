@@ -6,6 +6,7 @@ import CompareInfo from "./CompareInfo";
 import LoadingCompareInfo from "./LoadingCompareInfo";
 import LoadingAIComparison from "./LoadingAIComparison";
 import AICompareButton from "./AICompareButton";
+import BackButton from "./BackButton";
 const GameComparison = () => {
   const location = useLocation();
   const { game1Id, game2Id } = location.state || {};
@@ -66,10 +67,14 @@ const GameComparison = () => {
     <div>
       <Background />
       <AppLayout2>
-        <div className="m-10 w-full">
-          <h1 className="text-5xl text-white font-bold font-sf text-center mb-14">
-            Game Comparison
-          </h1>
+        <div className="m-10 w-full ">
+          <div className="flex items-center justify-center gap-4 mb-10">
+            <BackButton />
+            <h1 className="text-5xl text-white font-bold font-sf">
+              Game Comparison
+            </h1>
+          </div>
+
           <div className="flex flex-wrap justify-center gap-10 items-stretch">
             <CompareInfo game={game1Details} summary={game1Summary} />
             <CompareInfo game={game2Details} summary={game2Summary} />

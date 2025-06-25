@@ -7,12 +7,15 @@ import logo from "../assets/imerselogo_white.png"; // Importando o logo
 import { Link } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
 import { traduzirErroFirebase } from "./TraduzirErrosFirebase";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -106,7 +109,7 @@ function LoginForm() {
                   <input
                     className="bg-transparent placeholder-white/70 font-sf w-full focus:outline-none"
                     placeholder="Enter your password"
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -116,6 +119,17 @@ function LoginForm() {
                     }
                     onInput={(e) => e.target.setCustomValidity("")}
                   />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-4 text-white text-xl focus:outline-none"
+                    tabIndex={-1} // para não focar no tab
+                    aria-label={
+                      showPassword ? "Hide password" : "Show password"
+                    }
+                  >
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </button>
                 </div>
                 <div className="flex justify-end mt-4">
                   <Link to="/forgot-password" className="underline">

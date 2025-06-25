@@ -2,6 +2,7 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Background from "./background";
 import AppLayout2 from "./Layout2";
+import BackButton from "./BackButton";
 
 const AIComparisonResult = () => {
   const { state } = useLocation();
@@ -28,7 +29,10 @@ const AIComparisonResult = () => {
       <Background />
       <AppLayout2>
         <div className="font-sf text-white m-10">
-          <h1 className="text-5xl font-bold mb-3 font-sf">AI Comparison</h1>
+          <div className="flex items-center gap-2 mb-3">
+            <BackButton />
+            <h1 className="text-5xl font-bold font-sf">AI Comparison</h1>
+          </div>
           <div className=" text-4xl font-medium">
             {game1Name} vs {game2Name}
           </div>
@@ -67,26 +71,6 @@ const AIComparisonResult = () => {
                 ))}
               </ul>
             </div>
-
-            <div
-              className="col-span-1
-              p-6
-              bg-gradient-to-br from-white/15 to-white/5
-              backdrop-blur-[15px]
-              rounded-2xl
-              border border-white/30
-              shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
-            >
-              <div className="text-2xl font-semibold mb-4">
-                {game1Name} - Weaknesses
-              </div>
-              <ul className="list-disc list-inside text-lg">
-                {result.weaknessesGame1?.map((item, idx) => (
-                  <li key={idx}>{item}</li>
-                ))}
-              </ul>
-            </div>
-
             <div
               className="col-span-1
               p-6
@@ -101,6 +85,24 @@ const AIComparisonResult = () => {
               </div>
               <ul className="list-disc list-inside text-lg">
                 {result.strengthsGame2?.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            </div>
+            <div
+              className="col-span-1
+              p-6
+              bg-gradient-to-br from-white/15 to-white/5
+              backdrop-blur-[15px]
+              rounded-2xl
+              border border-white/30
+              shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
+            >
+              <div className="text-2xl font-semibold mb-4">
+                {game1Name} - Weaknesses
+              </div>
+              <ul className="list-disc list-inside text-lg">
+                {result.weaknessesGame1?.map((item, idx) => (
                   <li key={idx}>{item}</li>
                 ))}
               </ul>

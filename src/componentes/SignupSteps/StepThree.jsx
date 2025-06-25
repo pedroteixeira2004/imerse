@@ -1,5 +1,8 @@
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 const StepThree = ({ formData, updateForm, back, submit, loading, error }) => {
+  const [showPassword, setShowPassword] = useState(false);
   return (
     <div className="w-96">
       <h2 className="text-5xl font-bold mb-6">Sign up</h2>
@@ -21,7 +24,7 @@ const StepThree = ({ formData, updateForm, back, submit, loading, error }) => {
         outline-none flex gap-2 items-center transition-all duration-500 mt-4"
             >
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="Enter password"
                 required
                 value={formData.password}
@@ -32,6 +35,15 @@ const StepThree = ({ formData, updateForm, back, submit, loading, error }) => {
                 }
                 onInput={(e) => e.target.setCustomValidity("")}
               />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-4 text-white text-xl focus:outline-none"
+                tabIndex={-1} // para não focar no tab
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
             </div>
           </div>
           <div>
@@ -43,7 +55,7 @@ const StepThree = ({ formData, updateForm, back, submit, loading, error }) => {
         outline-none flex gap-2 items-center transition-all duration-500 mt-4"
             >
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="Confirm your password"
                 required
                 value={formData.confirmPassword}
@@ -54,6 +66,15 @@ const StepThree = ({ formData, updateForm, back, submit, loading, error }) => {
                 }
                 onInput={(e) => e.target.setCustomValidity("")}
               />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-4 text-white text-xl focus:outline-none"
+                tabIndex={-1} // para não focar no tab
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
             </div>
           </div>
         </div>

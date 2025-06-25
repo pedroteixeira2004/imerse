@@ -19,6 +19,11 @@ import GameComparison from "./componentes/GameComparison";
 import AIComparisonResult from "./componentes/AIComparisonResult";
 import Library from "./componentes/Library";
 import Cart from "./componentes/Cart";
+import FolderContentPage from "./componentes/FolderContentPage";
+import ReportsResults from "./componentes/Reports/ReportsResults";
+import ReportDetails from "./componentes/Reports/ReportDetails";
+import Checkout from "./componentes/Checkout";
+import PaymentConfirmation from "./componentes/PaymentConfirmation";
 
 function App() {
   return (
@@ -29,7 +34,7 @@ function App() {
           toastOptions={{
             duration: 2000,
             style: {
-              background: "transparent", // para glass funcionar
+              background: "transparent",
               boxShadow: "none",
             },
           }}
@@ -92,6 +97,22 @@ function App() {
             }
           />
           <Route
+            path="/reports-results"
+            element={
+              <ProtectedRoute>
+                <ReportsResults />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/report-details/:id"
+            element={
+              <ProtectedRoute>
+                <ReportDetails />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/compare"
             element={
               <ProtectedRoute>
@@ -116,6 +137,14 @@ function App() {
             }
           />
           <Route
+            path="/library/folder/:folderId"
+            element={
+              <ProtectedRoute>
+                <FolderContentPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/filters/:appId"
             element={
               <ProtectedRoute>
@@ -136,6 +165,22 @@ function App() {
             element={
               <ProtectedRoute>
                 <AIComparisonResult />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/checkout"
+            element={
+              <ProtectedRoute>
+                <Checkout />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/payment-confirmation"
+            element={
+              <ProtectedRoute>
+                <PaymentConfirmation />
               </ProtectedRoute>
             }
           />
