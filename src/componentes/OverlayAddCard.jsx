@@ -78,23 +78,30 @@ function OverlayAddCard({ isOpen, onClose }) {
   // Valida formulário antes de habilitar o botão
   const isFormValid = () => {
     if (!form.name.trim()) return false;
-    if (form.number.replace(/\s/g, "").length !== 16) return false;
     if (!/^(\d{2}\/\d{2})$/.test(form.expiry)) return false;
     if (form.cvc.length < 3) return false;
 
-    // Valida data de validade
     const [expiryMonth, expiryYear] = form.expiry.split("/");
     const monthNum = parseInt(expiryMonth, 10);
     const yearNum = parseInt(expiryYear, 10);
-    if (monthNum < 1 || monthNum > 12) return false;
-
     const currentYear = new Date().getFullYear() % 100;
     const currentMonth = new Date().getMonth() + 1;
 
+    if (monthNum < 1 || monthNum > 12) return false;
     if (yearNum < currentYear) return false;
     if (yearNum === currentYear && monthNum <= currentMonth) return false;
 
-    if (detectCardProvider(form.number) === "unknown") return false;
+    const provider = detectCardProvider(form.number);
+    if (provider === "unknown") return false;
+
+    const cleanNumber = form.number.replace(/\s/g, "");
+    if (
+      (provider === "american express" && cleanNumber.length !== 15) ||
+      ((provider === "visa" || provider === "mastercard") &&
+        cleanNumber.length !== 16)
+    ) {
+      return false;
+    }
 
     return true;
   };
@@ -150,8 +157,8 @@ function OverlayAddCard({ isOpen, onClose }) {
       const cardsRef = collection(db, "users", user.uid, "cards");
       const existingSnapshot = await getDocs(cardsRef);
 
-      if (existingSnapshot.size >= 5) {
-        setError("You can only add up to 5 cards.");
+      if (existingSnapshot.size >= 4) {
+        setError("You can only add up to 4 cards.");
         return;
       }
 
@@ -159,11 +166,11 @@ function OverlayAddCard({ isOpen, onClose }) {
         const data = doc.data();
         const existingNumber = data.number.replace(/\s/g, "");
         const newNumber = form.number.replace(/\s/g, "");
-        return existingNumber === newNumber || data.cvc === form.cvc;
+        return existingNumber === newNumber;
       });
 
       if (isDuplicate) {
-        setError("Card number or CVC already exists.");
+        setError("Card number already exists.");
         return;
       }
 

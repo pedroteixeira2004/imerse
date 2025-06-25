@@ -1,7 +1,9 @@
+import ReactDOM from "react-dom";
+
 const ConfirmDelete = ({ isOpen, onConfirm, onCancel, title, message }) => {
   if (!isOpen) return null;
 
-  return (
+  return ReactDOM.createPortal(
     <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50 font-sf">
       <div className="bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-[15px] rounded-2xl border border-white/30 shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-6 w-1/3 h-80 flex items-center justify-center">
         <div className="w-full text-center">
@@ -23,7 +25,8 @@ const ConfirmDelete = ({ isOpen, onConfirm, onCancel, title, message }) => {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

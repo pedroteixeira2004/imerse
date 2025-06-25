@@ -76,7 +76,7 @@ const Checkout = () => {
                 </div>
                 <div>
                   {cards.length === 0 ? (
-                    <p className="text-white/60 text-sm">No cards added yet.</p>
+                    <p className="text-white/60 text-lg">No cards added yet.</p>
                   ) : (
                     <ul className="space-y-4">
                       {cards.map((card) => (

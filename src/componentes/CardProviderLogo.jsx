@@ -15,7 +15,7 @@ const CardProviderLogo = ({ provider }) => {
   if (!logo) return null;
 
   return (
-    <img src={logo} alt={provider} className="w-8 mb-2" title={provider} />
+    <img src={logo} alt={provider} className="w-10 mb-2" title={provider} />
   );
 };
 

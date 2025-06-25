@@ -60,6 +60,8 @@ module.exports = {
     "./src/componentes/PaymentConfirmation.jsx",
     "./src/componentes/Profile.jsx",
     "./src/componentes/ProfileSections/ProfileInfo.jsx",
+    "./src/componentes/ProfileSections/PaymentMethods.jsx",
+    "./src/componentes/ProfileSections/PersonalInfo.jsx",
   ],
   theme: {
     extend: {

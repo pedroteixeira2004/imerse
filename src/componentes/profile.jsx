@@ -50,11 +50,11 @@ const Profile = () => {
                   {userData.firstName} {userData.lastName}
                 </p>
                 <div className="flex items-center text-2xl">
-                  {userData.occupation === "other" ? (
+                  {userData.occupation === "Other" ? (
                     userData.organization ? (
                       <span>{userData.organization}</span>
                     ) : null
-                  ) : userData.occupation && userData.organization ? (
+                  ) : userData.organization ? (
                     <span>
                       {userData.occupation}
                       <span className="mx-2 text-white/50">|</span>
@@ -62,8 +62,6 @@ const Profile = () => {
                     </span>
                   ) : userData.occupation ? (
                     <span>{userData.occupation}</span>
-                  ) : userData.organization ? (
-                    <span>{userData.organization}</span>
                   ) : null}
                 </div>
               </div>
@@ -73,7 +71,7 @@ const Profile = () => {
                 {[
                   { key: "profile", label: "Profile" },
                   { key: "payment", label: "Payment Methods" },
-                  { key: "personal", label: "Personal Info" },
+                  { key: "personal", label: "Personal Information" },
                 ].map(({ key, label }) => (
                   <div key={key} className="flex justify-center">
                     <button

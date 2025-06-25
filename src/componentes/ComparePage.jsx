@@ -79,14 +79,14 @@ const Compare = () => {
             Compare games
           </div>
 
-          <div className="text-2xl text-white font-sf flex justify-center mt-2 mb-4">
+          <div className="text-2xl text-white font-sf flex justify-center mt-2">
             {bothEmpty || onlyOne
               ? "Search for two games to compare."
               : "Everything is ready. Choose the way you want to compare."}
           </div>
 
           {(bothEmpty || onlyOne) && (
-            <div className="flex justify-center items-center mt-6 mb-10">
+            <div className="flex justify-center items-center mt-1 mb-10">
               <SearchBar />
             </div>
           )}

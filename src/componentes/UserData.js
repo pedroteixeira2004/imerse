@@ -1,7 +1,7 @@
 // src/hooks/useUserData.js
 import { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { getFirestore, doc, onSnapshot } from "firebase/firestore";
 
 export default function useUserData() {
   const [userData, setUserData] = useState(null);
@@ -11,28 +11,39 @@ export default function useUserData() {
     const auth = getAuth();
     const db = getFirestore();
 
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        try {
-          const docRef = doc(db, "users", user.uid);
-          const docSnap = await getDoc(docRef);
+    let unsubscribeSnapshot = null;
 
-          if (docSnap.exists()) {
-            setUserData(docSnap.data());
-          } else {
-            console.warn("User not found.");
-            setUserData(null);
+    const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const docRef = doc(db, "users", user.uid);
+
+        // Escutar alterações em tempo real
+        unsubscribeSnapshot = onSnapshot(
+          docRef,
+          (docSnap) => {
+            if (docSnap.exists()) {
+              setUserData(docSnap.data());
+            } else {
+              console.warn("User not found.");
+              setUserData(null);
+            }
+            setLoading(false);
+          },
+          (error) => {
+            console.error("Error listening to user data:", error);
+            setLoading(false);
           }
-        } catch (error) {
-          console.error("Error while trying to fetch user data:", error);
-        }
+        );
       } else {
         setUserData(null);
+        setLoading(false);
       }
-      setLoading(false);
     });
 
-    return () => unsubscribe();
+    return () => {
+      unsubscribeAuth();
+      if (unsubscribeSnapshot) unsubscribeSnapshot();
+    };
   }, []);
 
   return { userData, loading };
