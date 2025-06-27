@@ -245,8 +245,10 @@ const ReviewsPage = () => {
               id="overall info"
             >
               <div className="flex-1 min-w-[250px] max-w-[350px] flex flex-col items-center justify-center text-center bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-[15px] rounded-2xl border border-white/30 shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-6">
-                <p className="text-4xl font-medium">{dayRange} days</p>
-                <p className="text-xl mt-1">Selected timeframe</p>
+                <p className="text-4xl font-medium">
+                  {reviewSummary.total_reviews}
+                </p>
+                <p className="text-xl mt-1">Total reviews</p>
               </div>
               <div className="flex-1 min-w-[300px] max-w-[400px] flex flex-col items-center justify-center text-center bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-[15px] rounded-2xl border border-white/30 shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-6">
                 <p className="text-4xl font-medium">
@@ -265,6 +267,7 @@ const ReviewsPage = () => {
               <div className="flex-1 min-w-[300px] max-w-[400px] flex flex-col items-center justify-center text-center bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-[15px] rounded-2xl border border-white/30 shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-6">
                 <p className="text-4xl font-medium">{averagePlaytime} hours</p>
                 <p className="text-xl mt-1">Average playtime</p>
+                <p>(based on the extrated reviews)</p>
               </div>
             </div>
             <div className="backdrop-blur-lg rounded-2xl text-3xl mt-14 justify-center font-medium flex">

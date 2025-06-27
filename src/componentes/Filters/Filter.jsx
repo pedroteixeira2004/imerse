@@ -19,7 +19,6 @@ const Filter = ({ filter, setFilter, sorting, setSorting }) => {
     setSorting(value);
     setFilter(""); // limpa a seleção do outro grupo
   };
-
   return (
     <div>
       <p className="mb-2 font-semibold text-white text-4xl">Reviews sorting</p>

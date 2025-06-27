@@ -24,6 +24,8 @@ import ReportsResults from "./componentes/Reports/ReportsResults";
 import ReportDetails from "./componentes/Reports/ReportDetails";
 import Checkout from "./componentes/Checkout";
 import PaymentConfirmation from "./componentes/PaymentConfirmation";
+import PublicOnlyRoute from "./componentes/PublicOnlyRoute";
+import ExplanationPage from "./componentes/ExplanationPage";
 
 function App() {
   return (
@@ -184,9 +186,38 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/signup" element={<RegistrationForm />} />
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route
+            path="/signup"
+            element={
+              <PublicOnlyRoute>
+                <RegistrationForm />
+              </PublicOnlyRoute>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <PublicOnlyRoute>
+                <LoginForm />
+              </PublicOnlyRoute>
+            }
+          />
+          <Route
+            path="/forgot-password"
+            element={
+              <PublicOnlyRoute>
+                <ForgotPassword />
+              </PublicOnlyRoute>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <PublicOnlyRoute>
+                <ExplanationPage />
+              </PublicOnlyRoute>
+            }
+          />
         </Routes>
       </div>
     </Router>
