@@ -13,6 +13,7 @@ import Section4 from "./SectionsExplanationPage/Section4";
 import Section5 from "./SectionsExplanationPage/Section5";
 import Section6 from "./SectionsExplanationPage/Section6";
 import Section7 from "./SectionsExplanationPage/Section7";
+import Section8 from "./SectionsExplanationPage/Section8";
 import Background from "./background";
 const ExplanationPage = () => {
   const navigate = useNavigate();
@@ -170,6 +171,7 @@ const ExplanationPage = () => {
       <Section5 />
       <Section6 />
       <Section7 />
+      <Section8 />
       <BotaoTopo />
     </div>
   );

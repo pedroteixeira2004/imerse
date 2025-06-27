@@ -26,7 +26,10 @@ import Checkout from "./componentes/Checkout";
 import PaymentConfirmation from "./componentes/PaymentConfirmation";
 import PublicOnlyRoute from "./componentes/PublicOnlyRoute";
 import ExplanationPage from "./componentes/ExplanationPage";
-
+import GamePage from "./componentes/Preview/GamePage";
+import GameDetailsPreview from "./componentes/Preview/GameDetailsPreview";
+import FiltersPreview from "./componentes/Preview/FiltersPreview";
+import ReviewsPagePreview from "./componentes/Preview/ReviewsPagePreview";
 function App() {
   return (
     <Router>
@@ -207,6 +210,38 @@ function App() {
             element={
               <PublicOnlyRoute>
                 <ForgotPassword />
+              </PublicOnlyRoute>
+            }
+          />
+          <Route
+            path="/preview-gamepage"
+            element={
+              <PublicOnlyRoute>
+                <GamePage />
+              </PublicOnlyRoute>
+            }
+          />
+          <Route
+            path="/preview-gamedetails/:appId"
+            element={
+              <PublicOnlyRoute>
+                <GameDetailsPreview />
+              </PublicOnlyRoute>
+            }
+          />
+          <Route
+            path="/preview-filters/:appId"
+            element={
+              <PublicOnlyRoute>
+                <FiltersPreview />
+              </PublicOnlyRoute>
+            }
+          />
+          <Route
+            path="/preview-reviews/:appId"
+            element={
+              <PublicOnlyRoute>
+                <ReviewsPagePreview />
               </PublicOnlyRoute>
             }
           />

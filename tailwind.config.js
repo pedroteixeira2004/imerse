@@ -68,6 +68,13 @@ module.exports = {
     "./src/componentes/SectionsExplanationPage/Section5.jsx",
     "./src/componentes/SectionsExplanationPage/Section6.jsx",
     "./src/componentes/SectionsExplanationPage/Section7.jsx",
+    "./src/componentes/SectionsExplanationPage/Section8.jsx",
+    "./src/componentes/Preview/GamePage.jsx",
+    "./src/componentes/Preview/GameDetailsPreview.jsx",
+    "./src/componentes/Preview/FiltersPreview.jsx",
+    "./src/componentes/Preview/Filters/NumberLanguage.jsx",
+    "./src/componentes/Preview/Filters/TimePeriodPreview.jsx",
+    "./src/componentes/Preview/ReviewsPagePreview.jsx",
   ],
   theme: {
     extend: {
