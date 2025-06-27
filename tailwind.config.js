@@ -66,6 +66,8 @@ module.exports = {
     "./src/componentes/SectionsExplanationPage/Section4.jsx",
     "./src/componentes/SectionsExplanationPage/Section3.jsx",
     "./src/componentes/SectionsExplanationPage/Section5.jsx",
+    "./src/componentes/SectionsExplanationPage/Section6.jsx",
+    "./src/componentes/SectionsExplanationPage/Section7.jsx",
   ],
   theme: {
     extend: {
@@ -86,11 +88,19 @@ module.exports = {
           "0%": { transform: "translateX(-50%)" },
           "100%": { transform: "translateX(0%)" },
         },
+        excelPop: {
+          "0%": { transform: "scale(1)" },
+          "25%": { transform: "scale(1.15) rotate(-5deg)" },
+          "50%": { transform: "scale(1.2) rotate(5deg)" },
+          "75%": { transform: "scale(1.15) rotate(-5deg)" },
+          "100%": { transform: "scale(1) rotate(0deg)" },
+        },
       },
       animation: {
         bounceMouse: "bounceMouse 1.5s infinite",
         scrollLeft: "scrollLeft 100s linear infinite",
         scrollRight: "scrollRight 100s linear infinite",
+        excelPop: "excelPop 2s ease-in-out",
       },
     },
   },

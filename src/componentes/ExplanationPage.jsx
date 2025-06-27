@@ -11,6 +11,9 @@ import gradiente from "../assets/imagens/gradiente_game_details.svg";
 import Section3 from "./SectionsExplanationPage/Section3";
 import Section4 from "./SectionsExplanationPage/Section4";
 import Section5 from "./SectionsExplanationPage/Section5";
+import Section6 from "./SectionsExplanationPage/Section6";
+import Section7 from "./SectionsExplanationPage/Section7";
+import Background from "./background";
 const ExplanationPage = () => {
   const navigate = useNavigate();
   const scrollDown = () => {
@@ -23,14 +26,12 @@ const ExplanationPage = () => {
     <div className="font-sf">
       <div
         style={{
-          backgroundImage: `url(${background_gradient})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
           height: "100vh",
           display: "flex",
           flexDirection: "column",
         }}
       >
+        <Background />
         <header>
           <div className="flex text-2xl font-bold items-center justify-between">
             <div className="m-5">
@@ -75,9 +76,14 @@ const ExplanationPage = () => {
       </div>
       <section
         style={{ height: "100vh", backgroundColor: "#0D1060" }}
-        className="flex text-white items-center"
+        className="flex text-white items-center relative overflow-hidden"
       >
-        <div className="flex-1 mx-20 flex items-center justify-between">
+        <img
+          src={gradiente}
+          alt="gradiente"
+          className="absolute bottom-0 left-0 w-full z-0 pointer-events-none"
+        />
+        <div className="flex-1 mx-20 flex items-center justify-between z-10">
           {/* Texto */}
           <div className="max-w-2xl">
             <div className="text-6xl font-bold mb-6">About the platform</div>
@@ -162,6 +168,8 @@ const ExplanationPage = () => {
       <Section3 />
       <Section4 />
       <Section5 />
+      <Section6 />
+      <Section7 />
       <BotaoTopo />
     </div>
   );
