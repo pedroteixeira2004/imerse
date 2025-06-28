@@ -6,6 +6,7 @@ import Background from "../background";
 import mouse from "../../assets/icones/mouse.png";
 import ReviewCard from "../ReviewCard";
 import BackButton from "../BackButton";
+import FeatureOverlay from "./FeatureOverlay";
 
 const ReviewsPagePreview = () => {
   const { appId } = useParams();
@@ -26,6 +27,7 @@ const ReviewsPagePreview = () => {
   const dayRange = searchParams.get("day_range") || "365";
   const language = searchParams.get("language") || "english";
   const filter = searchParams.get("filter") || "all";
+  const [showOverlay, setShowOverlay] = useState(false);
   const minPlaytimeParam = Number(searchParams.get("min_playtime") || 0);
   const maxPlaytimeParam =
     searchParams.get("max_playtime") === ""
@@ -41,6 +43,13 @@ const ReviewsPagePreview = () => {
     const match = normalized.match(/\b(19|20)\d{2}\b/);
     return match ? match[0] : "";
   };
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowOverlay(true);
+    }, 20000);
+
+    return () => clearTimeout(timer);
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -252,6 +261,7 @@ const ReviewsPagePreview = () => {
           </div>
         </div>
       )}
+      {showOverlay && <FeatureOverlay onClose={() => setShowOverlay(false)} />}
     </div>
   );
 };

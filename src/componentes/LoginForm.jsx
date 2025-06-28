@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
 import { traduzirErroFirebase } from "./TraduzirErrosFirebase";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-
+import imerse_logo from "../assets/icones/imerse_icon.png";
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,19 +32,15 @@ function LoginForm() {
       const user = userCredential.user;
 
       if (!user.emailVerified) {
-        // ✅ Se o e-mail não estiver verificado, impede o login
         if (!user.emailVerified) {
           setError(
             "Your account is not verified. Please check your email to verify your account."
           );
-          await auth.signOut(); // <- IMPORTANTE usar await aqui
+          await auth.signOut();
           return;
         }
       }
 
-      // Se o e-mail estiver verificado, segue normalmente
-      console.log("Login bem-sucedido:", user.email);
-      // Redirecionamento ou mudança de estado aqui, se necessário
       navigate("/home");
     } catch (err) {
       console.error("Erro no login:", err);
@@ -56,10 +52,15 @@ function LoginForm() {
   };
 
   return (
-    <div className="font-sf text-white">
+    <div className="relative font-sf text-white">
       <Background />
-      <div className="flex items-center min-h-screen p-4 mx-10 justify-between">
-        {/* Lado esquerdo: logo e Welcome back */}
+      <div
+        className="absolute top-5 left-5 w-fit z-50 cursor-pointer"
+        onClick={() => navigate("/")}
+      >
+        <img src={imerse_logo} alt="imerse logo" className="h-14" />
+      </div>
+      <div className="flex items-center min-h-screen p-4 px-10 justify-between">
         <div className="flex-1 flex flex-col items-center">
           <div>
             <img src={logo} alt="Logo" className="w-[30rem]" />

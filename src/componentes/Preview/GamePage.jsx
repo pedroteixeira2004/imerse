@@ -1,8 +1,8 @@
-import React from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import gradiente from "../../assets/imagens/gradiente_cards.svg";
 import fallbackImage from "../../assets/imagens/fundo_jogos2.png";
-
+import PreviewOverlay from "./OverlayPreview";
 import god_of_war from "../../assets/imagens/backgrounds_jogos/god_of_war.jpg";
 import last_of_us from "../../assets/imagens/backgrounds_jogos/last_of_us.jpg";
 import detroit_become_human from "../../assets/imagens/backgrounds_jogos/detroit_become_human.jpg";
@@ -43,7 +43,7 @@ const games = [
 
 const GamePage = () => {
   const navigate = useNavigate();
-
+  const [isOverlayOpen, setIsOverlayOpen] = useState(true);
   return (
     <div>
       <Background />
@@ -105,6 +105,10 @@ const GamePage = () => {
           ))}
         </div>
       </div>
+      <PreviewOverlay
+        isOpen={isOverlayOpen}
+        onClose={() => setIsOverlayOpen(false)}
+      />
     </div>
   );
 };

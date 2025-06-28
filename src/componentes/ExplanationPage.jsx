@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import React, { useRef } from "react";
 import imerse_logo from "../assets/icones/imerse_icon.png";
-import background_gradient from "../assets/imagens/gradiente_fundo.svg";
 import { FiChevronDown } from "react-icons/fi";
 import logo2 from "../assets/imagens/logo2.png";
 import fundo_jogos from "../assets/imagens/fundo_jogos3.png";
@@ -14,18 +14,27 @@ import Section5 from "./SectionsExplanationPage/Section5";
 import Section6 from "./SectionsExplanationPage/Section6";
 import Section7 from "./SectionsExplanationPage/Section7";
 import Section8 from "./SectionsExplanationPage/Section8";
+import Section9 from "./SectionsExplanationPage/Section9";
 import Background from "./background";
 const ExplanationPage = () => {
   const navigate = useNavigate();
+  const scrollContainerRef = useRef(null);
+
   const scrollDown = () => {
-    window.scrollTo({
-      top: window.innerHeight,
-      behavior: "smooth",
-    });
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTo({
+        top: window.innerHeight,
+        behavior: "smooth",
+      });
+    }
   };
   return (
-    <div className="font-sf">
+    <div
+      ref={scrollContainerRef}
+      className="font-sf h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth"
+    >
       <div
+        className="snap-start"
         style={{
           height: "100vh",
           display: "flex",
@@ -41,13 +50,13 @@ const ExplanationPage = () => {
             <div className="flex gap-10 pr-5 m-5 text-white">
               <div
                 onClick={() => navigate("/login")}
-                className="cursor-pointer"
+                className="cursor-pointer transition-transform duration-300 hover:scale-125"
               >
                 Login
               </div>
               <div
                 onClick={() => navigate("/signup")}
-                className="cursor-pointer"
+                className="cursor-pointer transition-transform duration-300 hover:scale-125"
               >
                 Sign up
               </div>
@@ -77,7 +86,7 @@ const ExplanationPage = () => {
       </div>
       <section
         style={{ height: "100vh", backgroundColor: "#0D1060" }}
-        className="flex text-white items-center relative overflow-hidden"
+        className="snap-start flex text-white items-center relative overflow-hidden"
       >
         <img
           src={gradiente}
@@ -95,7 +104,7 @@ const ExplanationPage = () => {
               and AI, it transforms player feedback into strategic information.
             </div>
             <p className="text-2xl font-semibold mt-5">
-              Keep scrolling to learn how to use it
+              Keep scrolling to learn more about IMERSE
             </p>
           </div>
 
@@ -107,7 +116,7 @@ const ExplanationPage = () => {
       </section>
       <section
         style={{ height: "100vh", backgroundColor: "#3D0D60" }}
-        className="relative overflow-hidden"
+        className="snap-start relative overflow-hidden"
       >
         {/* Parte superior com imagem de fundo */}
         <div className="h-[40vh]">
@@ -160,18 +169,34 @@ const ExplanationPage = () => {
             <div className="font-bold text-6xl">1. Search your game</div>
             <div className="mt-8 text-2xl max-w-5xl mx-auto">
               Start by entering the name of the game you want to analyze. The
-              platform connects to live data from Steam to retrieve relevant
-              game data, player reviews and statistics.
+              platform connects to live Steam data to retrieve all games and
+              DLCs, along with relevant details, player reviews, and key
+              statistics.
             </div>
           </div>
         </div>
       </section>
-      <Section3 />
-      <Section4 />
-      <Section5 />
-      <Section6 />
-      <Section7 />
-      <Section8 />
+      <div className="snap-start">
+        <Section3 />
+      </div>
+      <div className="snap-start">
+        <Section4 />
+      </div>
+      <div className="snap-start">
+        <Section5 />
+      </div>
+      <div className="snap-start">
+        <Section6 />
+      </div>
+      <div className="snap-start">
+        <Section7 />
+      </div>
+      <div className="snap-start">
+        <Section8 />
+      </div>
+      <div className="snap-start">
+        <Section9 />
+      </div>
       <BotaoTopo />
     </div>
   );

@@ -30,6 +30,7 @@ import GamePage from "./componentes/Preview/GamePage";
 import GameDetailsPreview from "./componentes/Preview/GameDetailsPreview";
 import FiltersPreview from "./componentes/Preview/FiltersPreview";
 import ReviewsPagePreview from "./componentes/Preview/ReviewsPagePreview";
+import TermsPage from "./componentes/TermsPage";
 function App() {
   return (
     <Router>
@@ -242,6 +243,14 @@ function App() {
             element={
               <PublicOnlyRoute>
                 <ReviewsPagePreview />
+              </PublicOnlyRoute>
+            }
+          />
+          <Route
+            path="/terms-privacy"
+            element={
+              <PublicOnlyRoute>
+                <TermsPage />
               </PublicOnlyRoute>
             }
           />

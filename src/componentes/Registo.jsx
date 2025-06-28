@@ -16,8 +16,11 @@ import Background from "./background";
 import logo from "../assets/imerselogo_white.png";
 import { Link } from "react-router-dom";
 import { traduzirErroFirebase } from "./TraduzirErrosFirebase";
+import { useNavigate } from "react-router-dom";
+import imerse_logo from "../assets/icones/imerse_icon.png";
 
 const RegistrationForm = () => {
+  const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -104,9 +107,15 @@ const RegistrationForm = () => {
   };
 
   return (
-    <div className="font-sf text-white">
+    <div className="relative font-sf text-white">
       <Background />
-      <div className="flex items-center min-h-screen p-4 mx-10 justify-between">
+      <div
+        className="absolute top-5 left-5 w-fit z-50 cursor-pointer"
+        onClick={() => navigate("/")}
+      >
+        <img src={imerse_logo} alt="imerse logo" className="h-14" />
+      </div>
+      <div className="flex items-center min-h-screen p-4 px-10 justify-between">
         <div className="flex-1 flex flex-col items-center">
           <div>
             <img src={logo} alt="Logo" className="w-[30rem]" />
