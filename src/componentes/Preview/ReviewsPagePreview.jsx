@@ -9,6 +9,7 @@ import BackButton from "../BackButton";
 import FeatureOverlay from "./FeatureOverlay";
 
 const ReviewsPagePreview = () => {
+  const baseUrl = process.env.REACT_APP_API_BASE_URL;
   const { appId } = useParams();
   const [searchParams] = useSearchParams();
   const [reviews, setReviews] = useState([]);
@@ -56,7 +57,7 @@ const ReviewsPagePreview = () => {
       try {
         // Fetch reviews + summary
         const reviewsResponse = await fetch(
-          `http://localhost:3001/api/reviews/${appId}?filter=${filter}&num_per_page=${numPerPage}&review_type=${reviewType}&day_range=${dayRange}&language=${language}`
+          `${baseUrl}/api/reviews/${appId}?filter=${filter}&num_per_page=${numPerPage}&review_type=${reviewType}&day_range=${dayRange}&language=${language}`
         );
         if (!reviewsResponse.ok)
           throw new Error("Error while fetching reviews");
@@ -129,7 +130,7 @@ const ReviewsPagePreview = () => {
 
         // Fetch game details
         const gameDetailsResponse = await fetch(
-          `http://localhost:3001/api/game-details/${appId}`
+          `${baseUrl}/api/game-details/${appId}`
         );
         if (!gameDetailsResponse.ok)
           throw new Error("Erro ao buscar detalhes do jogo.");

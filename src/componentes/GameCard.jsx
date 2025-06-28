@@ -4,6 +4,7 @@ import gradiente from "../assets/imagens/gradiente_cards.svg";
 import fallbackImage from "../assets/imagens/fundo_jogos2.png";
 
 const GameCard = ({ game, onLoad }) => {
+  const baseUrl = process.env.REACT_APP_API_BASE_URL;
   const navigate = useNavigate();
   const [backgroundUrl, setBackgroundUrl] = useState(null);
   const [typeGame, setTypeGame] = useState("");
@@ -23,8 +24,8 @@ const GameCard = ({ game, onLoad }) => {
     const fetchAll = async () => {
       try {
         const [detailsRes, reviewsRes] = await Promise.all([
-          fetch(`http://localhost:3001/api/game-details/${game.appid}`),
-          fetch(`http://localhost:3001/api/reviews/${game.appid}`),
+          fetch(`${baseUrl}/api/game-details/${game.appid}`),
+          fetch(`${baseUrl}/api/reviews/${game.appid}`),
         ]);
 
         const detailsData = await detailsRes.json();

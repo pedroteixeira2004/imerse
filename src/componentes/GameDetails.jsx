@@ -12,6 +12,7 @@ const GameDetails = () => {
   const { appId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+  const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
   const preloaded = location.state || {};
 
@@ -44,10 +45,10 @@ const GameDetails = () => {
 
       try {
         const [detailsRes, reviewsRes] = await Promise.all([
-          fetch(`http://localhost:3001/api/game-details/${appId}`, {
+          fetch(`${baseUrl}/api/game-details/${appId}`, {
             signal: controller.signal,
           }),
-          fetch(`http://localhost:3001/api/reviews/${appId}`, {
+          fetch(`${baseUrl}/api/reviews/${appId}`, {
             signal: controller.signal,
           }),
         ]);

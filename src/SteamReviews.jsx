@@ -8,11 +8,12 @@ const SteamReviews = () => {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
   // Função para buscar jogos pela Steam API
   const fetchGames = async (gameName) => {
     try {
-      const response = await fetch("http://localhost:3001/api/game-list");
+      const response = await fetch(`${baseUrl}/api/game-list`);
       const data = await response.json();
 
       // Filtra jogos que contem a palavra do nome
@@ -35,7 +36,7 @@ const SteamReviews = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`http://localhost:3001/api/reviews/${id}`);
+      const response = await fetch(`${baseUrl}/api/reviews/${id}`);
       const data = await response.json();
 
       if (data.success) {

@@ -5,13 +5,14 @@ import star from "../assets/icones/star.png";
 const AICompareButton = ({ game1Id, game2Id, setLoading }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
   const isComparisonPage = location.pathname === "/game-comparison";
 
   const fetchGameData = async (appId) => {
     const [detailsRes, reviewsRes] = await Promise.all([
-      fetch(`http://localhost:3001/api/game-details/${appId}?num_per_page=50`),
-      fetch(`http://localhost:3001/api/reviews/${appId}`),
+      fetch(`${baseUrl}/api/game-details/${appId}?num_per_page=50`),
+      fetch(`${baseUrl}/api/reviews/${appId}`),
     ]);
 
     if (!detailsRes.ok || !reviewsRes.ok) {
@@ -37,23 +38,20 @@ const AICompareButton = ({ game1Id, game2Id, setLoading }) => {
         fetchGameData(game2Id),
       ]);
 
-      const compareRes = await fetch(
-        "http://localhost:3001/api/compare-games",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            comments1: game1.reviews,
-            comments2: game2.reviews,
-            details1: game1.details,
-            details2: game2.details,
-            game1Name: game1.details.name,
-            game2Name: game2.details.name,
-          }),
-        }
-      );
+      const compareRes = await fetch("${baseUrl}/api/compare-games", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          comments1: game1.reviews,
+          comments2: game2.reviews,
+          details1: game1.details,
+          details2: game2.details,
+          game1Name: game1.details.name,
+          game2Name: game2.details.name,
+        }),
+      });
 
       if (!compareRes.ok) {
         const errorText = await compareRes.text();

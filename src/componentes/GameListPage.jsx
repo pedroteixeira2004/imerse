@@ -7,6 +7,7 @@ import SearchBar from "./SearchBar";
 import GameCard from "./GameCard";
 
 const GameListPage = () => {
+  const baseUrl = process.env.REACT_APP_API_BASE_URL;
   const [games, setGames] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -31,7 +32,7 @@ const GameListPage = () => {
       setLoading(true);
       setGamesLoaded(0);
       try {
-        const response = await fetch("http://localhost:3001/api/game-list");
+        const response = await fetch(`${baseUrl}/api/game-list`);
         const data = await response.json();
         const normalizedSearchTerm = normalizeText(searchTerm || "");
 

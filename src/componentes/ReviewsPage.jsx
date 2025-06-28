@@ -19,6 +19,7 @@ import { getAuth } from "firebase/auth";
 import { saveAnalyzedGameToFirebase } from "../firebase/FirebaseUtils";
 
 const ReviewsPage = () => {
+  const baseUrl = process.env.REACT_APP_API_BASE_URL;
   const { appId } = useParams();
   const [searchParams] = useSearchParams();
   const [reviews, setReviews] = useState([]);
@@ -62,7 +63,7 @@ const ReviewsPage = () => {
       try {
         // Fetch reviews + summary
         const reviewsResponse = await fetch(
-          `http://localhost:3001/api/reviews/${appId}?filter=${filter}&num_per_page=${numPerPage}&review_type=${reviewType}&day_range=${dayRange}&language=${language}`
+          `${baseUrl}/api/reviews/${appId}?filter=${filter}&num_per_page=${numPerPage}&review_type=${reviewType}&day_range=${dayRange}&language=${language}`
         );
         if (!reviewsResponse.ok) throw new Error("Erro ao buscar avaliações.");
 
@@ -134,7 +135,7 @@ const ReviewsPage = () => {
 
         // Fetch game details
         const gameDetailsResponse = await fetch(
-          `http://localhost:3001/api/game-details/${appId}`
+          `${baseUrl}/api/game-details/${appId}`
         );
         if (!gameDetailsResponse.ok)
           throw new Error("Erro ao buscar detalhes do jogo.");
@@ -182,14 +183,11 @@ const ReviewsPage = () => {
     setAnalysisType(type);
 
     try {
-      const response = await fetch(
-        "http://localhost:3001/api/analyze-reviews",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ comments: reviewTexts, type }),
-        }
-      );
+      const response = await fetch(`${baseUrl}/api/analyze-reviews`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ comments: reviewTexts, type }),
+      });
 
       const data = await response.json();
       if (data.insight) {

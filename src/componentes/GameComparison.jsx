@@ -8,6 +8,7 @@ import LoadingAIComparison from "./LoadingAIComparison";
 import AICompareButton from "./AICompareButton";
 import BackButton from "./BackButton";
 const GameComparison = () => {
+  const baseUrl = process.env.REACT_APP_API_BASE_URL;
   const location = useLocation();
   const { game1Id, game2Id } = location.state || {};
 
@@ -21,10 +22,10 @@ const GameComparison = () => {
     const fetchDetailsAndSummary = async () => {
       try {
         const [res1, res2, rev1, rev2] = await Promise.all([
-          fetch(`http://localhost:3001/api/game-details/${game1Id}`),
-          fetch(`http://localhost:3001/api/game-details/${game2Id}`),
-          fetch(`http://localhost:3001/api/reviews/${game1Id}`),
-          fetch(`http://localhost:3001/api/reviews/${game2Id}`),
+          fetch(`${baseUrl}/api/game-details/${game1Id}`),
+          fetch(`${baseUrl}/api/game-details/${game2Id}`),
+          fetch(`${baseUrl}/api/reviews/${game1Id}`),
+          fetch(`${baseUrl}/api/reviews/${game2Id}`),
         ]);
 
         const [data1, data2, summary1, summary2] = await Promise.all([
