@@ -23,7 +23,7 @@ const Section8 = () => {
 
         {/* Conteúdo do iframe */}
         <iframe
-          src="http://localhost:3000/preview-gamepage"
+          src="https://imerse.onrender.com//preview-gamepage"
           title="Website"
           className="w-full h-[100%] border-none overflow-y-scroll"
         />
