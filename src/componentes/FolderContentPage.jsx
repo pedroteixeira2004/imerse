@@ -40,11 +40,11 @@ const FolderContentPage = () => {
       if (folderSnap.exists()) {
         setFolderData(folderSnap.data());
       } else {
-        console.error("Pasta não encontrada");
+        console.error("Folder not found");
         setFolderData(null);
       }
     } catch (error) {
-      console.error("Erro ao buscar conteúdo da pasta:", error);
+      console.error("Error while fetching folder content:", error);
       setFolderData(null);
     } finally {
       setLoading(false);

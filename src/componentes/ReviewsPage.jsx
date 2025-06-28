@@ -15,6 +15,8 @@ import BotaoTopo from "./BotaoTopo";
 import AddToPastas from "./AddToPastas";
 import BackButton from "./BackButton";
 import DownloadReviewsButton from "./DownloadReviewsButton";
+import { getAuth } from "firebase/auth";
+import { saveAnalyzedGameToFirebase } from "../firebase/FirebaseUtils";
 
 const ReviewsPage = () => {
   const { appId } = useParams();
@@ -148,6 +150,30 @@ const ReviewsPage = () => {
 
     fetchData();
   }, [appId, filter, numPerPage, reviewType, dayRange, language]);
+  useEffect(() => {
+    const saveGame = async () => {
+      const auth = getAuth();
+      const user = auth.currentUser;
+
+      if (user && gameDetails) {
+        try {
+          await saveAnalyzedGameToFirebase(user.uid, {
+            id: appId,
+            name: gameDetails.name,
+            background_raw: gameDetails.background_raw,
+            year: extractYear(gameDetails.release_date?.date),
+            typeGame: gameDetails.type,
+            reviewSummary: reviewSummary,
+            description: gameDetails.short_description,
+          });
+        } catch (err) {
+          console.error("Erro ao salvar jogo no Firebase:", err);
+        }
+      }
+    };
+
+    saveGame();
+  }, [gameDetails]); // <-- executa quando `gameDetails` mudar
 
   const handleAnalyze = async (type) => {
     setLoading(true);
