@@ -2,8 +2,7 @@ import gradiente from "../../assets/imagens/gradiente_game_details.svg";
 
 const Section8 = () => {
   const baseUrl = process.env.REACT_APP_PREVIEW_URL;
-  console.log(process.env);
-  console.log(baseUrl);
+
   return (
     <section className="relative text-white overflow-hidden h-[100vh] bg-[#0D1060] flex flex-col items-center justify-center">
       <img

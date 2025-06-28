@@ -38,7 +38,7 @@ const AICompareButton = ({ game1Id, game2Id, setLoading }) => {
         fetchGameData(game2Id),
       ]);
 
-      const compareRes = await fetch("${baseUrl}/api/compare-games", {
+      const compareRes = await fetch(`${baseUrl}/api/compare-games`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
