@@ -62,7 +62,7 @@ const ReviewsPage = () => {
       try {
         // Fetch reviews + summary
         const reviewsResponse = await fetch(
-          `http://localhost:5000/api/reviews/${appId}?filter=${filter}&num_per_page=${numPerPage}&review_type=${reviewType}&day_range=${dayRange}&language=${language}`
+          `http://localhost:3001/api/reviews/${appId}?filter=${filter}&num_per_page=${numPerPage}&review_type=${reviewType}&day_range=${dayRange}&language=${language}`
         );
         if (!reviewsResponse.ok) throw new Error("Erro ao buscar avaliações.");
 
@@ -134,7 +134,7 @@ const ReviewsPage = () => {
 
         // Fetch game details
         const gameDetailsResponse = await fetch(
-          `http://localhost:5000/api/game-details/${appId}`
+          `http://localhost:3001/api/game-details/${appId}`
         );
         if (!gameDetailsResponse.ok)
           throw new Error("Erro ao buscar detalhes do jogo.");
@@ -183,7 +183,7 @@ const ReviewsPage = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/analyze-reviews",
+        "http://localhost:3001/api/analyze-reviews",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

@@ -44,10 +44,10 @@ const GameDetails = () => {
 
       try {
         const [detailsRes, reviewsRes] = await Promise.all([
-          fetch(`http://localhost:5000/api/game-details/${appId}`, {
+          fetch(`http://localhost:3001/api/game-details/${appId}`, {
             signal: controller.signal,
           }),
-          fetch(`http://localhost:5000/api/reviews/${appId}`, {
+          fetch(`http://localhost:3001/api/reviews/${appId}`, {
             signal: controller.signal,
           }),
         ]);

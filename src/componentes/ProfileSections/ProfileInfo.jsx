@@ -65,7 +65,7 @@ const ProfileInfo = () => {
               year: data.year,
               type: data.typeGame,
               name: data.name,
-              createdAt: data.timestamp, // 👈 necessário para ordenar
+              createdAt: data.timestamp,
             };
           })
           .sort((a, b) => {
@@ -78,7 +78,7 @@ const ProfileInfo = () => {
       } catch (error) {
         console.error("Erro ao buscar dados do perfil:", error);
       } finally {
-        setLoadingData(false); // 👈 marca como carregado só quando tudo terminar
+        setLoadingData(false);
       }
     };
 

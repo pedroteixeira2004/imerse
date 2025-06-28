@@ -10,8 +10,8 @@ const AICompareButton = ({ game1Id, game2Id, setLoading }) => {
 
   const fetchGameData = async (appId) => {
     const [detailsRes, reviewsRes] = await Promise.all([
-      fetch(`http://localhost:5000/api/game-details/${appId}?num_per_page=50`),
-      fetch(`http://localhost:5000/api/reviews/${appId}`),
+      fetch(`http://localhost:3001/api/game-details/${appId}?num_per_page=50`),
+      fetch(`http://localhost:3001/api/reviews/${appId}`),
     ]);
 
     if (!detailsRes.ok || !reviewsRes.ok) {
@@ -38,7 +38,7 @@ const AICompareButton = ({ game1Id, game2Id, setLoading }) => {
       ]);
 
       const compareRes = await fetch(
-        "http://localhost:5000/api/compare-games",
+        "http://localhost:3001/api/compare-games",
         {
           method: "POST",
           headers: {

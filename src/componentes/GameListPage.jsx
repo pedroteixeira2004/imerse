@@ -31,7 +31,7 @@ const GameListPage = () => {
       setLoading(true);
       setGamesLoaded(0);
       try {
-        const response = await fetch("http://localhost:5000/api/game-list");
+        const response = await fetch("http://localhost:3001/api/game-list");
         const data = await response.json();
         const normalizedSearchTerm = normalizeText(searchTerm || "");
 
@@ -42,6 +42,7 @@ const GameListPage = () => {
 
         setGames(filteredGames);
       } catch (err) {
+        console.log(err);
         setError("Erro ao buscar jogos.");
       } finally {
         setLoading(false);

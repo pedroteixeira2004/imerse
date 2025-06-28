@@ -1,11 +1,12 @@
 const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
+const path = require("path");
 require("dotenv").config();
 console.log("🔑 GEMINI_API_KEY carregada:", process.env.GEMINI_API_KEY);
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(express.json()); // Para ler JSON do corpo da requisição
@@ -405,6 +406,13 @@ Return only a valid JSON object strictly in this format:
     }
     res.status(500).json({ error: "Error comparing games with Gemini." });
   }
+});
+
+// Serve React static files
+app.use(express.static(path.join(__dirname, "/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/build", "index.html"));
 });
 
 app.listen(PORT, () => {

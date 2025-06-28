@@ -8,7 +8,9 @@
 }
 
 .swiper-button-prev-custom,
-.swiper-button-next-custom {
+.swiper-button-next-custom,
+.swiper-button-prev-custom-games,
+.swiper-button-next-custom-games {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -25,10 +27,12 @@
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 }
 
-.swiper-button-prev-custom {
+.swiper-button-prev-custom,
+.swiper-button-prev-custom-games {
   left: 0;
 }
 
-.swiper-button-next-custom {
+.swiper-button-next-custom,
+.swiper-button-next-custom-games {
   right: 0;
 }

@@ -19,6 +19,14 @@ const Reports = () => {
           <div className="mt-3">
             <ReportsSearchBar />
           </div>
+          <div className="flex gap-5 mt-10">
+            <button className="button-filters rounded-full font-sf text-md font-medium">
+              Recent added
+            </button>
+            <button className=" button-filters rounded-full text-md font-sf font-medium">
+              Purchased
+            </button>
+          </div>
         </div>
       </AppLayout>
     </div>

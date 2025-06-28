@@ -23,8 +23,8 @@ const GameCard = ({ game, onLoad }) => {
     const fetchAll = async () => {
       try {
         const [detailsRes, reviewsRes] = await Promise.all([
-          fetch(`http://localhost:5000/api/game-details/${game.appid}`),
-          fetch(`http://localhost:5000/api/reviews/${game.appid}`),
+          fetch(`http://localhost:3001/api/game-details/${game.appid}`),
+          fetch(`http://localhost:3001/api/reviews/${game.appid}`),
         ]);
 
         const detailsData = await detailsRes.json();

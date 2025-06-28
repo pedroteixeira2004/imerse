@@ -21,10 +21,10 @@ const GameComparison = () => {
     const fetchDetailsAndSummary = async () => {
       try {
         const [res1, res2, rev1, rev2] = await Promise.all([
-          fetch(`http://localhost:5000/api/game-details/${game1Id}`),
-          fetch(`http://localhost:5000/api/game-details/${game2Id}`),
-          fetch(`http://localhost:5000/api/reviews/${game1Id}`),
-          fetch(`http://localhost:5000/api/reviews/${game2Id}`),
+          fetch(`http://localhost:3001/api/game-details/${game1Id}`),
+          fetch(`http://localhost:3001/api/game-details/${game2Id}`),
+          fetch(`http://localhost:3001/api/reviews/${game1Id}`),
+          fetch(`http://localhost:3001/api/reviews/${game2Id}`),
         ]);
 
         const [data1, data2, summary1, summary2] = await Promise.all([

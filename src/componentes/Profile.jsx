@@ -91,7 +91,9 @@ const Profile = () => {
             </div>
 
             {/* Lado Direito - Conteúdo Dinâmico */}
-            <div className="w-2/3 pl-6 text-white">{renderSection()}</div>
+            <div className="w-2/3 pl-6 text-white overflow-y-auto h-full max-h-[35rem] pr-2">
+              {renderSection()}
+            </div>
           </div>
         </div>
       </AppLayout>
