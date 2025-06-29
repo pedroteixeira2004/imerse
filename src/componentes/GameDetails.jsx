@@ -3,7 +3,7 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import AppLayout2 from "./Layout2";
 import Gradiente from "../assets/imagens/gradiente_game_details.svg";
 import LoadingDetails from "./LoadingDetails";
-import imagem_default from "../assets/imagens/fundo_jogos2.png"; // Imagem padrão para o background
+import imagem_default from "../assets/imagens/fundo_jogos2.png";
 import ComparisonButton from "./ComparisonButton";
 import { auth } from "../firebase/Inicializacao";
 import AddToPastas from "./AddToPastas";
@@ -40,7 +40,6 @@ const GameDetails = () => {
     const controller = new AbortController();
 
     const fetchGameData = async () => {
-      // Se já recebemos os dados via location.state, não buscar novamente
       if (game && reviewSummary) return;
 
       try {
@@ -113,6 +112,7 @@ const GameDetails = () => {
         <div className="relative z-10 flex items-end game-details">
           <div className="p-6 text-white">
             <div className="flex items-center gap-2">
+              <BackButton />
               <h1 className="text-6xl font-bold font-sf">{game.name}</h1>
             </div>
             <div className="mt-5">
