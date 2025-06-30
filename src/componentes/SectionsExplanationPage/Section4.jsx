@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import gradiente from "../../assets/imagens/gradiente_game_details.svg";
 
-// Lista de vídeos com títulos
 const filters = [
   {
     title: "Number of reviews",
@@ -35,7 +34,7 @@ function Section4() {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % filters.length);
-    }, 6000); // troca a cada 6 segundos
+    }, 6000);
     return () => clearInterval(interval);
   }, []);
 
@@ -43,7 +42,6 @@ function Section4() {
 
   return (
     <section className="relative text-white overflow-hidden h-[100vh] bg-[#0D1060]">
-      {/* Parte superior com vídeo em background */}
       <div className="h-[60vh] relative z-10 overflow-hidden">
         {filters.map((filter, i) => (
           <video
@@ -58,7 +56,7 @@ function Section4() {
           />
         ))}
       </div>
-      {/* Parte inferior com gradiente e texto estático */}
+
       <div className="relative flex justify-center items-center h-[40vh] text-white z-20">
         <img
           src={gradiente}

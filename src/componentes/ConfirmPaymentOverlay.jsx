@@ -12,14 +12,11 @@ const ConfirmPaymentOverlay = ({
 }) => {
   useEffect(() => {
     if (isOpen) {
-      // Bloqueia o scroll
       document.body.style.overflow = "hidden";
     } else {
-      // Libera o scroll
       document.body.style.overflow = "";
     }
 
-    // Garante que o scroll volte ao normal ao desmontar
     return () => {
       document.body.style.overflow = "";
     };

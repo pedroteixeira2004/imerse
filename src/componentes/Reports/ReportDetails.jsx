@@ -43,7 +43,7 @@ const ReportDetails = () => {
         });
 
         setPurchasedReports(allPurchasedIds);
-        setIsPurchased(allPurchasedIds.includes(report.id)); // comparar com report.id
+        setIsPurchased(allPurchasedIds.includes(report.id));
       } catch (error) {
         console.error("Erro ao buscar reports comprados:", error);
       }
@@ -72,7 +72,6 @@ const ReportDetails = () => {
       <AppLayout2>
         <div className="text-white h-screen flex items-center font-sf">
           <div className="flex items-center px-10 gap-x-10 w-full">
-            {/* Bloco do relatório */}
             <div className="w-[50%]">
               <h1 className="text-5xl font-bold mb-4">{report.title}</h1>
               <div className="text-3xl mb-4">{report.year}</div>
@@ -89,7 +88,6 @@ const ReportDetails = () => {
               </div>
             </div>
 
-            {/* Espaço restante com o card centralizado */}
             <div className="flex-1 flex justify-center">
               <div className="w-full max-w-lg flex flex-col items-center justify-center bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-[15px] rounded-2xl border border-white/30 shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-12">
                 <div className="text-5xl font-semibold mb-4 text-center">

@@ -37,7 +37,6 @@ const FiltersPreview = () => {
       purchase_type: purchaseType,
     };
 
-    // Adiciona filter e sorting somente se estiverem preenchidos
     if (filter) params.filter = filter;
     if (sorting) params.sorting = sorting;
 
@@ -108,8 +107,6 @@ const FiltersPreview = () => {
                   setSorting={setSorting}
                 />
               )}
-
-              {/* Navegação dos passos */}
             </div>
           </div>
           <div className="flex justify-between">

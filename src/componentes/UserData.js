@@ -1,4 +1,3 @@
-// src/hooks/useUserData.js
 import { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, onSnapshot } from "firebase/firestore";
@@ -17,7 +16,6 @@ export default function useUserData() {
       if (user) {
         const docRef = doc(db, "users", user.uid);
 
-        // Escutar alterações em tempo real
         unsubscribeSnapshot = onSnapshot(
           docRef,
           (docSnap) => {

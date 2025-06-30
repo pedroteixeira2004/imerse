@@ -8,12 +8,10 @@ const PaymentConfirmation = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Proteção contra acesso direto
     if (!location.state?.fromCheckout) {
       navigate("/cart", { replace: true });
     }
 
-    // Opcional: bloquear botão voltar
     window.history.pushState(null, "", window.location.href);
     const handleBack = () => {
       window.history.pushState(null, "", window.location.href);

@@ -54,7 +54,6 @@ const ComparisonButton = ({ appId, user, game, reviewSummary }) => {
     }
 
     if (updatedGames.includes(appId)) {
-      // Remove game
       updatedGames = updatedGames.filter((id) => id !== appId);
 
       if (newData.game1?.appId === appId) newData.game1 = null;
@@ -114,7 +113,7 @@ const ComparisonButton = ({ appId, user, game, reviewSummary }) => {
         game2: newData.game2 || null,
         updatedAt: new Date(),
       },
-      { merge: false } // 🔥 FORÇA substituição completa
+      { merge: false }
     );
   };
 

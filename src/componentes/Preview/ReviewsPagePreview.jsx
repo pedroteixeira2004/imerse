@@ -55,7 +55,6 @@ const ReviewsPagePreview = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        // Fetch reviews + summary
         const reviewsResponse = await fetch(
           `${baseUrl}/api/reviews/${appId}?filter=${filter}&num_per_page=${numPerPage}&review_type=${reviewType}&day_range=${dayRange}&language=${language}`
         );
@@ -67,7 +66,6 @@ const ReviewsPagePreview = () => {
         const maxPlaytimeMinutes =
           maxPlaytimeParam === Infinity ? Infinity : maxPlaytimeParam * 60;
 
-        // Filtro de playtime em minutos
         const filteredReviews = reviewsData.reviews.filter((review) => {
           const playtime = review.author?.playtime_at_review || 0;
           const steamPurchase = review.steam_purchase;
@@ -98,7 +96,7 @@ const ReviewsPagePreview = () => {
         setFilteredCount(filteredReviews.length);
         setReviews(filteredReviews);
         setReviewTexts(onlyTexts);
-        // Cálculo da média de horas jogadas
+
         const totalPlaytime = reviewsData.reviews.reduce((acc, review) => {
           return acc + (review.author?.playtime_at_review || 0);
         }, 0);
@@ -110,7 +108,6 @@ const ReviewsPagePreview = () => {
 
         setAveragePlaytime(avgPlaytime);
 
-        // Usar variável local para evitar o problema de timing do setState
         const summary = reviewsData.review_summary || {};
         setReviewSummary(summary);
         setTotalPositive(summary.total_positive || 0);
@@ -128,7 +125,6 @@ const ReviewsPagePreview = () => {
           setPercentNegative(0);
         }
 
-        // Fetch game details
         const gameDetailsResponse = await fetch(
           `${baseUrl}/api/game-details/${appId}`
         );
@@ -163,7 +159,6 @@ const ReviewsPagePreview = () => {
           backgroundRepeat: "no-repeat",
         }}
       >
-        {/* Overlay opcional (background1 por cima se você quiser) */}
         <div
           className="absolute inset-0 z-0"
           style={{
@@ -232,7 +227,6 @@ const ReviewsPagePreview = () => {
           <div className="relative">
             <div className="relative z-10">
               <div className="m-10 p-6 z-40">
-                {/* Reviews */}
                 <p className="text-5xl font-bold mb-3 font-sf text-white">
                   Reviews
                 </p>

@@ -39,7 +39,7 @@ const StepThree = ({ formData, updateForm, back, submit, loading, error }) => {
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-4 text-white text-xl focus:outline-none"
-                tabIndex={-1} // para não focar no tab
+                tabIndex={-1}
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
@@ -70,7 +70,7 @@ const StepThree = ({ formData, updateForm, back, submit, loading, error }) => {
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-4 text-white text-xl focus:outline-none"
-                tabIndex={-1} // para não focar no tab
+                tabIndex={-1}
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}

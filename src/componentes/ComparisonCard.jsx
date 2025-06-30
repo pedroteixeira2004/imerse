@@ -56,7 +56,6 @@ const ComparisonCard = ({ game, user, onRemove }) => {
 
   return (
     <div className="relative w-80 group">
-      {/* Card com fundo */}
       <div
         onClick={() =>
           navigate(`/details/${game.appId}`, {
@@ -73,7 +72,6 @@ const ComparisonCard = ({ game, user, onRemove }) => {
         className="h-80 w-80 rounded-3xl overflow-hidden transform transition duration-300 hover:scale-105 relative border border-white/50 shadow-[0_4px_30px_rgba(0,0,0,0.1)] hover:border-white/50 
     hover:shadow-[0_6px_40px_rgba(255,255,255,0.2)] cursor-pointer"
       >
-        {/* Backgrounds */}
         <div
           className={`absolute inset-0 bg-cover bg-center z-0 transition-opacity duration-500 ${
             game.background ? "opacity-100" : "opacity-0"
@@ -89,7 +87,6 @@ const ComparisonCard = ({ game, user, onRemove }) => {
           }}
         />
 
-        {/* Conteúdo */}
         <div className="absolute inset-0 z-20 flex flex-col justify-center items-center text-center p-4 font-sf">
           <h3 className="text-2xl font-semibold text-white">{game.name}</h3>
           <span className="text-xl text-white mt-6">{game.reviewSummary}</span>
@@ -108,7 +105,6 @@ const ComparisonCard = ({ game, user, onRemove }) => {
         </div>
       </div>
 
-      {/* Botão Remover - só visível no hover */}
       <button
         onClick={handleRemove}
         className="absolute top-2 right-2 button2 text-white p-2 rounded-full z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"

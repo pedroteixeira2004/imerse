@@ -64,7 +64,6 @@ const Section7 = () => {
         Other features
       </div>
       <div className="relative z-10 w-full max-w-6xl px-4">
-        {/* Custom arrows */}
         <div className="absolute top-1/2 -left-14 transform -translate-y-1/2 z-20 cursor-pointer">
           <button className="custom-prev text-white text-6xl flex items-center justify-center">
             <BiChevronLeft />
@@ -120,7 +119,6 @@ const Section7 = () => {
           ))}
         </Swiper>
 
-        {/* Barra de progresso */}
         <div className="w-full h-2 bg-white/20 rounded-full overflow-hidden mt-8">
           <div
             ref={progressRef}
@@ -129,7 +127,6 @@ const Section7 = () => {
           ></div>
         </div>
 
-        {/* Botão play/pause */}
         <div className="flex justify-center mt-6">
           <button
             onClick={handlePlayPause}

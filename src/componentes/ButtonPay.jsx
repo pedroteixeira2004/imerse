@@ -13,7 +13,7 @@ import ConfirmPaymentOverlay from "./ConfirmPaymentOverlay";
 
 const ButtonPay = ({ user, selectedCard, reports, total, onSuccess }) => {
   const [loading, setLoading] = useState(false);
-  const [confirmOpen, setConfirmOpen] = useState(false); // Estado do overlay
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   const handlePayment = async () => {
     setLoading(true);

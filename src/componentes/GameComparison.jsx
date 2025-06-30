@@ -38,7 +38,6 @@ const GameComparison = () => {
         setGame1Details(data1[game1Id].data);
         setGame2Details(data2[game2Id].data);
 
-        // Ajuste conforme o formato exato do seu retorno da API
         setGame1Summary(summary1);
         setGame2Summary(summary2);
 

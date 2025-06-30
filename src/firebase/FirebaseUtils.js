@@ -1,4 +1,3 @@
-// firebaseUtils.js
 import {
   getFirestore,
   collection,
@@ -18,7 +17,6 @@ export const saveAnalyzedGameToFirebase = async (userId, game) => {
 
   const userGamesRef = collection(db, "users", userId, "analyzed_game");
 
-  // Busca jogos já analisados
   const q = query(userGamesRef, orderBy("timestamp", "asc"));
   const snapshot = await getDocs(q);
 
@@ -30,7 +28,6 @@ export const saveAnalyzedGameToFirebase = async (userId, game) => {
   const existingGame = games.find((g) => g.id === game.id);
 
   if (existingGame) {
-    // Atualiza timestamp
     await setDoc(doc(userGamesRef, game.id), {
       ...game,
       timestamp: serverTimestamp(),

@@ -45,7 +45,7 @@ const GameCard = ({ game, onLoad }) => {
           setReviewSummary(reviewsData.review_summary.review_score_desc);
         }
       } catch (error) {
-        console.error("Erro ao buscar dados:", error);
+        console.error("Error while fetching game data:", error);
       } finally {
         if (typeof onLoad === "function") {
           onLoad();

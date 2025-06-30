@@ -28,11 +28,11 @@ const CreateFolderOverlay = ({ isOpen, onClose, onCreate }) => {
   return (
     <div
       className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50 font-sf"
-      onClick={onClose} // fecha ao clicar fora
+      onClick={onClose}
     >
       <div
         className="bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-[15px] rounded-2xl border border-white/30 shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-6 w-1/3 h-80 flex items-center justify-center"
-        onClick={(e) => e.stopPropagation()} // previne fechar clicando dentro
+        onClick={(e) => e.stopPropagation()}
       >
         <div>
           <h2 className="text-white text-4xl mb-4 font-bold w-full">

@@ -72,7 +72,6 @@ const GamePage = () => {
               }
               className="h-80 w-80 rounded-3xl overflow-hidden transform transition duration-300 hover:scale-105 relative border border-white/50 shadow-[0_4px_30px_rgba(0,0,0,0.1)] hover:border-white/50 hover:shadow-[0_6px_40px_rgba(255,255,255,0.2)] cursor-pointer"
             >
-              {/* Background image */}
               <div
                 className="absolute inset-0 bg-cover bg-center z-0 transition-opacity duration-500 opacity-100"
                 style={{
@@ -80,13 +79,11 @@ const GamePage = () => {
                 }}
               />
 
-              {/* Gradient overlay */}
               <div
                 className="absolute inset-0 bg-cover bg-center z-10"
                 style={{ backgroundImage: `url(${gradiente})` }}
               />
 
-              {/* Text content */}
               <div className="absolute inset-0 z-20 flex flex-col justify-center items-center text-center p-4">
                 <h3 className="text-2xl font-semibold text-white">
                   {game.name}
@@ -96,7 +93,6 @@ const GamePage = () => {
                 )}
               </div>
 
-              {/* Bottom bar with type and year */}
               <div className="absolute bottom-0 left-0 right-0 z-20 flex justify-between items-center m-1 mb-3 px-4">
                 <h3 className="text-lg font-regular text-white">{game.type}</h3>
                 <h3 className="text-lg font-regular text-white">{game.year}</h3>

@@ -1,6 +1,6 @@
 .carousel-container {
   position: relative;
-  padding: 0 32px; /* space for buttons */
+  padding: 0 32px;
 
   .swiper-slide {
     padding: 44px 12px;
@@ -17,7 +17,6 @@
   z-index: 10;
   cursor: pointer;
   font-size: 24px;
-  /* background: white; */
   border-radius: 50%;
   width: 32px;
   height: 32px;

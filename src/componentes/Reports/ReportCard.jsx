@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import gradiente from "../../assets/imagens/gradiente_cards.svg";
 import fallbackImage from "../../assets/imagens/fundo_jogos2.png";
 import CartButton from "./CartButton";
-import { FiDownload } from "react-icons/fi";
 import DownloadButton from "./DownloadButton";
 
 const ReportCard = ({ report, purchasedReports = [] }) => {

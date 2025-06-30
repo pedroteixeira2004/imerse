@@ -34,16 +34,14 @@ const Playtime = ({
       setError("");
     }
 
-    // Filtrar opções de maxPlaytime com base no minPlaytime
     const filteredMax = playtimeOptions.filter((option) => {
-      if (minPlaytime === "") return true; // mostrar todas
+      if (minPlaytime === "") return true;
       return option.value === "" || Number(option.value) >= Number(minPlaytime);
     });
     setFilteredMaxOptions(filteredMax);
 
-    // Filtrar opções de minPlaytime com base no maxPlaytime
     const filteredMin = playtimeOptions.filter((option) => {
-      if (maxPlaytime === "") return true; // mostrar todas
+      if (maxPlaytime === "") return true;
       return option.value === "" || Number(option.value) <= Number(maxPlaytime);
     });
     setFilteredMinOptions(filteredMin);

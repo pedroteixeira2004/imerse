@@ -11,7 +11,7 @@ function OverlayAddCard({ isOpen, onClose }) {
   const [form, setForm] = useState({
     name: "",
     number: "",
-    expiry: "", // MM/YY
+    expiry: "",
     cvc: "",
   });
   const [error, setError] = useState("");
@@ -36,7 +36,6 @@ function OverlayAddCard({ isOpen, onClose }) {
     };
   }, [isOpen]);
 
-  // Atualiza campos e aplica máscaras/formatação
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -57,10 +56,9 @@ function OverlayAddCard({ isOpen, onClose }) {
       setForm((prev) => ({ ...prev, [name]: value }));
     }
 
-    setError(""); // Limpa erro ao digitar
+    setError("");
   };
 
-  // Detecta bandeira do cartão (visa, mastercard, amex)
   const detectCardProvider = (cardNumber) => {
     const num = cardNumber.replace(/\s+/g, "");
 
@@ -75,7 +73,6 @@ function OverlayAddCard({ isOpen, onClose }) {
     return "unknown";
   };
 
-  // Valida formulário antes de habilitar o botão
   const isFormValid = () => {
     if (!form.name.trim()) return false;
     if (!/^(\d{2}\/\d{2})$/.test(form.expiry)) return false;
@@ -106,7 +103,6 @@ function OverlayAddCard({ isOpen, onClose }) {
     return true;
   };
 
-  // Submete o formulário e adiciona o cartão no Firestore
   const handleSubmit = async () => {
     if (!user) {
       setError("You must be logged in to add a card.");
@@ -207,11 +203,11 @@ function OverlayAddCard({ isOpen, onClose }) {
       aria-modal="true"
       aria-labelledby="add-card-title"
       className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-[9999] font-sf"
-      onClick={onClose} // fecha modal clicando fora da caixa
+      onClick={onClose}
     >
       <div
         className="bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-[15px] rounded-2xl border border-white/30 shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-8 w-full max-w-lg"
-        onClick={(e) => e.stopPropagation()} // evita fechar clicando dentro
+        onClick={(e) => e.stopPropagation()}
       >
         <h2
           id="add-card-title"

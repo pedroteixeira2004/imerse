@@ -88,9 +88,7 @@ const reviews5 = [
 function Section5() {
   return (
     <section className="relative text-white overflow-hidden h-[100vh] bg-[#0D1060]">
-      {/* Parte superior com frases animadas */}
       <div className="h-[40vh] flex flex-col justify-center gap-6 relative">
-        {/* Linha 1 - scroll left */}
         <div className="overflow-hidden w-full whitespace-nowrap">
           <div
             className="inline-block animate-scrollLeft text-2xl font-medium"
@@ -104,7 +102,6 @@ function Section5() {
           </div>
         </div>
 
-        {/* Linha 2 - scroll right */}
         <div className="overflow-hidden w-full whitespace-nowrap">
           <div
             className="inline-block animate-scrollRight text-2xl font-medium"
@@ -118,7 +115,6 @@ function Section5() {
           </div>
         </div>
 
-        {/* Linha 3 - scroll left */}
         <div className="overflow-hidden w-full whitespace-nowrap">
           <div
             className="inline-block animate-scrollLeft text-2xl font-medium"
@@ -132,7 +128,6 @@ function Section5() {
           </div>
         </div>
 
-        {/* Linha 4 - scroll right */}
         <div className="overflow-hidden w-full whitespace-nowrap">
           <div
             className="inline-block animate-scrollRight text-2xl font-medium"
@@ -159,7 +154,6 @@ function Section5() {
         </div>
       </div>
 
-      {/* Parte inferior com gradiente e texto estático */}
       <div className="relative flex justify-center items-center h-[60vh] text-white">
         <img
           src={gradiente}

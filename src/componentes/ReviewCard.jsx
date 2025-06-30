@@ -33,15 +33,11 @@ export default function ReviewCard({ review }) {
     el.style.overflow = "hidden";
 
     if (!isCollapsed) {
-      // expandir
       el.style.height = `${fullHeight}px`;
     } else {
-      // recolher → fixamos a altura atual antes de recolher
       const currentHeight = el.getBoundingClientRect().height;
       el.style.height = `${currentHeight}px`;
 
-      // forçamos o reflow para garantir que o browser vê a altura atual
-      // e consegue animar para 200px
       void el.offsetHeight;
 
       el.style.height = `${maxCollapsedHeight}px`;

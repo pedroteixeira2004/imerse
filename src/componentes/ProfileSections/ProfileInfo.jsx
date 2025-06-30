@@ -23,7 +23,6 @@ const ProfileInfo = () => {
       if (!userId) return;
 
       try {
-        // 🔍 Fetch purchased reports
         const purchasesSnapshot = await getDocs(
           collection(db, "users", userId, "purchased_reports")
         );
@@ -48,7 +47,6 @@ const ProfileInfo = () => {
         });
         setPurchasedReports(purchasedFullReports);
 
-        // 🎮 Fetch analyzed games
         const gamesSnapshot = await getDocs(
           collection(db, "users", userId, "analyzed_game")
         );
@@ -76,7 +74,7 @@ const ProfileInfo = () => {
 
         setAnalyzedGames(gamesData);
       } catch (error) {
-        console.error("Erro ao buscar dados do perfil:", error);
+        console.error("Erro while fetching data:", error);
       } finally {
         setLoadingData(false);
       }

@@ -44,7 +44,6 @@ function Navbar() {
   useEffect(() => {
     fetchCartCount();
 
-    // Escuta evento global para atualizar contador do carrinho
     const handler = () => {
       fetchCartCount();
     };

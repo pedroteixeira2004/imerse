@@ -9,8 +9,8 @@ const DownloadButton = ({ link, size = "default" }) => {
       href={link}
       target="_blank"
       rel="noopener noreferrer"
-      download // tenta forçar download (depende do servidor)
-      onClick={(e) => e.stopPropagation()} // evita clique subir para elementos pai
+      download
+      onClick={(e) => e.stopPropagation()}
       className={`
         flex items-center rounded-full shadow-lg group overflow-hidden transition-all duration-300 
         backdrop-blur-[15px] border text-white

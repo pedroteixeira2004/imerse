@@ -26,7 +26,7 @@ const RenameFolderModal = ({ isOpen, onClose, onSave, initialName }) => {
       return;
     }
 
-    onSave(newName.trim()); // Executa lógica externa (como updateDoc)
+    onSave(newName.trim());
     toast.custom(
       (t) => (
         <GlassToast
@@ -38,7 +38,7 @@ const RenameFolderModal = ({ isOpen, onClose, onSave, initialName }) => {
       { duration: 3000, position: "top-center" }
     );
 
-    onClose(); // Fecha o modal após salvar
+    onClose();
   };
 
   return (

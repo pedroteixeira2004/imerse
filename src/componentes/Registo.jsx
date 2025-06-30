@@ -1,5 +1,3 @@
-// src/components/RegistrationForm.jsx
-// RegistrationForm.jsx
 import React, { useState } from "react";
 import StepOne from "./SignupSteps/StepOne";
 import StepTwo from "./SignupSteps/StepTwo";
@@ -14,7 +12,6 @@ import { doc, setDoc, collection, addDoc } from "firebase/firestore";
 import { auth, db } from "../firebase/Inicializacao";
 import Background from "./background";
 import logo from "../assets/imerselogo_white.png";
-import { Link } from "react-router-dom";
 import { traduzirErroFirebase } from "./TraduzirErrosFirebase";
 import { useNavigate } from "react-router-dom";
 import imerse_logo from "../assets/icones/imerse_icon.png";
@@ -86,11 +83,10 @@ const RegistrationForm = () => {
       };
 
       await setDoc(doc(db, "users", user.uid), userDoc);
-      // 🔹 Criação da subcoleção "library" com um primeiro documento vazio ou base
       const libraryRef = collection(db, "users", user.uid, "library");
       await addDoc(libraryRef, {
         nome: "My folder",
-        jogos: [], // opcional para guardar jogos
+        jogos: [],
         reports: [],
         criadoEm: new Date(),
       });

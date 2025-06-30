@@ -61,18 +61,17 @@ const ReviewsPage = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        // Fetch reviews + summary
         const reviewsResponse = await fetch(
           `${baseUrl}/api/reviews/${appId}?filter=${filter}&num_per_page=${numPerPage}&review_type=${reviewType}&day_range=${dayRange}&language=${language}`
         );
-        if (!reviewsResponse.ok) throw new Error("Erro ao buscar avaliações.");
+        if (!reviewsResponse.ok)
+          throw new Error("Erro while fecthing game reviews.");
 
         const reviewsData = await reviewsResponse.json();
         const minPlaytimeMinutes = minPlaytimeParam * 60;
         const maxPlaytimeMinutes =
           maxPlaytimeParam === Infinity ? Infinity : maxPlaytimeParam * 60;
 
-        // Filtro de playtime em minutos
         const filteredReviews = reviewsData.reviews.filter((review) => {
           const playtime = review.author?.playtime_at_review || 0;
           const steamPurchase = review.steam_purchase;
@@ -103,7 +102,7 @@ const ReviewsPage = () => {
         setFilteredCount(filteredReviews.length);
         setReviews(filteredReviews);
         setReviewTexts(onlyTexts);
-        // Cálculo da média de horas jogadas
+
         const totalPlaytime = reviewsData.reviews.reduce((acc, review) => {
           return acc + (review.author?.playtime_at_review || 0);
         }, 0);
@@ -115,7 +114,6 @@ const ReviewsPage = () => {
 
         setAveragePlaytime(avgPlaytime);
 
-        // Usar variável local para evitar o problema de timing do setState
         const summary = reviewsData.review_summary || {};
         setReviewSummary(summary);
         setTotalPositive(summary.total_positive || 0);
@@ -133,12 +131,11 @@ const ReviewsPage = () => {
           setPercentNegative(0);
         }
 
-        // Fetch game details
         const gameDetailsResponse = await fetch(
           `${baseUrl}/api/game-details/${appId}`
         );
         if (!gameDetailsResponse.ok)
-          throw new Error("Erro ao buscar detalhes do jogo.");
+          throw new Error("Error while fetching game details.");
 
         const gameDetailsData = await gameDetailsResponse.json();
         setGameDetails(gameDetailsData[appId]?.data || null);
@@ -168,13 +165,13 @@ const ReviewsPage = () => {
             description: gameDetails.short_description,
           });
         } catch (err) {
-          console.error("Erro ao salvar jogo no Firebase:", err);
+          console.error("Error while saving game to Firebase:", err);
         }
       }
     };
 
     saveGame();
-  }, [gameDetails]); // <-- executa quando `gameDetails` mudar
+  }, [gameDetails]);
 
   const handleAnalyze = async (type) => {
     setLoading(true);
@@ -228,7 +225,6 @@ const ReviewsPage = () => {
           backgroundRepeat: "no-repeat",
         }}
       >
-        {/* Overlay opcional (background1 por cima se você quiser) */}
         <div
           className="absolute inset-0 z-0"
           style={{
@@ -311,7 +307,6 @@ const ReviewsPage = () => {
             <div className="relative z-10">
               <AppLayout>
                 <div className="m-10 p-6 z-40">
-                  {/* AI Analysis */}
                   <div className="flex items-center">
                     <p className="text-5xl font-bold font-sf text-white mb-2">
                       AI Analysis
@@ -367,7 +362,6 @@ const ReviewsPage = () => {
                     </p>
                   )}
 
-                  {/* Reviews */}
                   <p className="text-5xl font-bold mb-3 font-sf text-white">
                     Reviews
                   </p>

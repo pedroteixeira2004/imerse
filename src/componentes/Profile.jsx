@@ -6,7 +6,6 @@ import LogoutButton from "./LogoutButton";
 import Loading from "./Loading";
 import profile_img from "../assets/imagens/profile_image.png";
 
-// Componentes das secções
 import ProfileInfo from "./ProfileSections/ProfileInfo";
 import PersonalInfo from "./ProfileSections/PersonalInfo";
 import PaymentMethods from "./ProfileSections/PaymentMethods";
@@ -15,7 +14,6 @@ const Profile = () => {
   const { userData, loading } = useUserData();
   const [activeSection, setActiveSection] = useState("profile");
 
-  // Se ainda estiver a carregar os dados
   if (loading) return <Loading />;
 
   const renderSection = () => {
@@ -37,7 +35,6 @@ const Profile = () => {
       <AppLayout>
         <div className="flex justify-center font-sf text-white">
           <div className="flex h-[38rem] w-[80rem] bg-white/10 backdrop-blur-md rounded-3xl border border-white/30 shadow-md p-6">
-            {/* Lado Esquerdo - Menu e Info do Utilizador */}
             <div className="w-1/3 pr-6 border-r border-white/20">
               <LogoutButton />
               <div className="flex flex-col items-center mb-10 mt-8">
@@ -66,7 +63,6 @@ const Profile = () => {
                 </div>
               </div>
 
-              {/* Menu de Secções */}
               <div className="space-y-4">
                 {[
                   { key: "profile", label: "Profile" },
@@ -90,7 +86,6 @@ const Profile = () => {
               </div>
             </div>
 
-            {/* Lado Direito - Conteúdo Dinâmico */}
             <div className="w-2/3 pl-6 text-white overflow-y-auto h-full max-h-[35rem] pr-2">
               {renderSection()}
             </div>

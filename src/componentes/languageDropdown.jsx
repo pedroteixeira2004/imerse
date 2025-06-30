@@ -8,7 +8,7 @@ const LanguageDropdown = ({ language, setLanguage }) => {
     <div className="relative inline-block text-left w-30">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="px-5 py-2 bg-white bg-opacity-30 backdrop-blur-lg shadow-lg text-black rounded-full text-white text-sm font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-300 font-sf"
+        className="px-5 py-2 bg-white bg-opacity-30 backdrop-blur-lg rounded-full text-white text-sm font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-300 font-sf"
       >
         {supportedLocales[language].englishName}
         <span className="ml-2 text-blue-500">▾</span>

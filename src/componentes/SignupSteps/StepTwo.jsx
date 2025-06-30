@@ -13,15 +13,15 @@ const StepTwo = ({ formData, updateForm, next, back }) => {
         "linear-gradient(to bottom right, rgba(255,255,255,0.1), rgba(255,255,255,0.3))",
       backdropFilter: "blur(12px)",
       WebkitBackdropFilter: "blur(12px)",
-      borderRadius: "9999px", // rounded-full
+      borderRadius: "9999px",
       border: "1px solid rgba(255, 255, 255, 0.4)",
       boxShadow: "0 8px 32px 0 rgba(31,38,135,0.37)",
       color: "white",
-      paddingLeft: "1.5rem", // pl-6
-      paddingRight: "2.5rem", // pr-10
-      minHeight: "48px", // corresponde a py-3
-      height: "48px", // força altura igual
-      fontSize: "1.125rem", // text-lg
+      paddingLeft: "1.5rem",
+      paddingRight: "2.5rem",
+      minHeight: "48px",
+      height: "48px",
+      fontSize: "1.125rem",
       fontFamily: "inherit",
       transition: "all 0.3s ease",
       width: "100%",

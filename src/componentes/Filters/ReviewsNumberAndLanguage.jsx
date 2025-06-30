@@ -29,7 +29,7 @@ const ReviewsNumberAndLanguage = ({
       background:
         "linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05))",
       backdropFilter: "blur(15px)",
-      WebkitBackdropFilter: "blur(15px)", // correção de capital W
+      WebkitBackdropFilter: "blur(15px)",
       borderRadius: "2rem",
       border: state.isFocused
         ? "2px solid rgba(255, 255, 255, 0.5)"

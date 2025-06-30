@@ -41,7 +41,7 @@ export default function CartButton({ report, size = "default" }) {
           setInCart(false);
         }
       } catch (error) {
-        console.error("Erro ao verificar cart:", error);
+        console.error("Error while checking if report is in cart:", error);
       }
     }
     checkInCart();
@@ -93,14 +93,14 @@ export default function CartButton({ report, size = "default" }) {
       }
       window.dispatchEvent(new Event("cart-updated"));
     } catch (error) {
-      console.error("Erro ao atualizar carrinho:", error);
+      console.error("Erro while updating cart", error);
     }
   }
 
   return (
     <button
       onClick={(e) => {
-        e.stopPropagation(); // impede a propagação para o card
+        e.stopPropagation();
         toggleCart();
       }}
       className={`

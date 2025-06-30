@@ -13,7 +13,6 @@ const Section9 = () => {
         className="absolute bottom-0 left-0 w-full z-0 pointer-events-none"
       />
 
-      {/* Container centralizado */}
       <div className="flex-grow flex flex-col justify-center items-center text-center z-10 px-10">
         <div className="text-5xl font-bold mb-10">
           There is so much more to explore.
@@ -34,7 +33,6 @@ const Section9 = () => {
         </div>
       </div>
 
-      {/* Rodapé fixado na parte inferior da section */}
       <footer className="z-10 w-full py-6 bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-[15px] shadow-[0_4px_30px_rgba(0,0,0,0.1)] flex justify-between">
         <div>
           <ul className="flex flex-wrap gap-6 ml-10 text-lg">

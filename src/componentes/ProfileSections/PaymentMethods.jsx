@@ -102,7 +102,6 @@ const PaymentMethods = () => {
                 key={card.id}
                 className="relative group p-4 rounded-xl border transition-all bg-white/10 border-white/30 flex flex-col justify-between h-full"
               >
-                {/* Edit/Delete buttons */}
                 {isEditing && (
                   <div className="absolute top-2 right-2 flex space-x-2 z-40">
                     <button

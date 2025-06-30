@@ -44,7 +44,7 @@ const GameListPage = () => {
         setGames(filteredGames);
       } catch (err) {
         console.log(err);
-        setError("Erro ao buscar jogos.");
+        setError("Error fetching games");
       } finally {
         setLoading(false);
       }
@@ -72,7 +72,6 @@ const GameListPage = () => {
             <p className="text-red-500">{error}</p>
           ) : games.length > 0 ? (
             <div>
-              {/* SearchBar centralizada, apenas quando há resultados */}
               <div className="flex justify-center mb-6 items-center">
                 <SearchBar />
               </div>

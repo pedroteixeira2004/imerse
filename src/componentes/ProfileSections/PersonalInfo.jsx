@@ -215,7 +215,6 @@ const PersonalInfo = () => {
       </p>
 
       <div className="grid gap-4 max-w-xl">
-        {/* First Name e Last Name na mesma linha */}
         <div className="grid grid-cols-2 gap-4">
           {[
             {
@@ -253,7 +252,6 @@ const PersonalInfo = () => {
           ))}
         </div>
 
-        {/* Organization */}
         <div>
           <label className="text-white block mb-1">Organization</label>
           <div
@@ -276,7 +274,6 @@ const PersonalInfo = () => {
           </div>
         </div>
 
-        {/* Occupation */}
         <div>
           <label className="text-white block mb-1">Occupation</label>
           <div
@@ -297,13 +294,11 @@ const PersonalInfo = () => {
               isSearchable={false}
               menuPortalTarget={document.body}
               menuPosition={"fixed"}
-              // só habilita se estiver editando
               isDisabled={!isEditing}
             />
           </div>
         </div>
 
-        {/* Email (readonly) */}
         <div>
           <label className="text-white block mb-1">Email</label>
           <div
@@ -322,7 +317,6 @@ const PersonalInfo = () => {
           </div>
         </div>
 
-        {/* Botão para mudar senha */}
         <button
           onClick={handlePasswordReset}
           disabled={!isEditing}

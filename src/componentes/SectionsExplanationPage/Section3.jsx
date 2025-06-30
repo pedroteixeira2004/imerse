@@ -68,7 +68,6 @@ function Section3() {
       }}
       className="relative text-white overflow-hidden"
     >
-      {/* Parte superior com 40vh */}
       <div className="h-[40vh] flex items-center justify-center relative z-10">
         <div className="text-center max-w-4xl px-4">
           <motion.div
@@ -109,7 +108,6 @@ function Section3() {
         </div>
       </div>
 
-      {/* Parte inferior com gradiente e texto estático */}
       <div className="relative flex justify-center items-center h-[60vh] text-white">
         <img
           src={gradiente}

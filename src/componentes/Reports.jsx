@@ -7,7 +7,7 @@ import ReportsSearchBar from "./Reports/ReportsSearchBar";
 import ReportCard from "./Reports/ReportCard";
 
 const Reports = () => {
-  const [selectedTab, setSelectedTab] = useState("highlighted"); // default tab
+  const [selectedTab, setSelectedTab] = useState("highlighted");
   const [highlightedReports, setHighlightedReports] = useState([]);
   const [purchasedReports, setPurchasedReports] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -28,13 +28,13 @@ const Reports = () => {
           "19",
           "21",
           "23",
-        ]; // <- substitui pelos valores do campo 'id' dentro dos reports
+        ];
 
         const snapshot = await getDocs(collection(db, "reports"));
         const allReports = snapshot.docs.map((doc) => {
           const data = doc.data();
           return {
-            firestoreId: doc.id, // opcional, caso precise do doc.id depois
+            firestoreId: doc.id,
             ...data,
           };
         });
@@ -43,8 +43,7 @@ const Reports = () => {
           .map((id) =>
             allReports.find((report) => String(report.id) === String(id))
           )
-          .filter(Boolean); // remove reports não encontrados
-
+          .filter(Boolean);
         setHighlightedReports(filtered);
       } catch (error) {
         console.error("Erro ao buscar highlighted reports fixos:", error);
@@ -114,7 +113,7 @@ const Reports = () => {
           <ReportCard
             key={report.id}
             report={report}
-            purchasedReports={purchasedReports.map((r) => r.id)} // passa sempre os IDs comprados
+            purchasedReports={purchasedReports.map((r) => r.id)}
           />
         ))}
       </div>
@@ -137,7 +136,6 @@ const Reports = () => {
             <ReportsSearchBar />
           </div>
 
-          {/* Botões de filtro */}
           <div className="flex gap-5 mt-20">
             <button
               onClick={() => setSelectedTab("highlighted")}
@@ -158,7 +156,6 @@ const Reports = () => {
             </button>
           </div>
 
-          {/* Grid com os reports */}
           {renderReports()}
         </div>
       </AppLayout>

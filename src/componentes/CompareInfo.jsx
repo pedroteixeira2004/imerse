@@ -28,13 +28,11 @@ const CompareInfo = ({ game, summary }) => {
       <h2 className="text-4xl font-bold mb-2">{game.name}</h2>
 
       <div className="grid grid-cols-2  gap-5 justify-items-start/end">
-        {/* Product */}
         <div className="mt-5 pr-3">
           <div className="text-2xl font-medium">Product</div>
           <div className="text-xl font-regular mt-2">{game.type}</div>
         </div>
 
-        {/* Release Date */}
         <div className="mt-5 pl-3">
           <div className="text-2xl font-medium">Release date</div>
           <div className="text-xl mt-2">
@@ -42,7 +40,6 @@ const CompareInfo = ({ game, summary }) => {
           </div>
         </div>
 
-        {/* Developers */}
         <div className="mt-3 pr-3">
           <div className="text-2xl font-medium">Developers</div>
           <div className="text-xl mt-2">
@@ -50,7 +47,6 @@ const CompareInfo = ({ game, summary }) => {
           </div>
         </div>
 
-        {/* Publishers */}
         <div className="mt-3 pl-3">
           <div className="text-2xl font-medium">Publishers</div>
           <div className="text-xl mt-2">
@@ -60,7 +56,6 @@ const CompareInfo = ({ game, summary }) => {
           </div>
         </div>
 
-        {/* Metacritic */}
         <div className="mt-3 pr-3">
           <div className="text-2xl font-medium">Metacritic</div>
           {game.metacritic?.score ? (
@@ -77,7 +72,6 @@ const CompareInfo = ({ game, summary }) => {
           )}
         </div>
 
-        {/* PEGI */}
         <div className="mt-3 pl-3">
           <div className="text-2xl font-medium">PEGI rating</div>
           {game.ratings?.pegi?.rating ? (
@@ -94,7 +88,6 @@ const CompareInfo = ({ game, summary }) => {
           )}
         </div>
 
-        {/* Price */}
         <div className="mt-3 pr-3">
           <div className="text-2xl font-medium">Price</div>
           <div className="mt-2 text-xl">
@@ -106,7 +99,6 @@ const CompareInfo = ({ game, summary }) => {
           </div>
         </div>
 
-        {/* Genres */}
         <div className="mt-3 pl-3">
           <div className="text-2xl font-medium">Genres</div>
           <div className="mt-2 text-xl">
@@ -122,7 +114,6 @@ const CompareInfo = ({ game, summary }) => {
           </div>
         </div>
 
-        {/* Minimum requirements */}
         <div className="mt-3 pr-3">
           <div className="text-2xl font-medium">Minimum requirements</div>
           <div className="text-xl mt-2">
@@ -138,7 +129,6 @@ const CompareInfo = ({ game, summary }) => {
           </div>
         </div>
 
-        {/* Recommended requirements */}
         <div className="mt-3 pl-3">
           <div className="text-2xl font-medium">Recommended requirements</div>
           <div className="text-xl mt-2">

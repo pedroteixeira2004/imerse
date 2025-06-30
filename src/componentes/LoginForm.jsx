@@ -3,7 +3,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/Inicializacao";
 import { useNavigate } from "react-router-dom";
 import Background from "./background";
-import logo from "../assets/imerselogo_white.png"; // Importando o logo
+import logo from "../assets/imerselogo_white.png";
 import { Link } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
 import { traduzirErroFirebase } from "./TraduzirErrosFirebase";
@@ -43,7 +43,7 @@ function LoginForm() {
 
       navigate("/home");
     } catch (err) {
-      console.error("Erro no login:", err);
+      console.error("Error logging in: ", err);
       const mensagem = traduzirErroFirebase(err.code);
       setError(mensagem);
     } finally {
@@ -68,7 +68,6 @@ function LoginForm() {
           </div>
         </div>
 
-        {/* Lado direito: login */}
         <div className="flex-1 flex flex-col justify-center items-center">
           <div>
             <h2 className="text-5xl font-bold mb-4">Login</h2>
@@ -124,7 +123,7 @@ function LoginForm() {
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-4 text-white text-xl focus:outline-none"
-                    tabIndex={-1} // para não focar no tab
+                    tabIndex={-1}
                     aria-label={
                       showPassword ? "Hide password" : "Show password"
                     }

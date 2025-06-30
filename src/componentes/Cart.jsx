@@ -42,7 +42,6 @@ const Cart = () => {
 
       const currentReports = cartSnap.data().reports || [];
 
-      // Remove o relatório com base no id
       const filteredReports = currentReports.filter(
         (r) => r.id !== reportToRemove.id
       );
@@ -77,7 +76,6 @@ const Cart = () => {
             </div>
           ) : (
             <>
-              {/* Título e frase centralizados no topo */}
               <div className="flex flex-col items-center justify-center text-center mb-10">
                 <h1 className="text-5xl font-bold mb-4">My Cart</h1>
                 <p className="text-2xl text-white/80 max-w-2xl">
@@ -85,7 +83,6 @@ const Cart = () => {
                 </p>
               </div>
 
-              {/* Lista de relatórios */}
               <div className="space-y-4 w-full bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/30 shadow-md">
                 {reports.map((report) => (
                   <div key={report.id} className="mb-8 mt-6">
@@ -120,7 +117,6 @@ const Cart = () => {
                   </div>
                 ))}
 
-                {/* Total */}
                 <div className="text-right text-4xl flex items-center justify-between">
                   <div className="font-bold">Total</div>
                   <div className="font-bold">{total}€</div>

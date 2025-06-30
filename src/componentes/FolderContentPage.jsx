@@ -25,7 +25,7 @@ const FolderContentPage = () => {
   const [folderData, setFolderData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
-  const [gameToDeleteIndex, setGameToDeleteIndex] = useState(null); // índice do jogo a deletar
+  const [gameToDeleteIndex, setGameToDeleteIndex] = useState(null);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [purchasedReports, setPurchasedReports] = useState([]);
   const [reportToDeleteIndex, setReportToDeleteIndex] = useState(null);
@@ -107,26 +107,22 @@ const FolderContentPage = () => {
     setConfirmOpen(false);
   };
 
-  // Cancelar exclusão
   const handleCancelDelete = () => {
     setGameToDeleteIndex(null);
     setReportToDeleteIndex(null);
     setConfirmOpen(false);
   };
-  // Deleta o jogo do array e atualiza Firestore e estado local
+
   const deleteGame = async (gameIndex) => {
     if (!userId || !folderId || !folderData) return;
 
     try {
-      // Remove o jogo do array local
       const updatedGames = [...folderData.jogos];
       updatedGames.splice(gameIndex, 1);
 
-      // Atualiza o Firestore com o novo array de jogos
       const folderRef = doc(db, "users", userId, "library", folderId);
       await updateDoc(folderRef, { jogos: updatedGames });
 
-      // Atualiza estado local para re-renderizar
       setFolderData((prev) => ({ ...prev, jogos: updatedGames }));
       toast.custom(
         (t) => (
@@ -205,14 +201,12 @@ const FolderContentPage = () => {
             </button>
           </div>
 
-          {/* Se houver jogos */}
           {folderData.jogos?.length > 0 && (
             <div>
               <h2 className="text-4xl font-semibold mb-6">Games</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {folderData.jogos.map((game, index) => (
                   <div key={index} className="relative">
-                    {/* Seu componente, aqui adaptado para aceitar children */}
                     <FolderGameCard game={game} />
                     {isEditing && (
                       <button
@@ -229,7 +223,6 @@ const FolderContentPage = () => {
             </div>
           )}
 
-          {/* Se houver reports */}
           {folderData.reports?.length > 0 && (
             <div className="mt-16">
               <h2 className="text-4xl font-semibold mb-6">Reports</h2>

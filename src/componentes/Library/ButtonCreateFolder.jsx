@@ -15,18 +15,13 @@ const ButtonCreateFolder = ({ onFolderCreated, isEmpty = false }) => {
   const closeOverlay = () => setOverlayOpen(false);
 
   const createFolder = async (folderName) => {
-    if (!userId) {
-      alert("Usuário não autenticado.");
-      return;
-    }
-
     try {
       const libraryRef = collection(db, "users", userId, "library");
       await addDoc(libraryRef, {
         nome: folderName,
         criadoEm: new Date(),
-        jogos: [], // opcional para guardar jogos
-        reports: [], // opcional para guardar reports
+        jogos: [],
+        reports: [],
       });
       toast.custom(
         (t) => (
@@ -41,11 +36,11 @@ const ButtonCreateFolder = ({ onFolderCreated, isEmpty = false }) => {
       closeOverlay();
 
       if (onFolderCreated) {
-        onFolderCreated(); // atualiza a lista no componente pai
+        onFolderCreated();
       }
     } catch (error) {
-      console.error("Erro ao criar pasta:", error);
-      alert("Erro ao criar pasta. Tente novamente.");
+      console.error("Error while creating folder: ", error);
+      alert("Error while creating folder. Please try again");
     }
   };
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
-import { db, auth } from "../../firebase/Inicializacao"; // Importa auth
+import { db, auth } from "../../firebase/Inicializacao";
 import Loading from "../../componentes/Loading";
 import Background from "../background";
 import AppLayout2 from "../Layout2";
@@ -16,7 +16,6 @@ const ReportsResults = () => {
   const searchParams = new URLSearchParams(location.search);
   const searchTerm = searchParams.get("search")?.toLowerCase() ?? "";
 
-  // Pega o usuário atual
   const user = auth.currentUser;
 
   useEffect(() => {
@@ -30,7 +29,7 @@ const ReportsResults = () => {
 
         setReports(filtered);
       } catch (error) {
-        console.error("Erro ao buscar reports:", error);
+        console.error("Error while fetching reports:", error);
       } finally {
         setLoading(false);
       }
@@ -64,16 +63,14 @@ const ReportsResults = () => {
         snapshot.docs.forEach((doc) => {
           const data = doc.data();
           if (Array.isArray(data.reports)) {
-            const ids = data.reports.map((r) => r.id); // assume que o campo é 'id'
+            const ids = data.reports.map((r) => r.id);
             allPurchasedIds.push(...ids);
           }
         });
 
-        console.log("Reports comprados (IDs):", allPurchasedIds); // 🔍 Aqui está o log!
-
         setPurchasedReports(allPurchasedIds);
       } catch (error) {
-        console.error("Erro ao buscar reports comprados:", error);
+        console.error("Error while fetching purchased reports:", error);
       }
     };
 

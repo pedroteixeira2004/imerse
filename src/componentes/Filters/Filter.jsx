@@ -12,12 +12,12 @@ const Filter = ({ filter, setFilter, sorting, setSorting }) => {
 
   const handleFilterClick = (value) => {
     setFilter(value);
-    setSorting(""); // limpa a seleção do outro grupo
+    setSorting("");
   };
 
   const handleSortingClick = (value) => {
     setSorting(value);
-    setFilter(""); // limpa a seleção do outro grupo
+    setFilter("");
   };
   return (
     <div>

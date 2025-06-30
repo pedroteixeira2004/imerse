@@ -1,4 +1,3 @@
-// src/componentes/GlassToast.js
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle, AlertTriangle, XCircle } from "lucide-react";

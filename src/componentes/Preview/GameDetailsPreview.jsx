@@ -8,7 +8,6 @@ const GameDetailsPreview = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Pega os dados enviados via navigate state
   const {
     appId,
     backgroundUrl,
@@ -19,7 +18,6 @@ const GameDetailsPreview = () => {
     name,
   } = location.state || {};
 
-  // Se não tiver dados, pode redirecionar pra lista ou mostrar mensagem
   if (!name) {
     return (
       <div className="text-center p-10 text-white">

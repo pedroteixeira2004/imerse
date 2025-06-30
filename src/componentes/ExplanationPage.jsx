@@ -64,7 +64,6 @@ const ExplanationPage = () => {
           </div>
         </header>
 
-        {/* Conteúdo centralizado */}
         <main className="flex-grow flex justify-center items-center">
           <div className="text-6xl text-white font-sf font-bold text-center">
             <p>Decode the feedback.</p>
@@ -94,7 +93,6 @@ const ExplanationPage = () => {
           className="absolute bottom-0 left-0 w-full z-0 pointer-events-none"
         />
         <div className="flex-1 mx-20 flex items-center justify-between z-10">
-          {/* Texto */}
           <div className="max-w-2xl">
             <div className="text-6xl font-bold mb-6">About the platform</div>
             <div className="text-2xl">
@@ -108,7 +106,6 @@ const ExplanationPage = () => {
             </p>
           </div>
 
-          {/* Imagem com margem à direita */}
           <div className="mr-10">
             <img src={logo2} alt="logo 2" className="h-[70vh] w-auto" />
           </div>
@@ -118,7 +115,6 @@ const ExplanationPage = () => {
         style={{ height: "100vh", backgroundColor: "#3D0D60" }}
         className="snap-start relative overflow-hidden"
       >
-        {/* Parte superior com imagem de fundo */}
         <div className="h-[40vh]">
           <img
             src={fundo_jogos}
@@ -126,7 +122,6 @@ const ExplanationPage = () => {
             className="absolute top-0 left-0 w-full z-0"
           />
 
-          {/* Barra de pesquisa centrada */}
           <div className="absolute top-[8rem] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
             <div
               className="barra_pesquisa pl-6 pr-10 py-3 text-white text-lg rounded-full 
@@ -155,16 +150,13 @@ const ExplanationPage = () => {
           </div>
         </div>
 
-        {/* Parte inferior com imagem gradiente no fundo */}
         <div className="relative flex justify-center items-center h-[60vh] text-white">
-          {/* Imagem gradiente colada em baixo */}
           <img
             src={gradiente}
             alt="gradiente"
             className="absolute bottom-0 left-0 w-full z-0 pointer-events-none"
           />
 
-          {/* Conteúdo por cima da imagem */}
           <div className="relative z-10 text-center">
             <div className="font-bold text-6xl">1. Search your game</div>
             <div className="mt-8 text-2xl max-w-5xl mx-auto">

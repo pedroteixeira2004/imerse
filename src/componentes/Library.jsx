@@ -27,11 +27,9 @@ const Library = () => {
   const [folders, setFolders] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
 
-  // Estados para renomear
   const [isRenameModalOpen, setIsRenameModalOpen] = useState(false);
   const [folderToRename, setFolderToRename] = useState(null);
 
-  // Estados para deletar
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [folderToDelete, setFolderToDelete] = useState(null);
 
@@ -39,7 +37,6 @@ const Library = () => {
   const navigate = useNavigate();
 
   const fetchFolders = async () => {
-    if (!userId) return;
     try {
       const libraryRef = collection(db, "users", userId, "library");
       const snapshot = await getDocs(libraryRef);
@@ -58,7 +55,7 @@ const Library = () => {
   }, [userId]);
 
   if (loading) return <Loading />;
-  if (!userData) return <p>Utilizador não autenticado ou sem dados.</p>;
+  if (!userData) return <p>User not found or with no data</p>;
 
   const handleFolderCreated = () => {
     fetchFolders();

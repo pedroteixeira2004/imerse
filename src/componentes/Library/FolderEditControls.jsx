@@ -3,7 +3,6 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 const FolderEditControls = ({ onRename, onDelete, folderId }) => {
   return (
     <div className="absolute top-2 right-2 flex flex-row space-x-2 z-40">
-      {/* Rename Button */}
       <button
         onClick={() => onRename(folderId)}
         className="flex items-center justify-center text-white px-4 py-2 rounded-full group
@@ -23,7 +22,6 @@ const FolderEditControls = ({ onRename, onDelete, folderId }) => {
         </div>
       </button>
 
-      {/* Delete Button */}
       <button
         onClick={() => onDelete(folderId)}
         className="flex items-center justify-center text-white px-4 py-2 rounded-full group

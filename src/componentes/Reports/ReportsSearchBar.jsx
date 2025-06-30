@@ -24,7 +24,6 @@ const ReportsSearchBar = ({ initialSearch = "" }) => {
       return;
     }
 
-    // Redireciona para a página de resultados
     navigate(`/reports-results?search=${searchTerm}`);
   };
 

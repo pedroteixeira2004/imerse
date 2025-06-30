@@ -7,7 +7,7 @@ const TimePeriod = ({ dayRange, setDayRange }) => {
     { value: 30, label: "30 days" },
     { value: 60, label: "2 months" },
     { value: 90, label: "3 months" },
-    { value: 180, label: "6 months" }, // corrigido de 120 para 180
+    { value: 180, label: "6 months" },
     { value: 365, label: "1 year" },
   ];
   return (
