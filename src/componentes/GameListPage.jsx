@@ -67,7 +67,7 @@ const GameListPage = () => {
     <div>
       <Background />
       <AppLayout2>
-        <div className="p-4 m-10 w-full">
+        <div className="p-4 m-10 w-full ">
           {error ? (
             <p className="text-red-500">{error}</p>
           ) : games.length > 0 ? (
@@ -91,14 +91,16 @@ const GameListPage = () => {
               </div>
             </div>
           ) : (
-            <div className="items-center justify-center w-full h-screen">
-              <div className="justify-center mb-6 items-center">
+            <div className="flex flex-col flex-grow">
+              <div className="flex justify-center">
                 <SearchBar />
               </div>
 
-              <p className="text-white font-sf font-medium text-center text-3xl">
-                No results found for "{searchTerm}".
-              </p>
+              <div className="flex-grow flex items-center justify-center mt-32">
+                <p className="text-white font-sf font-medium text-center text-3xl">
+                  No results found for "{searchTerm}".
+                </p>
+              </div>
             </div>
           )}
         </div>

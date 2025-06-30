@@ -17,6 +17,7 @@ import BackButton from "./BackButton";
 import DownloadReviewsButton from "./DownloadReviewsButton";
 import { getAuth } from "firebase/auth";
 import { saveAnalyzedGameToFirebase } from "../firebase/FirebaseUtils";
+import NoReviews from "./NoReviews";
 
 const ReviewsPage = () => {
   const baseUrl = process.env.REACT_APP_API_BASE_URL;
@@ -211,7 +212,7 @@ const ReviewsPage = () => {
   };
   if (error) return <p className="text-red-500">{error}</p>;
   if (loading) return <LoadingReviews />;
-  if (!reviews.length) return <p className="text-black">No reviews found.</p>;
+  if (!reviews.length) return <NoReviews appId={appId} />;
   const year = extractYear(gameDetails.release_date.date);
   return (
     <div>

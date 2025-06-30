@@ -64,6 +64,7 @@ module.exports = {
     "./src/componentes/ProfileSections/PersonalInfo.jsx",
     "./src/componentes/ExplanationPage.jsx",
     "./src/componentes/TermsPage.jsx",
+    "./src/componentes/NoReviews.jsx",
     "./src/componentes/SectionsExplanationPage/Section4.jsx",
     "./src/componentes/SectionsExplanationPage/Section3.jsx",
     "./src/componentes/SectionsExplanationPage/Section5.jsx",
