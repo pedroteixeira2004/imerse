@@ -118,6 +118,9 @@ const GameDetails = () => {
             <div className="mt-5">
               {reviewSummary?.review_score_desc ? (
                 <div className="mb-7 font-sf text-2xl font-medium">
+                  <span className="text-2xl font-sf font-semibold">
+                    Players reviews:{" "}
+                  </span>{" "}
                   {reviewSummary.review_score_desc}
                 </div>
               ) : (

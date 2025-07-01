@@ -18,6 +18,8 @@ import DownloadReviewsButton from "./DownloadReviewsButton";
 import { getAuth } from "firebase/auth";
 import { saveAnalyzedGameToFirebase } from "../firebase/FirebaseUtils";
 import NoReviews from "./NoReviews";
+import like from "../assets/icones/like.png";
+import smile from "../assets/icones/smile.png";
 
 const ReviewsPage = () => {
   const baseUrl = process.env.REACT_APP_API_BASE_URL;
@@ -275,7 +277,7 @@ const ReviewsPage = () => {
                 <p className="text-4xl font-medium">
                   {reviewSummary.review_score_desc}
                 </p>
-                <p className="text-xl mt-1">Overall score</p>
+                <p className="text-xl mt-1">Overall players reviews</p>
               </div>
               <div className="flex-1 min-w-[200px] max-w-[300px] flex flex-col items-center justify-center text-center bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-[15px] rounded-2xl border border-white/30 shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-6">
                 <p className="text-4xl font-medium">{percentPositive}%</p>
@@ -370,6 +372,20 @@ const ReviewsPage = () => {
                     We found {filteredCount} reviews according to the filters
                     you applied
                   </p>
+                  <div className="flex items-center mb-4 gap-5">
+                    <div className="flex items-center">
+                      <img src={like} alt="like" className="w-6 h-6" />
+                      <div className="text-white font-sf text-xl font-medium ml-2">
+                        - Likes
+                      </div>
+                    </div>
+                    <div className="flex items-center">
+                      <img src={smile} alt="like" className="w-6 h-6" />
+                      <div className="text-white font-sf text-xl font-medium ml-2">
+                        - Votes funny
+                      </div>
+                    </div>
+                  </div>
                   <ul>
                     {reviews.map((review, index) => (
                       <ReviewCard review={review} key={index} />
